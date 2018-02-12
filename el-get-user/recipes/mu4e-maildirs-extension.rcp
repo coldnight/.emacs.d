@@ -1,0 +1,4 @@
+(:name mu4e-maildirs-extension
+       :description "Show mu4e maildirs summary in mu4e-main-view"
+       :type github
+       :pkgname "agpchil/mu4e-maildirs-extension")
