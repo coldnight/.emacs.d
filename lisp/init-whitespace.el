@@ -16,4 +16,5 @@
           (lambda ()
             (delete-trailing-whitespace)))
 
+(provide 'init-whitespace)
 ;; init-whitespace.el ends here

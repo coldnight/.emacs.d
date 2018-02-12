@@ -19,6 +19,9 @@
 (require 'init-el-get)
 (require 'init-utils)
 
+;; Whitespace
+(require 'init-whitespace)
+
 ;; 从 shell 的 $PATH 中获取命令
 (require 'init-exec-path)
 
