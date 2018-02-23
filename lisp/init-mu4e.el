@@ -18,7 +18,7 @@
            :match-func (lambda (msg)
                          (when msg
                            (string-match-p "^/Gray" (mu4e-message-field msg :maildir))))
-           :vars `(( user-mail-address . secret-gmail-gray-account)
+           :vars `(( user-mail-address . ,secret-gmail-gray-account)
                    ( user-full-name . "Gray King")
                    ( smtpmail-auth-credentials .
                      (("smtp.gmail.com" 587 secret-gmail-cold-account nil)))
@@ -92,10 +92,21 @@
 (setq mu4e-get-mail-command "offlineimap")
 
 (require 'smtpmail)
+
+;;; smtpmail-send-it-via-socks
+;; (defun smtpmail-send-it-via-socks()
+;;   "Send email via SOCKS5 proxy."
+;;   (require 'socks)
+;;   (setq socks-server '("Default server" "127.0.0.1" 6666 5))
+;;   (setq socks-override-functions t)
+;;   (smtpmail-send-it)
+;;   (setq socks-server nil)
+;;   (setq socks-override-functions nil))
+;;
+
 ;; sending mail -- replace USERNAME with your gmail username
 ;; also, make sure the gnutls command line utils are installed
 ;; package 'gnutls-bin' in Debian/Ubuntu
-
 (setq
    message-send-mail-function 'smtpmail-send-it
    starttls-use-gnutls t
