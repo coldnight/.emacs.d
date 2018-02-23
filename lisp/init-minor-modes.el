@@ -11,6 +11,10 @@
 ;; 启用 projectile
 (projectile-mode)
 
+;; helm-projectile
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
 (provide 'init-minor-modes)
 
 ;;; init-minor-modes.el ends here

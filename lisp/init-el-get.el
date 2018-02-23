@@ -17,6 +17,9 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+
+(remove-hook 'el-get-post-install-hooks 'el-get-post-install-notification)
+
 ;; (el-get 'sync)
 (el-get-bundle ansi-color)
 (el-get-bundle autopair)
@@ -51,6 +54,7 @@
 (el-get-bundle request)
 (el-get-bundle v2ex-mode)
 (el-get-bundle helm)
+(el-get-bundle helm-projectile)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
