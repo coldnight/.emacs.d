@@ -65,7 +65,7 @@
 ;; 鼠标靠近光标指针时,让鼠标自动让开
 (mouse-avoidance-mode 'animate)
 ;; 在标题栏显示buffer的名字
-(setq frame-title-format "emacs@%b")
+(setq frame-title-format "%b@emacs")
 ;; 打开压缩文件时自动解压缩
 (auto-compression-mode 1)
 ;; C-k时,同时删除该行

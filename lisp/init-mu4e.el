@@ -18,7 +18,7 @@
            :match-func (lambda (msg)
                          (when msg
                            (string-match-p "^/Gray" (mu4e-message-field msg :maildir))))
-           :vars '(( user-mail-address . secret-gmail-gray-account)
+           :vars `(( user-mail-address . secret-gmail-gray-account)
                    ( user-full-name . "Gray King")
                    ( smtpmail-auth-credentials .
                      (("smtp.gmail.com" 587 secret-gmail-cold-account nil)))
@@ -43,7 +43,7 @@
            :match-func (lambda (msg)
                          (when msg
                            (string-match-p "^/Cold" (mu4e-message-field msg :maildir))))
-           :vars '(( user-mail-address . secret-gmail-cold-account)
+           :vars `(( user-mail-address . ,secret-gmail-cold-account)
                    ( user-full-name . "Gray King")
                    ( smtpmail-auth-credentials .
                      (("smtp.gmail.com" 587 secret-gmail-cold-account nil)))
