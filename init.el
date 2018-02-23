@@ -43,4 +43,6 @@
 ;; 按键绑定
 (require 'init-key-bind)
 
+(require 'init-helm)
+
 ;; init.el ends here

@@ -50,6 +50,7 @@
 (el-get-bundle neotree)
 (el-get-bundle request)
 (el-get-bundle v2ex-mode)
+(el-get-bundle helm)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

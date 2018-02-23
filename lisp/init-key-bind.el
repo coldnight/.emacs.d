@@ -15,8 +15,12 @@
 (global-set-key (kbd "C-c w j") 'windmove-down)
 
 ;; smex
-(require 'smex)
-(global-set-key (kbd "M-x") 'smex)
+;; (require 'smex)
+;; (global-set-key (kbd "M-x") 'smex)
+
+;; helm
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 ;; neotree
 (require 'neotree)
