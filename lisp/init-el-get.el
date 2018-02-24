@@ -41,7 +41,7 @@
 (el-get-bundle markdown-mode)
 (el-get-bundle material-theme)
 (el-get-bundle projectile)
-(el-get-bundle python-mode)
+;; (el-get-bundle python-mode)
 (el-get-bundle smart-mode-line)
 (el-get-bundle smex)
 (el-get-bundle yaml-mode)
