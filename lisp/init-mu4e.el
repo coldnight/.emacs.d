@@ -93,36 +93,66 @@
 
 (require 'smtpmail)
 
+(defun my/socks-open-network-stream (name buffer host service &rest parameters)
+  "NAME BUFFER HOST SERVICE is for `socks-open-network-stream` and ignore
+PARAMETERS
+"
+  (let ((type (plist-get parameters :type))
+        (start (with-current-buffer buffer (point)))
+        (stream (socks-open-network-stream name buffer host service))
+        (eoc (plist-get parameters :end-of-command))
+        (return-list (plist-get parameters :return-list)))
+    (let ((greeting (network-stream-get-response stream start eoc))
+          (capability-command (plist-get parameters :capability-command))
+          (eo-capa (or (plist-get parameters :end-of-capability) eoc)))
+
+      (message "type: %s" type)
+      (message "greeting code: %s" (smtpmail-response-code greeting))
+      (message "start: %s greeting:%s eoc:%s" start greeting eoc)
+      (let ((result (list stream greeting
+                          (network-stream-command stream capability-command eo-capa)
+                          'plain)))
+        (if return-list
+            (list (car result)
+                  :greeting     (nth 1 result)
+		  :capabilities (nth 2 result)
+		  :type         (nth 3 result)
+                  :error (nth 4 result))
+          (car result))))))
+
 ;;; smtpmail-send-it-via-socks
-;; (defun smtpmail-send-it-via-socks()
-;;   "Send email via SOCKS5 proxy."
-;;   (require 'socks)
-;;   (setq socks-server '("Default server" "127.0.0.1" 6666 5))
-;;   (setq socks-override-functions t)
-;;   (smtpmail-send-it)
-;;   (setq socks-server nil)
-;;   (setq socks-override-functions nil))
-;;
+(defun my/smtpmail-send-it-via-socks()
+  "Send email via SOCKS5 proxy."
+  (require 'socks)
+  (setq socks-server '("Default server" "127.0.0.1" 6666 5))
+  (defalias 'my/socks-original-open-network-stream
+    (symbol-function 'open-network-stream))
+  (defalias 'open-network-stream 'my/socks-open-network-stream)
+  (smtpmail-send-it)
+  (setq socks-server nil)
+  (defalias 'open-network-stream 'my/socks-original-open-network-stream))
+
 
 ;; sending mail -- replace USERNAME with your gmail username
 ;; also, make sure the gnutls command line utils are installed
 ;; package 'gnutls-bin' in Debian/Ubuntu
-(setq
-   message-send-mail-function 'smtpmail-send-it
-   starttls-use-gnutls t
-   smtpmail-auth-credentials "~/.authinfo"
-   smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-   smtpmail-default-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-service 587
-)
+;; (setq
+;;    message-send-mail-function 'my/smtpmail-send-it-via-socks
+;;    starttls-use-gnutls t
+;;    smtpmail-auth-credentials "~/.authinfo"
+;;    smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+;;    smtpmail-default-smtp-server "smtp.gmail.com"
+;;    smtpmail-smtp-server "smtp.gmail.com"
+;;    smtpmail-smtp-service 587
+;; )
+
 
 ;; alternatively, for emacs-24 you can use:
-;;(setq message-send-mail-function 'smtpmail-send-it
-;;     smtpmail-stream-type 'starttls
-;;     smtpmail-default-smtp-server "smtp.gmail.com"
-;;     smtpmail-smtp-server "smtp.gmail.com"
-;;     smtpmail-smtp-service 587)
+(setq message-send-mail-function 'smtpmail-send-it
+     smtpmail-stream-type 'starttls
+     smtpmail-default-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-service 587)
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)

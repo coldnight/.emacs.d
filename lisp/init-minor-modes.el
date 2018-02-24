@@ -15,6 +15,10 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 
+(add-hook 'after-init-hook 'global-company-mode)
+(require 'yasnippet)
+(yas-global-mode 1)
+
 (provide 'init-minor-modes)
 
 ;;; init-minor-modes.el ends here
