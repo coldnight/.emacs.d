@@ -24,7 +24,8 @@
 (el-get-bundle ansi-color)
 (el-get-bundle autopair)
 (el-get-bundle company-mode)
-(el-get-bundle company-jedi)
+(el-get-bundle elpa:jedi-core)
+(el-get-bundle company-jedi :depends (company-mode))
 (el-get-bundle eclim)
 (el-get-bundle exec-path-from-shell)
 (el-get-bundle flycheck)
@@ -55,6 +56,9 @@
 (el-get-bundle v2ex-mode)
 (el-get-bundle helm)
 (el-get-bundle helm-projectile)
+(el-get-bundle helm-ag)
+(el-get-bundle yasnippet)
+(el-get-bundle yasnippet-snippets)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
