@@ -17,6 +17,8 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 (require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/el-get/yasnippet-snippets/snippets/"))
 (yas-global-mode 1)
 
 (provide 'init-minor-modes)

@@ -51,5 +51,6 @@
 (require 'init-key-bind)
 
 (require 'init-helm)
+(require 'init-org-mode)
 
 ;; init.el ends here

@@ -30,5 +30,11 @@
 (require 'mu4e)
 (global-set-key (kbd "C-c s m") 'mu4e)
 
+;; helm-ag
+(global-set-key (kbd "C-r") 'helm-do-ag-this-file)
+(global-set-key (kbd "C-s") 'helm-do-ag-this-file)
+(global-set-key (kbd "C-c a a") 'helm-do-ag)
+(global-set-key (kbd "C-c a p") 'helm-do-ag-project-root)
+(global-set-key (kbd "C-c a f") 'helm-do-ag-this-file)
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here
