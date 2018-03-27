@@ -52,5 +52,7 @@
 ;; Magit
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c m p") 'magit-push-current)
+(global-set-key (kbd "C-c m c") 'magit-branch-checkout)
+(global-set-key (kbd "C-c m b") 'magit-branch-and-checkout)
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here
