@@ -18,7 +18,7 @@
 
 ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
 ;; may have their own settings.
-(load-theme 'doom-one t)
+(load-theme 'doom-citylights t)
 
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
@@ -44,16 +44,8 @@
 ;; Git Gutter
 (global-git-gutter-mode +1)
 
-;; ansi-color
-(require 'ansi-color)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region compilation-filter-start (point))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-(setq ansi-color-for-comint-mode t)
-
+;; Font
+(set-face-attribute 'default nil
+                    :family "Source Code Pro Light" :height 145 :weight 'normal)
 (provide 'init-appearance)
 ;; init-appearance.el ends here

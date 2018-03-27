@@ -71,7 +71,7 @@
 ;; C-k时,同时删除该行
 (setq-default kill-whole-line t)
 ;; 不产生备份文件
-(setq make-backup-files nil)
+;; (setq make-backup-files nil)
 ;; 自动保存模式(默认在~/.emacs.d/auto-save-list)
 (auto-save-mode t)
 ;; 允许emacs和外部程序进行粘贴
@@ -118,7 +118,8 @@
 ;; 删掉不属于以上1,2中版本的版本
 (setq delete-old-versions t)
 ;; 设置备份文件的路径
-(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
 ;; 备份设置方法,直接拷贝
 (setq backup-by-copying t)
 ;; 时间显示设置

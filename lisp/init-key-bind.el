@@ -36,5 +36,21 @@
 (global-set-key (kbd "C-c a a") 'helm-do-ag)
 (global-set-key (kbd "C-c a p") 'helm-do-ag-project-root)
 (global-set-key (kbd "C-c a f") 'helm-do-ag-this-file)
+
+(defun my/open-remark-org() (interactive)
+  "Open my own remark in org-mode"
+  (find-file "~/Documents/org-modes/remark.org"))
+
+(global-set-key (kbd "C-c s r") 'my/open-remark-org)
+
+;; Shell
+
+(global-set-key (kbd "C-c s s") 'shell)
+(global-set-key (kbd "C-c s r") 'rename-buffer)
+
+
+;; Magit
+(global-set-key (kbd "C-c m s") 'magit-status)
+(global-set-key (kbd "C-c m p") 'magit-push-current)
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here

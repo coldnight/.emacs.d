@@ -59,6 +59,7 @@
 (el-get-bundle helm-ag)
 (el-get-bundle yasnippet)
 (el-get-bundle yasnippet-snippets)
+(el-get-bundle with-editor)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
