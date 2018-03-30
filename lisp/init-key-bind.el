@@ -31,8 +31,7 @@
 (global-set-key (kbd "C-c s m") 'mu4e)
 
 ;; helm-ag
-(global-set-key (kbd "C-r") 'helm-do-ag-this-file)
-(global-set-key (kbd "C-s") 'helm-do-ag-this-file)
+(global-set-key (kbd "C-c a s") 'helm-do-ag-this-file)
 (global-set-key (kbd "C-c a a") 'helm-do-ag)
 (global-set-key (kbd "C-c a p") 'helm-do-ag-project-root)
 (global-set-key (kbd "C-c a f") 'helm-do-ag-this-file)
@@ -54,5 +53,8 @@
 (global-set-key (kbd "C-c m p") 'magit-push-current)
 (global-set-key (kbd "C-c m c") 'magit-branch-checkout)
 (global-set-key (kbd "C-c m b") 'magit-branch-and-checkout)
+(global-set-key (kbd "C-c m f") 'magit-fetch)
+(global-set-key (kbd "C-c m m") 'magit-merge)
+(global-set-key (kbd "C-c m r") 'magit-rebase)
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here
