@@ -36,6 +36,9 @@
 (global-set-key (kbd "C-c a p") 'helm-do-ag-project-root)
 (global-set-key (kbd "C-c a f") 'helm-do-ag-this-file)
 
+;; helm-dash
+(global-set-key (kbd "C-c s d") 'helm-dash)
+
 (defun my/open-remark-org() (interactive)
   "Open my own remark in org-mode"
   (find-file "~/Documents/org-modes/remark.org"))
@@ -56,5 +59,14 @@
 (global-set-key (kbd "C-c m f") 'magit-fetch)
 (global-set-key (kbd "C-c m m") 'magit-merge)
 (global-set-key (kbd "C-c m r") 'magit-rebase)
+
+
+;; make a temp buffer
+(defun generate-buffer ()
+  (interactive)
+  (switch-to-buffer (make-temp-name "scratch")))
+
+(global-set-key (kbd "C-c g b") 'generate-buffer)
+
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here

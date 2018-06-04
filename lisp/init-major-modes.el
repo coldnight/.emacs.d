@@ -40,5 +40,21 @@
 ;; HTML/XML 等使用 4 个空格(而非2个)
 (setq sgml-basic-offset 4)
 
+;; Web mode
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 4)
+  (setq web-mode-css-indent-offset 4)
+  (setq web-mode-code-indent-offset 4)
+  (setq web-mode-attr-indent-offset 4)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jinja\\'" . web-mode))
+
 (provide 'init-major-modes)
 ;; init-major-modes.el ends here

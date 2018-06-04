@@ -6,8 +6,8 @@
 ;;; Code:
 (require 'mu4e)
 (setq mail-user-agent 'mu4e-user-agent)
-(setq mu4e-get-mail-command "offlineimap")
-(setq mu4e-update-interval 300)
+(setq mu4e-get-mail-command "true")  ;; use offlineimap via crontab
+;; (setq mu4e-update-interval 300)
 (setq mu4e-index-update-in-backgroud t)
 
 (setq mu4e-contexts
@@ -87,9 +87,6 @@
        ("/Gray/[Gmail].垃圾邮件"    . ?t)
        ("/Gray/[Gmail].所有邮件"    . ?a)
        ))
-
-;; allow for updating mail using 'U' in the main view:
-(setq mu4e-get-mail-command "offlineimap")
 
 (require 'smtpmail)
 

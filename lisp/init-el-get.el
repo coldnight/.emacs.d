@@ -24,7 +24,7 @@
 (el-get-bundle ansi-color)
 (el-get-bundle autopair)
 (el-get-bundle company-mode)
-(el-get-bundle elpa:jedi-core)
+;; (el-get-bundle elpa:jedi-core)
 (el-get-bundle company-jedi :depends (company-mode))
 (el-get-bundle eclim)
 (el-get-bundle exec-path-from-shell)
@@ -34,6 +34,7 @@
 (el-get-bundle highlight-indentation)
 (el-get-bundle indent-guide)
 (el-get-bundle js2-mode)
+(el-get-bundle rjsx-mode)
 (el-get-bundle json-mode)
 (el-get-bundle json-reformat)
 (el-get-bundle less-css-mode)
@@ -41,6 +42,7 @@
 (el-get-bundle markdown-mode)
 (el-get-bundle material-theme)
 (el-get-bundle projectile)
+;; Use Python.el
 ;; (el-get-bundle python-mode)
 (el-get-bundle smart-mode-line)
 (el-get-bundle smex)
@@ -57,9 +59,12 @@
 (el-get-bundle helm)
 (el-get-bundle helm-projectile)
 (el-get-bundle helm-ag)
+(el-get-bundle helm-dash)
 (el-get-bundle yasnippet)
 (el-get-bundle yasnippet-snippets)
 (el-get-bundle with-editor)
+(el-get-bundle web-mode)
+(el-get-bundle rust-mode)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

@@ -39,6 +39,7 @@
 ;; 取消菜单栏
 (menu-bar-mode -1)
 ;; 取消滚动条
+;; 在 Emacs 26 中无效
 (scroll-bar-mode -1)
 ;; 取消工具栏
 (tool-bar-mode -1)
