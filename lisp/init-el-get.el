@@ -65,6 +65,8 @@
 (el-get-bundle with-editor)
 (el-get-bundle web-mode)
 (el-get-bundle rust-mode)
+(el-get-bundle htmlize)  ;; For org-mode to export HTML
+(el-get-bundle meghanada)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

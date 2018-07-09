@@ -20,6 +20,10 @@
 (setq ansi-color-for-comint-mode t)
 
 ;; with-eidtor
+(define-key (current-global-map)
+  [remap async-shell-command] 'with-editor-async-shell-command)
+(define-key (current-global-map)
+  [remap shell-command] 'with-editor-shell-command)
 (add-hook 'shell-mode-hook  'with-editor-export-editor)
 (add-hook 'shell-mode-hook 'with-editor-export-git-editor)
 (add-hook 'term-exec-hook   'with-editor-export-editor)

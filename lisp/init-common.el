@@ -74,7 +74,7 @@
 ;; 不产生备份文件
 ;; (setq make-backup-files nil)
 ;; 自动保存模式(默认在~/.emacs.d/auto-save-list)
-(auto-save-mode t)
+;; (auto-save-mode t)
 ;; 允许emacs和外部程序进行粘贴
 (setq select-enable-clipboard t)
 ;; 当光标在行尾上下移动的时候,始终保持在行尾
@@ -136,6 +136,10 @@
 (setq display-time-interval 10)
 ;; 显示时间的格式
 (setq display-time-format "%m-%d %A %H:%M")
+
+;;
+(setq-local default-directory "~/.emacs.d/data/autosave")
+(setq-default auto-save-default t)
 
 (provide 'init-common)
 ;; init-common.el ends here

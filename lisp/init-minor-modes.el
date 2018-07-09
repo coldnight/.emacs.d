@@ -11,6 +11,30 @@
 ;; 启用 projectile
 (projectile-mode)
 
+(setq projectile-globally-ignored-directories
+      (append '(".git"
+                ".svn"
+                ".tox"
+                ".venv"
+                ".gradle"
+                ".meghanada"
+                "out"
+                "repl"
+                "target"
+                "venv")
+              projectile-globally-ignored-directories))
+
+(setq projectile-globally-ignored-files
+      (append '(".DS_Store"
+                "*.gz"
+                "*.pyc"
+                "*.jar"
+                "*.tar.gz"
+                "*.tgz"
+                "*.zip"
+                )
+              projectile-globally-ignored-files))
+
 ;; helm-projectile
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
