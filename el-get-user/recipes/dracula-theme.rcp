@@ -1,0 +1,4 @@
+(:name dracula-theme
+       :description "A dark theme for Emacs"
+       :type github
+       :pkgname "dracula/emacs")

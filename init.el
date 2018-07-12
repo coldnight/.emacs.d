@@ -62,7 +62,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("463a24ebf2922855c36637f46c53903a4737cf57038e7a9fba700456e3bd27f2" "3d20cf0dbc6465a02c468abf2d9b8c17e88b20fbc05a04205a829285da28799d" default)))
+    ("5715d3b4b071d33af95e9ded99a450aad674e308abb06442a094652a33507cd2" "463a24ebf2922855c36637f46c53903a4737cf57038e7a9fba700456e3bd27f2" "3d20cf0dbc6465a02c468abf2d9b8c17e88b20fbc05a04205a829285da28799d" default)))
  '(uniquify-buffer-name-style nil nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -18,7 +18,8 @@
 
 ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
 ;; may have their own settings.
-(load-theme 'doom-nord t)
+;; (load-theme 'doom-nord t)
+(load-theme 'doom-dracula t)
 
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
@@ -27,10 +28,9 @@
 (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
 ;; Corrects (and improves) org-mode's native fontification.
- (doom-themes-org-config)
+(doom-themes-org-config)
 
 ;; (load-theme 'moe-dark t)
-
 
 ;;; Modeline
 ;; mode line

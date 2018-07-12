@@ -67,6 +67,7 @@
 (el-get-bundle rust-mode)
 (el-get-bundle htmlize)  ;; For org-mode to export HTML
 (el-get-bundle meghanada)
+(el-get-bundle dracula-theme)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

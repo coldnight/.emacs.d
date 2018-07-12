@@ -43,6 +43,7 @@
 ;; Web mode
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
+  (setq web-mode-script-padding 0)
   (setq web-mode-markup-indent-offset 4)
   (setq web-mode-css-indent-offset 4)
   (setq web-mode-code-indent-offset 4)
