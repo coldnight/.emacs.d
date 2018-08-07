@@ -46,6 +46,10 @@
         "~/.emacs.d/snippets"))
 (yas-global-mode 1)
 
+
+(setq-default flycheck-disabled-checkers '(rst))
+
+
 (provide 'init-minor-modes)
 
 ;;; init-minor-modes.el ends here
