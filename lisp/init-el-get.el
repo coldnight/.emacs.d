@@ -68,6 +68,7 @@
 (el-get-bundle htmlize)  ;; For org-mode to export HTML
 (el-get-bundle meghanada)
 (el-get-bundle dracula-theme)
+(el-get-bundle multi-term)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
