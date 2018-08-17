@@ -68,5 +68,8 @@
 
 (global-set-key (kbd "C-c g b") 'generate-buffer)
 
+;; multi-mode
+(global-set-key (kbd "C-c t m") 'multi-term)
+
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here

@@ -69,6 +69,7 @@
 (el-get-bundle meghanada)
 (el-get-bundle dracula-theme)
 (el-get-bundle multi-term)
+(el-get-bundle eterm-256color)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

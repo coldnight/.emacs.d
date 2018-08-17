@@ -32,5 +32,16 @@
 ;; multi-term
 (require 'multi-term)
 (setq multi-term-program "/bin/zsh")
+(add-hook 'term-mode-hook #'eterm-256color-mode)
+
+(defun my/term-mode-key-bind-hook ()
+    "bind keys for term-mode"
+  (global-set-key (kbd "C-c C-j") 'term-line-mode)
+  (global-set-key (kbd "C-c C-k") 'term-char-mode)
+  )
+
+(add-hook 'term-mode-hook 'my/term-mode-key-bind-hook)
+
+(setq system-uses-terminfo nil)
 (provide 'init-shell)
 ;; init-shell.el ends here
