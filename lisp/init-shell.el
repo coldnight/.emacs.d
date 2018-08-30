@@ -41,6 +41,7 @@
   )
 
 (add-hook 'term-mode-hook 'my/term-mode-key-bind-hook)
+(setq term-buffer-maximum-size 204800)
 
 (setq system-uses-terminfo nil)
 (provide 'init-shell)
