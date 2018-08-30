@@ -53,6 +53,7 @@
 (require 'init-helm)
 (require 'init-org-mode)
 (require 'init-shell)
+(require 'url-view)
 
 ;; init.el ends here
 (custom-set-variables
