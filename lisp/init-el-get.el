@@ -70,6 +70,9 @@
 (el-get-bundle dracula-theme)
 (el-get-bundle multi-term)
 (el-get-bundle eterm-256color)
+(el-get-bundle github:coldnight/emacs-urlview
+  :features urlview)
+;; (el-get-bundle org-journal)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
