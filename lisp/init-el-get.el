@@ -73,6 +73,7 @@
 (el-get-bundle github:coldnight/emacs-urlview
   :features urlview)
 (el-get-bundle php-mode)
+(el-get-bundle go-mode)
 ;; (el-get-bundle org-journal)
 
 (provide 'init-el-get)
