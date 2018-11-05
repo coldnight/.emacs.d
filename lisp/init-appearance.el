@@ -50,5 +50,13 @@
 ;; Font
 (set-face-attribute 'default nil
                     :family "Source Code Pro Light" :height 145 :weight 'normal)
+
+;; Transparent
+;;
+;;   (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+;;   (set-frame-parameter (selected-frame) 'alpha <both>)
+(set-frame-parameter (selected-frame) 'alpha '(90 . 50))
+(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+
 (provide 'init-appearance)
 ;; init-appearance.el ends here
