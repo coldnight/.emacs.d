@@ -37,19 +37,38 @@
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
 
 
-;; HTML/XML 等使用 4 个空格(而非2个)
-(setq sgml-basic-offset 4)
+;; 设置缩进级别空格数
+(setq my/web-mode-offset 2)
+
+
+;; JS2 设置缩进
+(setq js2-basic-offset my/web-mode-offset)
+
+;; HTML/XML 缩进
+(setq sgml-basic-offset my/web-mode-offset)
+
+(defun my/current-buffer-suffix()
+  "Return suffix of current buffer."
+
+  (nth 0 (cdr (split-string (buffer-name) "\\."))))
+
 
 ;; Web mode
-(defun my-web-mode-hook ()
+(defun my/web-mode-hook ()
   "Hooks for Web mode."
-  (setq web-mode-script-padding 0)
-  (setq web-mode-markup-indent-offset 4)
-  (setq web-mode-css-indent-offset 4)
-  (setq web-mode-code-indent-offset 4)
-  (setq web-mode-attr-indent-offset 4)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+  ;; Vue.js 下禁用 script 内 padding
+  (if (string= (my/current-buffer-suffix) "vue")
+      (setq web-mode-style-padding 0)
+      (setq web-mode-script-padding 0))
+
+  ;; 设置缩进级别
+  (setq web-mode-markup-indent-offset my/web-mode-offset)
+  (setq web-mode-css-indent-offset my/web-mode-offset)
+  (setq web-mode-code-indent-offset my/web-mode-offset)
+  (setq web-mode-attr-indent-offset my/web-mode-offset))
+
+(add-hook 'web-mode-hook  'my/web-mode-hook)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
