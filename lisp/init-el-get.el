@@ -26,7 +26,7 @@
 (el-get-bundle company-mode)
 ;; (el-get-bundle elpa:jedi-core)
 (el-get-bundle company-jedi :depends (company-mode))
-(el-get-bundle eclim)
+;; (el-get-bundle eclim)
 (el-get-bundle exec-path-from-shell)
 (el-get-bundle flycheck)
 (el-get-bundle git-gutter)
