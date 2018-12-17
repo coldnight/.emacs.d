@@ -71,5 +71,20 @@
 ;; multi-mode
 (global-set-key (kbd "C-c t m") 'multi-term)
 
+
+;; hg reject
+
+(defun switch-hg-reject ()
+  (interactive)
+  (let ((other-file
+     (if (string= (substring (buffer-file-name) -4 nil) ".rej")
+         (substring (buffer-file-name) 0 -4)
+       (concat (buffer-file-name) ".rej"))))
+    (if (file-exists-p other-file)
+      (switch-to-buffer (find-file-noselect other-file))
+      (message (format "No alternate reject file found" other-file)))))
+
+(global-set-key (kbd "C-c r") 'switch-hg-reject)
+
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here

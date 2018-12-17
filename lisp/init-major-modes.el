@@ -43,6 +43,7 @@
 
 ;; JS2 设置缩进
 (setq js2-basic-offset my/web-mode-offset)
+(setq js-indent-level my/web-mode-offset)
 
 ;; HTML/XML 缩进
 (setq sgml-basic-offset my/web-mode-offset)
@@ -59,8 +60,8 @@
 
   ;; Vue.js 下禁用 script 内 padding
   (if (string= (my/current-buffer-suffix) "vue")
-      (setq web-mode-style-padding 0)
-      (setq web-mode-script-padding 0))
+      (setq web-mode-style-padding 0
+            web-mode-script-padding 0))
 
   ;; 设置缩进级别
   (setq web-mode-markup-indent-offset my/web-mode-offset)

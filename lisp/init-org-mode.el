@@ -21,5 +21,18 @@
                            ("~/gtd/someday.org" :level . 1)
                            ("~/gtd/tickler.org" :maxlevel . 2)))
 (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+;; 禁用 htmlize
+;; (setq org-html-htmlize-output-type nil)
+
+;; 使用 pygments 做代码高亮
+;; (define-advice org-html-src-block (:override (src-block _contents info) pygmentize)
+;;   "Highlight src-block via Pygmentize."
+;;   (let ((lang (org-element-property :language src-block))
+;;         (code (org-html-format-code src-block info)))
+;;     (with-temp-buffer
+;;       (call-process-region code nil "pygmentize" nil t nil "-l" lang "-f" "html")
+;;       (buffer-string))))
+
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here
