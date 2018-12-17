@@ -7,3 +7,9 @@ My Emacs configuration that includes:
 - mu4e
 - erc
 - etc.
+
+## Installation
+
+```shell
+$ git clone https://github.com/coldnight/.emacs.d ~/.emacs.d
+```
