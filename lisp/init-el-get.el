@@ -29,6 +29,7 @@
 ;; (el-get-bundle eclim)
 (el-get-bundle exec-path-from-shell)
 (el-get-bundle flycheck)
+(el-get-bundle flycheck-pos-tip)
 (el-get-bundle git-gutter)
 (el-get-bundle gradle-mode)
 (el-get-bundle highlight-indentation)
