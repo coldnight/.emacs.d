@@ -27,8 +27,8 @@
 (require 'neotree)
 (global-set-key (kbd "C-c s n") 'neotree-toggle)
 
-(require 'mu4e)
-(global-set-key (kbd "C-c s m") 'mu4e)
+;; (require 'mu4e)
+;; (global-set-key (kbd "C-c s m") 'mu4e)
 
 ;; helm-ag
 (global-set-key (kbd "C-c a s") 'helm-do-ag-this-file)

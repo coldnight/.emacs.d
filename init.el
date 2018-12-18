@@ -41,8 +41,8 @@
 ;; 外观
 (require 'init-appearance)
 
-;; mu4e 配置
-(require 'init-mu4e)
+;; ;; mu4e 配置
+;; (require 'init-mu4e)
 
 ;;配置 erc
 (require 'init-erc)
