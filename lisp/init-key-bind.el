@@ -86,5 +86,8 @@
 
 (global-set-key (kbd "C-c r") 'switch-hg-reject)
 
+(global-set-key (kbd "C-c f g") 'gofmt)
+(global-set-key (kbd "C-c f p") 'blacken-buffer)
+
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here
