@@ -77,6 +77,7 @@
 (el-get-bundle go-mode)
 (el-get-bundle kotlin-mode)
 ;; (el-get-bundle org-journal)
+(el-get-bundle blacken)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

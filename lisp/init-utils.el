@@ -21,5 +21,8 @@
 (require 'smex)
 (smex-initialize)
 
+;; blacken
+(setq blacken-fast-unsafe t)
+
 (provide 'init-utils)
 ;; init-utils.el ends here
