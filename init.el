@@ -41,6 +41,9 @@
 ;; 外观
 (require 'init-appearance)
 
+;; elfeed
+(require 'init-elfeed)
+
 ;; ;; mu4e 配置
 ;; (require 'init-mu4e)
 
@@ -53,6 +56,8 @@
 (require 'init-helm)
 (require 'init-org-mode)
 (require 'init-shell)
+
+(require 'init-lsp-mode)
 
 ;; init.el ends here
 (custom-set-variables

@@ -46,10 +46,17 @@
         "~/.emacs.d/snippets"))
 (yas-global-mode 1)
 
-
+;; .rst 文件禁用 flycheck
 (setq-default flycheck-disabled-checkers '(rst))
 
 
-(provide 'init-minor-modes)
+;; 启用 pipenv
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
 
+(provide 'init-minor-modes)
 ;;; init-minor-modes.el ends here

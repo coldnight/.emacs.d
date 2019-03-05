@@ -5,7 +5,7 @@
 ;; 配置 Shell 相关
 ;;; Code:
 
-(setq shell-file-name "/usr/local/bin/zsh")
+(setq shell-file-name "/usr/local/bin/fish")
 
 ;; ansi-color
 ;; ansi-color
@@ -31,7 +31,7 @@
 
 ;; multi-term
 (require 'multi-term)
-(setq multi-term-program "/bin/zsh")
+(setq multi-term-program "/usr/local/bin/fish")
 (add-hook 'term-mode-hook #'eterm-256color-mode)
 
 (defun my/term-mode-key-bind-hook ()

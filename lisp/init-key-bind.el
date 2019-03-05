@@ -89,5 +89,9 @@
 (global-set-key (kbd "C-c f g") 'gofmt)
 (global-set-key (kbd "C-c f p") 'blacken-buffer)
 
+(global-set-key (kbd "C-c v w") 'pyvenv-workon)
+(global-set-key (kbd "C-c v a") 'pyvenv-activate)
+(global-set-key (kbd "C-c v d") 'pyvenv-deactivate)
+
 (provide 'init-key-bind)
 ;; init-key-bind.el ends here

@@ -78,6 +78,13 @@
 (el-get-bundle kotlin-mode)
 ;; (el-get-bundle org-journal)
 (el-get-bundle blacken)
+(el-get-bundle lsp-mode)
+(el-get-bundle pyvenv)
+(el-get-bundle use-package)
+(el-get-bundle pipenv)
+(el-get-bundle elfeed)
+(el-get-bundle github:vreeze/eboy
+  :features eboy)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
