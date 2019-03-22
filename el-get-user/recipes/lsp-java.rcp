@@ -1,0 +1,5 @@
+(:name lsp-java
+       :description "LSP java mode supports the following JDT Features"
+       :type github
+       :depends (markdown-mode)
+       :pkgname "emacs-lsp/lsp-java")

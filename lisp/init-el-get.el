@@ -85,6 +85,9 @@
 (el-get-bundle elfeed)
 (el-get-bundle github:vreeze/eboy
   :features eboy)
+(el-get-bundle github:emacs-lsp/dap-mode
+  :features dap-mode
+  :depends (tree-mode lsp-java bui markdown-mode))
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
