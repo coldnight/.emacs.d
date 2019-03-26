@@ -48,8 +48,15 @@
 ;; (global-git-gutter-mode +1)
 
 ;; Font
-(set-face-attribute 'default nil
-                    :family "Source Code Pro Light" :height 145 :weight 'normal)
+(cond ((string-equal system-type "darwin")
+  (progn
+    (set-face-attribute 'default nil
+                        :family "Source Code Pro Light" :height 145 :weight 'normal)))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (set-face-attribute 'default nil
+                        :family "Source Code Pro" :height 110 :weight 'normal))))
+
 
 ;; Transparent
 ;;
