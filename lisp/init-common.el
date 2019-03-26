@@ -26,7 +26,12 @@
 (setenv "LC_CTYPE" "UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
 (setenv "LANG" "en_US.UTF-8")
-(setenv "GOPATH" "/Users/wh/jobs/go")
+(cond ((string-equal system-type "darwin")
+  (progn
+    (setenv "GOPATH" "/Users/wh/jobs/go")))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (setenv "GOPATH" "/home/wh/codes/go"))))
 
 ;; 基本设置
 ;; 在fringe上显示一个小箭头指示当前buffer的边界

@@ -5,7 +5,12 @@
 ;; 配置 Shell 相关
 ;;; Code:
 
-(setq shell-file-name "/usr/local/bin/fish")
+(cond ((string-equal system-type "darwin")
+  (progn
+    (setq shell-file-name "/usr/local/bin/fish")))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (setq shell-file-name "/usr/bin/fish"))))
 
 ;; ansi-color
 ;; ansi-color

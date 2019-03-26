@@ -9,8 +9,8 @@
 ;;; Code:
 
 ;; 启用 projectile
-(projectile-mode)
-
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-globally-ignored-directories
       (append '(".git"
                 ".svn"
