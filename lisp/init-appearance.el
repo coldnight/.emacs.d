@@ -55,7 +55,7 @@
  ((string-equal system-type "gnu/linux") ; linux
   (progn
     (set-face-attribute 'default nil
-                        :family "Source Code Pro" :height 110 :weight 'normal))))
+                        :family "Source Code Pro" :height 100 :weight 'normal))))
 
 
 ;; Transparent
