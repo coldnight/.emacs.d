@@ -89,5 +89,11 @@
   :features dap-mode
   :depends (tree-mode lsp-java bui markdown-mode))
 
+(cond ((string-equal system-type "darwin")
+  (progn
+    (el-get-bundle emojify))))
+
+(el-get-bundle github:caiorss/org-wiki)
+
 (provide 'init-el-get)
 ;; init-el-get.el ends here

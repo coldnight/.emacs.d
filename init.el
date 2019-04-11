@@ -58,6 +58,7 @@
 (require 'init-shell)
 
 (require 'init-lsp-mode)
+(require 'init-org-wiki)
 
 ;; init.el ends here
 (custom-set-variables

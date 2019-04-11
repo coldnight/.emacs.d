@@ -65,5 +65,9 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 . 50))
 (add-to-list 'default-frame-alist '(alpha . (90 . 50)))
 
+
+;; Emoji
+(add-hook 'after-init-hook #'global-emojify-mode)
+
 (provide 'init-appearance)
 ;; init-appearance.el ends here
