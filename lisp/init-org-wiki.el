@@ -18,7 +18,7 @@
 #+KEYWORDS:
 #+STARTUP:  content
 #+DATE: %d
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-bigblow.setup
+#+SETUPFILE: assets/themes/theme.setup
 
 - [[wiki:index][Index]]
 
