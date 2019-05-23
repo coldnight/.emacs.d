@@ -62,11 +62,14 @@
 ;;
 ;;   (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
 ;;   (set-frame-parameter (selected-frame) 'alpha <both>)
-(set-frame-parameter (selected-frame) 'alpha '(90 . 50))
-(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+(cond ((string-equal system-type "darwin")
+  (progn
+    (set-frame-parameter (selected-frame) 'alpha '(90 . 50))
+    (add-to-list 'default-frame-alist '(alpha . (90 . 50))))))
 
 
 ;; Emoji
+(setq emojify-emoji-styles '(unicode github))
 (add-hook 'after-init-hook #'global-emojify-mode)
 
 (provide 'init-appearance)
