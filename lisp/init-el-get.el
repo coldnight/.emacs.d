@@ -83,11 +83,13 @@
 (el-get-bundle use-package)
 (el-get-bundle pipenv)
 (el-get-bundle elfeed)
-(el-get-bundle github:vreeze/eboy
-  :features eboy)
+;; (el-get-bundle github:vreeze/eboy
+;;   :features eboy)
 (el-get-bundle github:emacs-lsp/dap-mode
   :features dap-mode
   :depends (tree-mode lsp-java bui markdown-mode))
+(el-get-bundle typescript-mode)
+(el-get-bundle tide)
 
 (cond ((string-equal system-type "darwin")
   (progn
