@@ -47,30 +47,14 @@
 ;; Git Gutter
 ;; (global-git-gutter-mode +1)
 
-;; Font
-(cond ((string-equal system-type "darwin")
-  (progn
-    (set-face-attribute 'default nil
-                        :family "Source Code Pro Light" :height 145 :weight 'normal)))
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (set-face-attribute 'default nil
-                        :family "Source Code Pro" :height 100 :weight 'normal))))
-
-
-;; Transparent
-;;
-;;   (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
-;;   (set-frame-parameter (selected-frame) 'alpha <both>)
-(cond ((string-equal system-type "darwin")
-  (progn
-    (set-frame-parameter (selected-frame) 'alpha '(90 . 50))
-    (add-to-list 'default-frame-alist '(alpha . (90 . 50))))))
-
-
 ;; Emoji
 (setq emojify-emoji-styles '(unicode github))
 (add-hook 'after-init-hook #'global-emojify-mode)
+
+;; Dashboard
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
 (provide 'init-appearance)
 ;; init-appearance.el ends here

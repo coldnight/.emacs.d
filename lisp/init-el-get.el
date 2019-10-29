@@ -90,12 +90,18 @@
   :depends (tree-mode lsp-java bui markdown-mode))
 (el-get-bundle typescript-mode)
 (el-get-bundle tide)
+(el-get-bundle github:emacs-lsp/helm-lsp
+  :features helm-lsp
+  :depends(lsp-mode))
 
 (cond ((string-equal system-type "darwin")
   (progn
     (el-get-bundle emojify))))
 
 (el-get-bundle github:caiorss/org-wiki)
+(el-get-bundle github:emacs-dashboard/emacs-dashboard
+  :features dashboard
+  :depends (page-break-lines))
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

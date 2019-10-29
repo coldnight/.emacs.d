@@ -5,12 +5,6 @@
 ;; 配置 Shell 相关
 ;;; Code:
 
-(cond ((string-equal system-type "darwin")
-  (progn
-    (setq shell-file-name "/usr/local/bin/fish")))
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (setq shell-file-name "/usr/bin/fish"))))
 
 ;; ansi-color
 ;; ansi-color
@@ -36,7 +30,7 @@
 
 ;; multi-term
 (require 'multi-term)
-(setq multi-term-program "/usr/local/bin/fish")
+(setq multi-term-program shell-file-name)
 (add-hook 'term-mode-hook #'eterm-256color-mode)
 
 (defun my/term-mode-key-bind-hook ()

@@ -26,6 +26,16 @@
 (require 'init-el-get)
 (require 'init-utils)
 
+(cond
+ ;; macOS only
+ ((string-equal system-type "darwin")
+  (progn
+    (require 'init-darwin)))
+ ;; Linux only
+ ((string-equal ssystem-type "gnu/linux")
+  (progn
+    (require 'init-linux))))
+
 ;; Whitespace
 (require 'init-whitespace)
 
@@ -72,6 +82,18 @@
  '(meghanada-cache-in-project nil)
  '(meghanada-class-completion-matcher "fuzzy")
  '(meghanada-completion-matcher "fuzzy")
+ '(safe-local-variable-values
+   (quote
+    ((eval let
+           ((root
+             (projectile-project-root)))
+           (setq-local company-clang-arguments
+                       (list
+                        (concat "-I" root "deps")))
+           (setq-local flycheck-clang-include-path
+                       (list
+                        (concat root "deps"))))
+     (company-clang-arguments "/home/wh/codes/jobs/ai/serval-sdk/deps"))))
  '(uniquify-buffer-name-style nil nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
