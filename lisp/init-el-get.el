@@ -102,6 +102,7 @@
 (el-get-bundle github:emacs-dashboard/emacs-dashboard
   :features dashboard
   :depends (page-break-lines))
+(el-get-bundle org-pomodoro)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
