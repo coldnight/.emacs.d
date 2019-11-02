@@ -19,6 +19,7 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
 (remove-hook 'el-get-post-install-hooks 'el-get-post-install-notification)
+(require 'el-get-elpa)
 
 ;; (el-get 'sync)
 (el-get-bundle ansi-color)
@@ -45,7 +46,7 @@
 (el-get-bundle projectile)
 ;; Use Python.el
 ;; (el-get-bundle python-mode)
-(el-get-bundle smart-mode-line)
+;; (el-get-bundle smart-mode-line)
 (el-get-bundle smex)
 (el-get-bundle yaml-mode)
 ;; (el-get-bundle mu4e)
@@ -103,6 +104,10 @@
   :features dashboard
   :depends (page-break-lines))
 (el-get-bundle org-pomodoro)
+(el-get-bundle dockerfile-mode)
+(el-get-bundle github:seagle0128/doom-modeline
+  :features doom-modeline
+  :depends(all-the-icons shrink-path))
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

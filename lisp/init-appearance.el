@@ -34,10 +34,12 @@
 
 ;;; Modeline
 ;; mode line
-(require 'smart-mode-line)
-(setq sml/no-confirm-load-theme t)
-(sml/setup)
-(setq sml/theme 'dark)
+;; (require 'smart-mode-line)
+;; (setq sml/no-confirm-load-theme t)
+;; (sml/setup)
+;; (setq sml/theme 'dark)
+(require 'doom-modeline)
+(doom-modeline-mode 1)
 
 ;; Not compatible with Emacs 26
 ;; ;;; Indent guide
@@ -55,6 +57,5 @@
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-
 (provide 'init-appearance)
 ;; init-appearance.el ends here

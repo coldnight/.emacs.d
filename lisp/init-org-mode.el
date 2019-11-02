@@ -42,5 +42,6 @@
 ;;       (call-process-region code nil "pygmentize" nil t nil "-l" lang "-f" "html")
 ;;       (buffer-string))))
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a o") 'org-agenda)
 (provide 'init-org-mode)
 ;; init-org-mode.el ends here
