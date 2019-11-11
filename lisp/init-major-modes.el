@@ -122,5 +122,11 @@
 ;; enable typescript-tslint checker
 (require 'flycheck)
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+;; C/C++
+(setq c-default-style "linux"
+      c-basic-offset 4
+      tab-width 4
+      indent-tabs-mode t)
 (provide 'init-major-modes)
 ;; init-major-modes.el ends here
