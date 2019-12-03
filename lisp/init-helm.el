@@ -50,6 +50,9 @@
 
 (helm-mode 1)
 
+(global-set-key (kbd "C-c C-s") 'helm-swoop)
+
+
 (provide 'init-helm)
 
 ;;; init-helm.el ends here

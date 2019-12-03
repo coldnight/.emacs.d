@@ -62,6 +62,7 @@
 (el-get-bundle helm-projectile)
 (el-get-bundle helm-ag)
 (el-get-bundle helm-dash)
+(el-get-bundle helm-swoop)
 (el-get-bundle yasnippet)
 (el-get-bundle yasnippet-snippets)
 (el-get-bundle with-editor)
@@ -108,6 +109,7 @@
 (el-get-bundle github:seagle0128/doom-modeline
   :features doom-modeline
   :depends(all-the-icons shrink-path))
+(el-get-bundle cmake-mode)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
