@@ -18,6 +18,9 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
 (remove-hook 'el-get-post-install-hooks 'el-get-post-install-notification)
 (require 'el-get-elpa)
 
@@ -110,6 +113,8 @@
   :features doom-modeline
   :depends(all-the-icons shrink-path))
 (el-get-bundle cmake-mode)
+
+(el-get-bundle chinese-fonts-setup)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here

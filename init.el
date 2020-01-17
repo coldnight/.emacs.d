@@ -51,6 +51,9 @@
 ;; 外观
 (require 'init-appearance)
 
+;; 中文字体
+(require 'init-cnfonts)
+
 ;; elfeed
 (require 'init-elfeed)
 
@@ -82,6 +85,7 @@
  '(meghanada-cache-in-project nil)
  '(meghanada-class-completion-matcher "fuzzy")
  '(meghanada-completion-matcher "fuzzy")
+ '(package-selected-packages (quote (cnfonts)))
  '(safe-local-variable-values
    (quote
     ((eval let
