@@ -24,6 +24,16 @@
       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
 (setq org-journal-file-header 'org-journal-file-header-func)
 
+;; rebinding
+(global-unset-key (kbd "C-c C-s"))
+(global-set-key (kbd "C-c j s") 'org-journal-search)
+(global-unset-key (kbd "C-c C-f"))
+(global-set-key (kbd "C-c j f") 'org-journal-open-next-entry)
+(global-unset-key (kbd "C-c C-b"))
+(global-set-key (kbd "C-c j b") 'org-journal-open-previous-entry)
+(global-unset-key (kbd "C-c C-j"))
+(global-set-key (kbd "C-c j j") 'org-journal-new-entry)
+
 (require 'org-roam)
 
 (add-hook 'org-mode 'org-roam-mode)
