@@ -73,6 +73,9 @@
 (require 'init-lsp-mode)
 (require 'init-org-wiki)
 
+;; taking notes
+(require 'init-taking-notes)
+
 ;; init.el ends here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

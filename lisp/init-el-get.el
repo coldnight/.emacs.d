@@ -81,7 +81,7 @@
 (el-get-bundle php-mode)
 (el-get-bundle go-mode)
 (el-get-bundle kotlin-mode)
-;; (el-get-bundle org-journal)
+(el-get-bundle org-journal)
 (el-get-bundle blacken)
 (el-get-bundle lsp-mode)
 (el-get-bundle pyvenv)
@@ -115,6 +115,7 @@
 (el-get-bundle cmake-mode)
 
 (el-get-bundle chinese-fonts-setup)
+(el-get-bundle github:jethrokuan/org-roam)
 
 (provide 'init-el-get)
 ;; init-el-get.el ends here
