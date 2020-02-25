@@ -23,6 +23,7 @@
       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
 (setq org-journal-file-header 'org-journal-file-header-func)
+(setq org-journal-enable-agenda-integration t)
 
 ;; rebinding
 (global-unset-key (kbd "C-c C-s"))
@@ -41,6 +42,7 @@
 
 (setq org-roam-directory "~/codes/notes/org-roam")
 
+(global-set-key (kbd "C-c n n") 'org-roam-new-file)
 (global-set-key (kbd "C-c n l") 'org-roam)
 (global-set-key (kbd "C-c n t") 'org-roam-today)
 (global-set-key (kbd "C-c n f") 'org-roam-find-file)
