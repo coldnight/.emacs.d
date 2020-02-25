@@ -1,4 +1,0 @@
-(:name v2ex-mode
-       :description "v2ex-mode, major mode for visiting http://v2ex.com/ freely in emacs. "
-       :type github
-       :pkgname "aborn/v2ex-mode")

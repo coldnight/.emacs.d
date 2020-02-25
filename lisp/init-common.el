@@ -141,5 +141,34 @@
 (setq-local default-directory "~/.emacs.d/data/autosave")
 (setq-default auto-save-default t)
 
+;; key bindings
+;; windmove
+(global-set-key (kbd "C-c w h") 'windmove-left)
+(global-set-key (kbd "C-c w l") 'windmove-right)
+(global-set-key (kbd "C-c w k") 'windmove-up)
+(global-set-key (kbd "C-c w j") 'windmove-down)
+
+
+;; make a temp buffer
+(defun my/generate-buffer ()
+  (interactive)
+  (switch-to-buffer (make-temp-name "scratch")))
+
+(global-set-key (kbd "C-c g b") 'my/generate-buffer)
+
+
+(defun my/open-remark-org() (interactive)
+  "Open my own remark in org-mode"
+  (find-file "~/Documents/org-modes/remark.org"))
+
+(global-set-key (kbd "C-c s r") 'my/open-remark-org)
+
+;; C/C++
+(setq c-default-style "linux"
+      c-basic-offset 4
+      tab-width 4
+      indent-tabs-mode t)
+
+(require 'init-darwin)
 (provide 'init-common)
 ;; init-common.el ends here

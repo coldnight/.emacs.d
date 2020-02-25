@@ -1,4 +1,0 @@
-(:name blacken
-       :description "Python Black for Emacs"
-       :type github
-       :pkgname "proofit404/blacken")

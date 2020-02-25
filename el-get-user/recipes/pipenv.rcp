@@ -1,4 +1,0 @@
-(:name pipenv
-       :description "A Pipenv porcelain inside Emacs."
-       :type github
-       :pkgname "pwalsh/pipenv.el")

@@ -1,5 +1,0 @@
-(:name eterm-256color
-       :description " Customizable 256 colors for emacs term and ansi-term"
-       :type github
-       :pkgname "dieggsy/eterm-256color"
-       :depends (xterm-color f))

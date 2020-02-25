@@ -1,4 +1,0 @@
-(:name company-lsp
-       :description "An opinionated pack of modern color-themes"
-       :type github
-       :pkgname "tigersoldier/company-lsp")

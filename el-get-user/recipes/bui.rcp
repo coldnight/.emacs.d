@@ -1,4 +1,0 @@
-(:name bui
-       :description "Buffer interface library for Emacs"
-       :type github
-       :pkgname "alezost/bui.el")

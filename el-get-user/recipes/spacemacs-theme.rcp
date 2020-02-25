@@ -1,4 +1,0 @@
-(:name spacemacs-themes
-       :description " Light and dark theme for spacemacs that supports GUI and terminal"
-       :type github
-       :pkgname "nashamri/spacemacs-theme")

@@ -1,4 +1,0 @@
-(:name lldb-gud
-       :description "lldb-gud mode for Emacs"
-       :type github
-       :pkgname "kevineschmidt/lldb-gud")

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name : Weekly report
+# key: weekly
+# --
+* 周报 `(insert (format-time-string "%Y-%m-%d"))` 王会
+
+** 本周工作内容
+
+$0
+
+** 本周重点工作及进度
+
+
+** 下周计划
+
+
+** 统计报表
+
+   无
+
+** 问题
+
+   无
