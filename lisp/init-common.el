@@ -30,6 +30,8 @@
 ;; 基本设置
 ;; 在fringe上显示一个小箭头指示当前buffer的边界
 (setq-default indicate-buffer-boundaries 'left)
+;; fringe 放在外面
+(setq fringes-outside-margins t)
 ;; 尽快显示按键序列
 (setq echo-keystrokes 0.1)
 ;; 设置系统时间显示格式
@@ -151,24 +153,26 @@
 
 ;; make a temp buffer
 (defun my/generate-buffer ()
+  "Generate a tmp buffer."
   (interactive)
   (switch-to-buffer (make-temp-name "scratch")))
 
 (global-set-key (kbd "C-c g b") 'my/generate-buffer)
 
 
-(defun my/open-remark-org() (interactive)
-  "Open my own remark in org-mode"
+(defun my/open-remark-org()
+  "Open my own remark in 'org-mode'."
+  (interactive)
   (find-file "~/Documents/org-modes/remark.org"))
 
 (global-set-key (kbd "C-c s r") 'my/open-remark-org)
 
 ;; C/C++
+(require 'cc-vars)
 (setq c-default-style "linux"
       c-basic-offset 4
       tab-width 4
       indent-tabs-mode t)
 
-(require 'init-darwin)
 (provide 'init-common)
-;; init-common.el ends here
+;;; init-common.el ends here

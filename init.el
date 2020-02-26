@@ -102,6 +102,8 @@
 
   (cnfonts-enable))
 
+(use-package all-the-icons :straight t)
+
 ;;; Shell
 (use-package exec-path-from-shell
   :straight (exec-path-from-shell :host github :repo "purcell/exec-path-from-shell")
