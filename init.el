@@ -2,7 +2,12 @@
 (eval-when-compile
   (add-to-list 'load-path "~/.emacs.d/lisp")
   (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
-  (require 'use-package))
+  (require 'use-package)
+
+  (defconst secret-el-path (expand-file-name ".secret.el" user-emacs-directory))
+
+  (if(file-exists-p secret-el-path)
+      (load-file secret-el-path)))
 
 ;; straight.el to manage package
 (setq straight-vc-git-default-protocol 'ssh)
@@ -58,7 +63,7 @@
 (use-package emojify
   :straight (emojify :host github :repo "iqbalansari/emacs-emojify")
   :hook
-  (after-init-hook . #'global-emojify-mode)
+  (after-init . global-emojify-mode)
   :init
   (setq emojify-emoji-styles '(unicode github)))
 
@@ -108,7 +113,7 @@
   :straight (helm :host github :repo "emacs-helm/helm")
   :commands heml-config
   :hook
-  (helm-minibuffer-set-up-hook . spacemacs//helm-hide-minibuffer-maybe)
+  (helm-minibuffer-set-up . spacemacs//helm-hide-minibuffer-maybe)
   :init
   (require 'helm)
   (require 'helm-config)
@@ -229,7 +234,7 @@
 (use-package flycheck
   :straight t
   :hook
-  (after-init-hook . #'global-flycheck-mode)
+  (after-init . global-flycheck-mode)
   :init
   ;; .rst 文件禁用 flycheck
   (setq-default flycheck-disabled-checkers '(rst)))
@@ -247,9 +252,10 @@
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
-  (python-mode-hook . #'lsp)
-  (go-mode-hook . #'lsp)
-  (c++-mode-hook . #'lsp))
+  (python-mode . lsp)
+  (go-mode . lsp)
+  (c++-mode . lsp)
+  :after (company flycheck))
 
 (use-package dap-mode
   :straight (dap-mode :host github :repo "emacs-lsp/dap-mode")
@@ -260,12 +266,22 @@
   (setq dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
   :after (lsp-mode))
 
+(use-package company-lsp
+  :straight t
+  :init
+  (push 'company-lsp company-backends)
+  :after (company lsp-mode))
+
+(use-package lsp-ui
+  :straight t
+  :after lsp-mode)
+
 (use-package whitespace
   :straight whitespace
   :hook
-  (prog-mode-hook . whitespace-mode)
-  (before-save-hook . (lambda()
-                        (delete-trailing-whitespace)))
+  (prog-mode . whitespace-mode)
+  (before-save . (lambda()
+                   (delete-trailing-whitespace)))
   :init
   (setq whitespace-line-column 79)
   (setq whitespace-style '(face lines-tail)))
@@ -321,7 +337,7 @@
 (use-package web-mode
   :straight t
   :hook
-  (web-mode-hook . my/web-mode-hook)
+  (web-mode . my/web-mode-hook)
   :mode
   ("\\.js\\'" . web-mode)
   ("\\.jsx\\'" . web-mode)
@@ -354,12 +370,12 @@
 (use-package tide
   :straight t
   :hook
-  (before-save-hook . tide-format-before-save)
-  (typescript-mode-hook . #'setup-tide-mode)
-  (web-mode-hook . 
-                 (lambda ()
-                   (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                     (my/setup-tide-mode))))
+  (before-save . tide-format-before-save)
+  (typescript-mode . setup-tide-mode)
+  (web-mode . 
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (my/setup-tide-mode))))
   :init
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   :after (web-mode flycheck company))
@@ -367,7 +383,7 @@
 (use-package meghanada
   :straight t
   :hook
-  (java-mode-hook .
+  (java-mode .
                   (lambda ()
                     ;; meghanada-mode on
                     (meghanada-mode t)
@@ -460,8 +476,8 @@
   :after org
   :straight (:host github :repo "jethrokuan/org-roam" :branch "develop")  
   :hook
-  (org-mode . org-roam-mode)
-  (after-init-hook . org-roam--build-cache-async)
+  (org . org-roam-mode)
+  (after-init . org-roam--build-cache-async)
   :bind
   (:map org-roam-mode-map
         (("C-c n n" . org-roam-new-file)
@@ -486,4 +502,38 @@
 (use-package php-mode :straight t)
 (use-package kotlin-mode :straight t)
 (use-package dockerfile-mode :straight t)
-(use-package cmake-mode :straight t)
+;; (use-package cmake-mode :straight t)
+
+;; ERC to chat via IRC
+
+;; enable TLS
+(use-package tls
+  :straight t
+  :custom
+  (tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
+                    "gnutls-cli --priority secure256"
+                    "gnutls-cli --priority secure256 -p %p %h")))
+
+; M-x my/start-irc
+(defun my/start-irc ()
+  "Connect to IRC."
+  (interactive)
+  (erc-tls :server "irc.freenode.net" :port 7000
+           :full-name secret-freenode-full-name
+           :nick secret-freenode-nick
+           :password secret-freenode-password))
+
+
+(defun my/start-mozilla-irc ()
+  "Connect to Mozilla-irc."
+  (interactive)
+  (erc-tls :server "irc.mozilla.org" :port 6697
+           :full-name secret-freenode-full-name
+           :nick secret-freenode-nick
+           :password secret-freenode-password))
+
+
+(use-package erc
+  :straight t
+  :after tls
+  :commands (my/start-irc my/start-mozilla-irc))
