@@ -1,3 +1,12 @@
+;;; init.el -- Emacs configuration
+;;;
+;;; Commentary:
+;;;
+;;; Use use-package and straight to manage Emacs configuration
+;;;
+;;; Code:
+;;;
+
 ;; use package
 (eval-when-compile
   (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -9,8 +18,9 @@
   (if(file-exists-p secret-el-path)
       (load-file secret-el-path)))
 
-;; straight.el to manage package
 (setq straight-vc-git-default-protocol 'ssh)
+
+;; straight.el to manage package
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -28,7 +38,7 @@
 
 (use-package init-darwin
   :if (memq window-system '(mac ns)))
- 
+
 (use-package init-linux
   :if (memq window-system '(x)))
 
@@ -40,7 +50,7 @@
   :init
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled  
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
   ;; may have their own settings.
   ;; (load-theme 'doom-nord t)
@@ -128,7 +138,7 @@
   (setq helm-autoresize-max-height 0)
   (setq helm-autoresize-min-height 20)
   (helm-autoresize-mode 1)
-  (helm-mode 1)  
+  (helm-mode 1)
   :bind
   ("C-c h" . helm-command-prefix)
   ("M-x" . helm-M-x)
@@ -152,12 +162,12 @@
   :straight (helm-dash :host github :repo "dash-docs-el/helm-dash")
   :bind
   ("C-c d s" . helm-dash))
-  
+
 
 (use-package neotree
   :straight (neotree :host github :repo "jaypei/emacs-neotree")
   :bind
-  ("C-c s n" . neotree-toggle))  
+  ("C-c s n" . neotree-toggle))
 
 ;; Effective
 (use-package magit
@@ -282,15 +292,15 @@
   (prog-mode . whitespace-mode)
   (before-save . (lambda()
                    (delete-trailing-whitespace)))
-  :init
-  (setq whitespace-line-column 79)
-  (setq whitespace-style '(face lines-tail)))
+  :custom
+  (whitespace-line-column 79)
+  (whitespace-style '(face lines-tail)))
 
 ;; Python black
 (use-package blacken
   :straight (blacken :host github :repo "pythonic-emacs/blacken")
-  :init
-  (setq blacken-fast-unsafe t)
+  :custom
+  (blacken-fast-unsafe t)
   :bind
   ("C-c f p" . blacken-buffer))
 
@@ -298,8 +308,8 @@
 (use-package go-mode
   :straight (go-mode :host github :repo "dominikh/go-mode.el")
   :mode "\\.go\\'"
-  :init
-  (setq gofmt-command "/usr/local/bin/gofmt")
+  :custom
+  (gofmt-command "/usr/local/bin/gofmt")
   :bind
   ("C-c f g" . gofmt))
 
@@ -309,7 +319,7 @@
   ("\\.md\\'" . gfm-mode))
 
 ;; 设置缩进级别空格数
-(setq my/web-mode-offset 2)
+(defvar-local my/web-mode-offset 2)
 
 
 (defun my/current-buffer-suffix()
@@ -318,26 +328,19 @@
   (nth 0 (cdr (split-string (buffer-name) "\\."))))
 
 
-;; Web mode
-(defun my/web-mode-hook ()
-  "Hooks for Web mode."
-
-  ;; Vue.js 下禁用 script 内 padding
-  (if (string= (my/current-buffer-suffix) "vue")
-      (setq web-mode-style-padding 0
-            web-mode-script-padding 0))
-
-  ;; 设置缩进级别
-  (setq web-mode-markup-indent-offset my/web-mode-offset)
-  (setq web-mode-css-indent-offset my/web-mode-offset)
-  (setq web-mode-code-indent-offset my/web-mode-offset)
-  (setq web-mode-attr-indent-offset my/web-mode-offset))
-
-
 (use-package web-mode
   :straight t
   :hook
-  (web-mode . my/web-mode-hook)
+  (web-mode . (lambda()
+                (if (string= (my/current-buffer-suffix) "vue")
+                    (setq web-mode-style-padding 0
+                          web-mode-script-padding 0))
+
+                ;; 设置缩进级别
+                (setq web-mode-markup-indent-offset my/web-mode-offset)
+                (setq web-mode-css-indent-offset my/web-mode-offset)
+                (setq web-mode-code-indent-offset my/web-mode-offset)
+                (setq web-mode-attr-indent-offset my/web-mode-offset)))
   :mode
   ("\\.js\\'" . web-mode)
   ("\\.jsx\\'" . web-mode)
@@ -345,17 +348,18 @@
   ("\\.jinja\\'" . web-mode)
   ("\\.ts\\'" . web-mode)
   ("\\.tsx\\'" . web-mode)
-  :init
+  :custom
   ;; JS2 设置缩进
-  (setq js2-basic-offset my/web-mode-offset)
-  (setq js-indent-level my/web-mode-offset)
-  (setq company-tooltip-align-annotations t)
+  (js2-basic-offset my/web-mode-offset)
+  (js-indent-level my/web-mode-offset)
+  (company-tooltip-align-annotations t)
 
   ;; HTML/XML 缩进
-  (setq sgml-basic-offset my/web-mode-offset))
+  (sgml-basic-offset my/web-mode-offset))
 
 ;; TypeScript
 (defun my/setup-tide-mode ()
+  "Setup tide mode used in \\<keymap\\>>."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
@@ -372,7 +376,7 @@
   :hook
   (before-save . tide-format-before-save)
   (typescript-mode . setup-tide-mode)
-  (web-mode . 
+  (web-mode .
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (my/setup-tide-mode))))
@@ -398,11 +402,11 @@
 
 ;; Org Mode
 ;; See also: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
-(setq-local my/gtd-root "~/codes/gtd/work/")
-(setq-local my/gtd-main (s-concat my/gtd-root "gtd.org"))
-(setq-local my/gtd-inbox (s-concat my/gtd-root "inbox.org"))
-(setq-local my/gtd-tickler (s-concat my/gtd-root "tickler.org"))
-(setq-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
+(defvar-local my/gtd-root "~/codes/gtd/work/")
+(defvar-local my/gtd-main (s-concat my/gtd-root "gtd.org"))
+(defvar-local my/gtd-inbox (s-concat my/gtd-root "inbox.org"))
+(defvar-local my/gtd-tickler (s-concat my/gtd-root "tickler.org"))
+(defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
 (use-package org
   :bind
@@ -474,7 +478,7 @@
 
 (use-package org-roam
   :after org
-  :straight (:host github :repo "jethrokuan/org-roam" :branch "develop")  
+  :straight (:host github :repo "jethrokuan/org-roam" :branch "develop")
   :hook
   (org . org-roam-mode)
   (after-init . org-roam--build-cache-async)
@@ -537,3 +541,4 @@
   :straight t
   :after tls
   :commands (my/start-irc my/start-mozilla-irc))
+;;; init.el ends here
