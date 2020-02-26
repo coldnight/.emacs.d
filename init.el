@@ -34,6 +34,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;; Common
 (use-package init-common)
 
 (use-package init-darwin
@@ -42,7 +43,7 @@
 (use-package init-linux
   :if (memq window-system '(x)))
 
-;; Appearance
+;;; Appearance
 (use-package doom-themes
   :ensure t
   :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
@@ -54,7 +55,7 @@
   ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
   ;; may have their own settings.
   ;; (load-theme 'doom-nord t)
-  (load-theme 'doom-dracula t)
+  (load-theme 'doom-vibrant t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -101,14 +102,14 @@
 
   (cnfonts-enable))
 
-;; Shell
+;;; Shell
 (use-package exec-path-from-shell
   :straight (exec-path-from-shell :host github :repo "purcell/exec-path-from-shell")
   :init
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
-;; Enhance Emacs
+;;; Enhance Emacs
 (defun spacemacs//helm-hide-minibuffer-maybe ()
   "Hide minibuffer in Helm session if we use the header line as input field."
   (when (with-helm-buffer helm-echo-input-in-header-line)
@@ -542,3 +543,18 @@
   :after tls
   :commands (my/start-irc my/start-mozilla-irc))
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default)))
+ '(uniquify-buffer-name-style nil nil (uniquify)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
