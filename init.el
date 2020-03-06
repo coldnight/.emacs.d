@@ -79,12 +79,12 @@
   :init
   (setq emojify-emoji-styles '(unicode github)))
 
-;; (use-package dashboard
-;;   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
-;;                        :files ("*.el" "banners/"))
-;;   :init
-;;   (dashboard-setup-startup-hook)
-;;   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+(use-package dashboard
+  :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
+                       :files ("*.el" "banners"))
+  :init
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
 (use-package cnfonts
   :straight (cnfonts :host github :repo "tumashu/cnfonts")
