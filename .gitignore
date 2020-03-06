@@ -57,3 +57,16 @@ places
 projectile.cache
 el-get/
 .secret.el
+
+/straight/build-cache.el
+/straight/build/
+/straight/repos/
+/meghanada/
+/transient/
+/tutorial/
+/emojis/
+/bookmarks
+/org-journal.cache
+/.extension/
+/.dap-breakpoints
+/.lsp-session-v1
