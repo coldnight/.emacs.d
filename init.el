@@ -47,7 +47,7 @@
 (use-package doom-themes
   :ensure t
   :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
-                         :files ("*.el" "themes/*.el"))
+                         :files ("*.el" "themes"))
   :init
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
