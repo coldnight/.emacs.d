@@ -72,7 +72,8 @@
   (doom-modeline-mode 1))
 
 (use-package emojify
-  :straight (emojify :host github :repo "iqbalansari/emacs-emojify")
+  :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
+                     :files ("*.el" "data"))
   :hook
   (after-init . global-emojify-mode)
   :init
@@ -230,11 +231,14 @@
   :defer t
   :after company)
 
+(use-package yasnippet-snippets
+  :straight t)
+
 (use-package yasnippet
   :straight t
   :init
   (setq yas-snippet-dirs
-      '("~/.emacs.d/el-get/yasnippet-snippets/snippets/"
+      '("~/.emacs.d/straight/build/yasnippet-snippets/snippets/"
         "~/.emacs.d/snippets"))
   (yas-global-mode 1))
 
@@ -485,14 +489,16 @@
   :hook
   (org . org-roam-mode)
   (after-init . org-roam--build-cache-async)
+  (after-init . org-roam-mode)
   :bind
   (:map org-roam-mode-map
         (("C-c n n" . org-roam-new-file)
          ("C-c n l" . org-roam)
          ("C-c n t" . org-roam-today)
          ("C-c n f" . org-roam-find-file)
-         ("C-c n i" . org-roam-insert)
-         ("C-c n g" . org-roam-show-graph)))
+         ("C-c n g" . org-roam-show-graph))
+        :map org-mode-map
+        (("C-c n i" . org-roam-insert)))
   :custom
   (org-roam-directory "~/codes/notes/org-roam"))
 
