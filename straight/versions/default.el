@@ -76,5 +76,6 @@
  ("web-mode" . "cd000fcfce97152f8b831b7eef4ea0d0b1eed11a")
  ("with-editor" . "4fe66d4d55c8eacebda53a13cc38e01d32bdaaa2")
  ("yaml-mode" . "cecf4b106b0c4236931b14919fdf87ff3546e2c9")
- ("yasnippet" . "3bf9a3b1af37174a004798b7195826af0123fa6a"))
+ ("yasnippet" . "3bf9a3b1af37174a004798b7195826af0123fa6a")
+ ("yasnippet-snippets" . "612be838d2e50c3601c349d7842702d95e17682a"))
 :alpha
