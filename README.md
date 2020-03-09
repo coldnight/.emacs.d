@@ -2,8 +2,9 @@
 
 My Emacs configuration that includes:
 
-- use-package & straight
+- Manage package via `use-package` & `straight`
 - Python/Go/LSP
+- Org-mode/org-roam/org-journal
 
 ## Installation
 
@@ -13,4 +14,4 @@ $ git submodule init
 $ git submodule update --init
 ```
 
-Then open Emacs.
+Open your Emacs and wait initialize done.

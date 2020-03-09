@@ -59,6 +59,7 @@
  ("org-journal" . "dc120bf42a7df3c49899d53f47681c09169e1139")
  ("org-roam" . "d780b6ffd176fbbfe863c2fccfba0f29e1b60d0d")
  ("org-wiki" . "3654e4f3b63ff7ec40b64f28c5e6af1ef1278ee2")
+ ("ox-hugo" . "1c1e3ec46785d93f4de2e71fc32604bd7c0fed40")
  ("page-break-lines" . "6fb993a42059b58d1a0219006f2d61ebd3b2c9e6")
  ("pfuture" . "fbecd1562b34fcd15563b7cc00d98e5af0d7e43d")
  ("php-mode" . "5580fe0e4aee6821f23fc92ea126c0abd202e91e")
