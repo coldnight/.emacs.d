@@ -137,7 +137,7 @@
 ;; 时间的变化频率
 (setq display-time-interval 10)
 ;; 显示时间的格式
-(setq display-time-format "%m-%d %A %H:%M")
+(setq display-time-format "%A %H:%M")
 
 ;;
 (setq-local default-directory "~/.emacs.d/data/autosave")

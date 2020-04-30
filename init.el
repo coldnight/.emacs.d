@@ -272,6 +272,10 @@
   (python-mode . lsp)
   (go-mode . lsp)
   (c++-mode . lsp)
+  (rust-mode . lsp)
+  (php-mode . lsp)
+  :custom
+  (lsp-rust-server 'rust-analyzer)
   :after (company flycheck))
 
 (use-package dap-mode
@@ -554,6 +558,20 @@
   :straight t
   :after tls
   :commands (my/start-irc my/start-mozilla-irc))
+
+(use-package keypression
+  :straight (:host github :repo "chuntaro/emacs-keypression" :branch "master")
+  :custom
+  ;; (keypression-use-child-frame t)
+  ;; (keypression-frame-justify 'keypression-left-justified)
+  (keypression-fade-out-delay 1.0)
+  (keypression-cast-command-name t)
+  (keypression-cast-command-name-format "%s  %s")
+  (keypression-combine-same-keystrokes t)
+  (keypression-font-face-attribute '(:width normal :height 200 :weight bold))
+  :init
+  (keypression-mode))
+
 ;;; init.el ends here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -570,3 +588,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'set-goal-column 'disabled nil)
