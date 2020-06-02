@@ -320,7 +320,7 @@
   :straight (go-mode :host github :repo "dominikh/go-mode.el")
   :mode "\\.go\\'"
   :custom
-  (gofmt-command "/usr/local/bin/gofmt")
+  (gofmt-command (concat usr-bin-path "gofmt"))
   :bind
   ("C-c f g" . gofmt))
 
@@ -568,9 +568,7 @@
   (keypression-cast-command-name t)
   (keypression-cast-command-name-format "%s  %s")
   (keypression-combine-same-keystrokes t)
-  (keypression-font-face-attribute '(:width normal :height 200 :weight bold))
-  :init
-  (keypression-mode))
+  (keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
 
 ;;; init.el ends here
 (custom-set-variables

@@ -174,5 +174,8 @@
       tab-width 4
       indent-tabs-mode t)
 
+(defvar usr-bin-path "/usr/bin/"
+  "The /usr/bin path to custom in each OS.")
+
 (provide 'init-common)
 ;;; init-common.el ends here

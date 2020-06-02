@@ -9,9 +9,6 @@
 (set-face-attribute 'default nil
                     :family "Source Code Pro" :height 100 :weight 'normal)
 
-;; Shell
-(setq shell-file-name "/usr/bin/fish")
-
 ;; Go
 (setenv "GOPATH" "/home/wh/codes/go")
 (provide 'init-linux)

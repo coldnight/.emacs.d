@@ -10,7 +10,7 @@
 (setenv "GOPATH" "/Users/wh/codes/go")
 
 ;; Shell
-(setq shell-file-name "/usr/local/bin/fish")
+(setq usr-bin-path "/usr/local/bin/")
 
 ;; Font
 (set-face-attribute 'default nil

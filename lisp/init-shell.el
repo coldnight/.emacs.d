@@ -5,6 +5,7 @@
 ;; 配置 Shell 相关
 ;;; Code:
 
+(setq shell-file-name (concat usr-bin-path "fish"))
 
 ;; ansi-color
 ;; ansi-color
@@ -41,6 +42,7 @@
 
 (add-hook 'term-mode-hook 'my/term-mode-key-bind-hook)
 (setq term-buffer-maximum-size 204800)
+
 
 (setq system-uses-terminfo nil)
 (provide 'init-shell)
