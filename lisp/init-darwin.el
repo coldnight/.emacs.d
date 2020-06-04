@@ -20,8 +20,8 @@
 ;;
 ;;   (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
 ;;   (set-frame-parameter (selected-frame) 'alpha <both>)
-(set-frame-parameter (selected-frame) 'alpha '(95 . 70))
-(add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 90))
+(add-to-list 'default-frame-alist '(alpha . (100 . 90)))
 
 ;; share clipboard between os
 (defun copy-from-osx ()
