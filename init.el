@@ -315,6 +315,9 @@
   :bind
   ("C-c f p" . blacken-buffer))
 
+(use-package ein
+  :straight t)
+
 ;; Programming Language Mode
 (use-package go-mode
   :straight (go-mode :host github :repo "dominikh/go-mode.el")
@@ -420,7 +423,9 @@
 (defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
 (use-package org
-  :straight (:type git :repo "https://code.orgmode.org/bzg/org-mode.git" :branch "release_9.3.7" :local-repo "org")
+  :straight (:type git :repo "https://code.orgmode.org/bzg/org-mode.git"
+                   :branch "release_9.3.7" :local-repo "org")
+  :after ein
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -442,7 +447,10 @@
                              (,(s-concat my/gtd-root "someday.org") :level . 1)
                              (,(s-concat my/gtd-root "tickler.org") :maxlevel . 2)))
 
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ein . t))))
 
 (use-package org-wiki
   :straight (org-wiki :host github :repo "caiorss/org-wiki")
@@ -525,7 +533,7 @@
   :after simple-httpd org-roam
   :config
   (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
+        org-roam-server-port 1212
         org-roam-server-export-inline-images t
         org-roam-server-authenticate nil
         org-roam-server-network-arrows nil
