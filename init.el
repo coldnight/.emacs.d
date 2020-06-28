@@ -420,6 +420,7 @@
 (defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
 (use-package org
+  :straight (:type git :repo "https://code.orgmode.org/bzg/org-mode.git" :branch "release_9.3.7" :local-repo "org")
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -480,19 +481,17 @@
     "Custom function to create journal header."
     (concat
      (pcase org-journal-file-type
-       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
-       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
-       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
-       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
+       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
+       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
+       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
+       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal"))))
   (setq org-journal-file-header 'org-journal-file-header-func)
   (setq org-journal-enable-agenda-integration t))
 
 (use-package org-roam
   :after org
-  :straight (:host github :repo "jethrokuan/org-roam" :branch "develop")
+  :straight (:host github :repo "org-roam/org-roam" :branch "v1.2.0")
   :hook
-  (org . org-roam-mode)
-  (after-init . org-roam--build-cache-async)
   (after-init . org-roam-mode)
   :bind
   (:map org-roam-mode-map
@@ -501,15 +500,38 @@
          ("C-c n t" . org-roam-today)
          ("C-c n f" . org-roam-find-file)
          ("C-c n b" . org-roam-switch-to-buffer)
-         ("C-c n g" . org-roam-show-graph))
+         ("C-c n g" . org-roam-graph-show))
         :map org-mode-map
         (("C-c n i" . org-roam-insert)))
   :custom
-  (org-roam-directory "~/codes/notes/roam-research-notes-hugo/content-org"))
+  (org-roam-directory "~/codes/notes/roam-research-notes-hugo/content-org")
+  (org-roam-capture-templates `(("d" "default"
+                                 plain #'org-roam-capture--get-point "%?"
+                                 :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                 :head "#+TITLE: ${title}
+#+AUTHOR: Gray King
+#+DATE: %U
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: notes
+" :unnarrowed t))))
 
 (use-package ox-hugo
   :straight t
   :after ox)
+
+(use-package org-roam-server
+  :straight (:host github :repo "org-roam/org-roam-server"
+             :files ("*.el" "*.html" "assets"))
+  :after simple-httpd org-roam
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8080
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
 
 ;; Some useful modes
 (use-package indent-guide :straight t)
@@ -569,6 +591,12 @@
   (keypression-cast-command-name-format "%s  %s")
   (keypression-combine-same-keystrokes t)
   (keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
+
+(use-package rainbow-fart
+  :straight (:host github :repo "stardiviner/emacs-rainbow-fart" :branch "master"
+                   :files ("*.el" "voices"))
+  :hook
+  (prog-mode . rainbow-fart-mode))
 
 ;;; init.el ends here
 (custom-set-variables
