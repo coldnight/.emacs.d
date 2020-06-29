@@ -73,10 +73,6 @@
 (auto-compression-mode 1)
 ;; C-k时,同时删除该行
 (setq-default kill-whole-line t)
-;; 不产生备份文件
-;; (setq make-backup-files nil)
-;; 自动保存模式(默认在~/.emacs.d/auto-save-list)
-;; (auto-save-mode t)
 ;; 允许emacs和外部程序进行粘贴
 (setq select-enable-clipboard t)
 ;; 当光标在行尾上下移动的时候,始终保持在行尾
@@ -111,20 +107,6 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4) ; or any other preferred value
 
-;; 备份设置
-;; 启用版本控制,即可以备份多次
-(setq version-control t)
-;; 备份最原始的版本两次,记第一次编辑前的文档,和第二次编辑前的文档
-(setq kept-old-versions 2)
-;; 备份最新的版本十次,理解同上
-(setq kept-new-versions 10)
-;; 删掉不属于以上1,2中版本的版本
-(setq delete-old-versions t)
-;; 设置备份文件的路径
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backups"))))
-;; 备份设置方法,直接拷贝
-(setq backup-by-copying t)
 ;; 时间显示设置
 ;; 启用时间显示设置,在minibuffer上面的那个杠上
 (display-time-mode 1)

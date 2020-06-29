@@ -450,7 +450,8 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((ein . t))))
+   '((ein . t)
+     (dot . t))))
 
 (use-package org-wiki
   :straight (org-wiki :host github :repo "caiorss/org-wiki")
@@ -605,6 +606,42 @@
                    :files ("*.el" "voices"))
   :hook
   (prog-mode . rainbow-fart-mode))
+
+;; backup
+
+(use-package backup-walker
+  :straight t
+  :custom
+  ;; 备份设置
+  (make-backup-files t)
+  (vc-make-backup-files t)
+  ;; 启用版本控制,
+  (version-control t)
+  ;; 备份最原始的版本两次,记第一次编辑前的文档,和第二次编辑前的文档
+  (kept-old-versions 2)
+  ;; 备份最新的版本 256 次,理解同上
+  (kept-new-versions 256)
+  ;; 删掉不属于以上1,2中版本的版本
+  (delete-old-versions t)
+  ;; 备份设置方法,直接拷贝
+  (backup-by-copying t)
+  :init
+  ;; 设置备份文件的路径
+  (defvar-local backup-dir (concat user-emacs-directory "backups") "Backup directory.")
+
+  (if (not (file-exists-p backup-dir))
+      (make-directory backup-dir))
+
+  (add-to-list 'backup-directory-alist `(".*" . ,backup-dir))
+
+  (defun force-backup-of-buffer()
+    "Force backup buffer."
+    (setq buffer-backed-up nil))
+
+  (add-hook 'before-save-hook 'force-backup-of-buffer)
+
+  ;; tramp for remote edit
+  (setq tramp-backup-directory-alist backup-directory-alist))
 
 ;;; init.el ends here
 (custom-set-variables
