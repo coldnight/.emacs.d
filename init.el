@@ -558,13 +558,13 @@
 
 ;; ERC to chat via IRC
 
-;; enable TLS
-(use-package tls
-  :straight t
-  :custom
-  (tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
-                    "gnutls-cli --priority secure256"
-                    "gnutls-cli --priority secure256 -p %p %h")))
+;; ;; enable TLS
+;; (use-package tls
+;;   :straight t
+;;   :custom
+;;   (tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
+;;                     "gnutls-cli --priority secure256"
+;;                     "gnutls-cli --priority secure256 -p %p %h")))
 
 ; M-x my/start-irc
 (defun my/start-irc ()

@@ -99,7 +99,6 @@
 (global-linum-mode t)
 
 ;; 记住上次打开文件光标的位置
-(setq-default save-place t)
 (require 'saveplace)
 (save-place-mode 1)
 
