@@ -99,8 +99,9 @@
 (global-linum-mode t)
 
 ;; 记住上次打开文件光标的位置
-(require 'saveplace)
-(save-place-mode 1)
+(use-package saveplace
+  :init
+  (save-place-mode 1))
 
 ;; 设置4个空格缩进
 (setq-default indent-tabs-mode nil)
