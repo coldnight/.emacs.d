@@ -132,6 +132,8 @@
 (global-set-key (kbd "C-c w k") 'windmove-up)
 (global-set-key (kbd "C-c w j") 'windmove-down)
 
+;; Making Buffer Names Unique
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; make a temp buffer
 (defun my/generate-buffer ()
