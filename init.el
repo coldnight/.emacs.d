@@ -105,12 +105,18 @@
 
 (use-package all-the-icons :straight t)
 
+(use-package goto-line-preview :straight t
+  :bind (("M-g g" . goto-line-preview)))
+
 ;;; Shell
 (use-package exec-path-from-shell
   :straight (exec-path-from-shell :host github :repo "purcell/exec-path-from-shell")
   :init
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
+
+(use-package quickrun
+  :straight t)
 
 ;;; Enhance Emacs
 (defun spacemacs//helm-hide-minibuffer-maybe ()
