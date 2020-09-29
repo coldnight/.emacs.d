@@ -272,6 +272,15 @@
   :init
   (flycheck-pos-tip-mode))
 
+(use-package swift-mode
+  :straight t)
+
+(use-package flycheck-swiftlint
+  :straight t
+  :config
+  (with-eval-after-load 'flycheck
+    (flycheck-swiftlint-setup)))
+
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
@@ -283,6 +292,12 @@
   :custom
   (lsp-rust-server 'rust-analyzer)
   :after (company flycheck))
+
+(use-package lsp-sourcekit
+  :straight t
+  :after lsp-mode
+  :config
+  (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
 
 (use-package dap-mode
   :straight (dap-mode :host github :repo "emacs-lsp/dap-mode")
@@ -648,6 +663,7 @@
 
   ;; tramp for remote edit
   (setq tramp-backup-directory-alist backup-directory-alist))
+
 
 ;;; init.el ends here
 (custom-set-variables
