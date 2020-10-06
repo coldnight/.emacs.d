@@ -71,7 +71,7 @@
  ("markdown-mode" . #("8c6775a000bf40d7c7b35a529011a99231a4a4f7" 0 40 (fontified nil)))
  ("meghanada-emacs" . #("1e41f7f2c7a172e9699f3557c97c3f39a149bfc2" 0 40 (fontified nil)))
  ("melpa" . #("1b04b46020d56067898cb4445f271381d7996ddf" 0 40 (fontified nil)))
- ("org" . #("41651f4ed018a1d64cc5fb57cb0c040a09384f6d" 0 40 (fontified nil)))
+ ("org" . #("2c980de07341b015741dc2fdad27a3078c9618fb" 0 40 (fontified nil)))
  ("org-journal" . #("e7c51c40f1d6c1f24a9924efa78256044d72c653" 0 40 (fontified nil)))
  ("org-roam" . #("0cce9d116580665d9eb9284d3317ae1beda56bc1" 0 40 (fontified nil)))
  ("org-roam-server" . #("1dc94e102d60e53bb9929b1cdc55d4d8c2b0d64f" 0 40 (fontified nil)))
