@@ -275,6 +275,9 @@
 (use-package swift-mode
   :straight t)
 
+(use-package posframe
+  :straight t)
+
 (use-package flycheck-swiftlint
   :straight t
   :config
@@ -289,9 +292,15 @@
   (c++-mode . lsp)
   (rust-mode . lsp)
   (php-mode . lsp)
+  (scala-mode . lsp)
   :custom
   (lsp-rust-server 'rust-analyzer)
   :after (company flycheck))
+
+;; Add metals backend for lsp-mode
+(use-package lsp-metals
+  :straight (lsp-metals :host github :repo "emacs-lsp/lsp-metals")
+  :config (setq lsp-metals-treeview-show-when-views-received t))
 
 (use-package lsp-sourcekit
   :straight t
@@ -300,12 +309,12 @@
   (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
 
 (use-package dap-mode
-  :straight (dap-mode :host github :repo "emacs-lsp/dap-mode")
   :init
   (dap-mode 1)
   (dap-ui-mode 1)
   (require 'dap-go)
-  (setq dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
+  :custom
+  (dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
   :after (lsp-mode))
 
 (use-package company-lsp
@@ -444,8 +453,7 @@
 (defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
 (use-package org
-  :straight (:type git :repo "https://code.orgmode.org/bzg/org-mode.git"
-                   :branch "release_9.3.7" :local-repo "org")
+  :straight t
   :after ein
   :bind
   ("C-c c" . org-capture)
@@ -520,7 +528,7 @@
 
 (use-package org-roam
   :after org
-  :straight (:host github :repo "org-roam/org-roam" :branch "v1.2.0")
+  :straight t
   :hook
   (after-init . org-roam-mode)
   :bind
@@ -576,6 +584,26 @@
 (use-package kotlin-mode :straight t)
 (use-package dockerfile-mode :straight t)
 ;; (use-package cmake-mode :straight t)
+
+;; Enable scala-mode for highlighting, indentation and motion commands
+(use-package scala-mode
+  :straight t
+  :interpreter
+    ("scala" . scala-mode))
+
+;; Enable sbt mode for executing sbt commands
+(use-package sbt-mode
+  :straight t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 ;; ERC to chat via IRC
 
