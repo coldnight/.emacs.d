@@ -293,6 +293,7 @@
   (rust-mode . lsp)
   (php-mode . lsp)
   (scala-mode . lsp)
+  (lsp-mode . lsp-lens-mode)
   :custom
   (lsp-rust-server 'rust-analyzer)
   :after (company flycheck))
@@ -317,11 +318,11 @@
   (dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
   :after (lsp-mode))
 
-(use-package company-lsp
-  :straight t
-  :init
-  (push 'company-lsp company-backends)
-  :after (company lsp-mode))
+;; (use-package company-lsp
+;;   :straight t
+;;   :init
+;;   (push 'company-lsp company-backends)
+;;   :after (company lsp-mode))
 
 (use-package lsp-ui
   :straight t
@@ -515,7 +516,7 @@
   (org-journal-file-type 'weekly)
   (org-journal-dir "~/codes/notes/roam-research-notes-hugo/journal")
   :init
-  (defun org-journal-file-header-func ()
+  (defun org-journal-file-header-func (time)
     "Custom function to create journal header."
     (concat
      (pcase org-journal-file-type
@@ -700,9 +701,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default)))
+   '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
  '(uniquify-buffer-name-style nil nil (uniquify)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
