@@ -61,6 +61,7 @@ el-get/
 /straight/build-cache.el
 /straight/build/
 /straight/repos/
+/straight/modified/
 /meghanada/
 /transient/
 /tutorial/
@@ -70,3 +71,7 @@ el-get/
 /.extension/
 /.dap-breakpoints
 /.lsp-session-v1
+
+/org-roam.db
+/lsp-cache/
+/request/
