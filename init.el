@@ -332,8 +332,7 @@
   :straight whitespace
   :hook
   (prog-mode . whitespace-mode)
-  (before-save . (lambda()
-                   (delete-trailing-whitespace)))
+  (before-save . delete-trailing-whitespace)
   :custom
   (whitespace-line-column 79)
   (whitespace-style '(face lines-tail)))
