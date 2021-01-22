@@ -293,10 +293,21 @@
   (rust-mode . lsp)
   (php-mode . lsp)
   (scala-mode . lsp)
+  (cmake-mode . lsp)
   (lsp-mode . lsp-lens-mode)
   :custom
   (lsp-rust-server 'rust-analyzer)
+  (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
   :after (company flycheck))
+
+(use-package helm-lsp :straight :commands helm-lsp-workspace-symbol)
+
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  "Set up before-save hooks to format buffer and add/delete imports."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
@@ -444,6 +455,12 @@
   (setq meghanada-maven-path "mvn"))
 
 
+(use-package slime
+  :straight t
+  :custom
+  (inferior-lisp-program "sbcl"))
+
+
 ;; Org Mode
 ;; See also: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 (defvar-local my/gtd-root "~/codes/notes/roam-research-notes-hugo/gtd/")
@@ -526,6 +543,10 @@
   (setq org-journal-file-header 'org-journal-file-header-func)
   (setq org-journal-enable-agenda-integration t))
 
+(use-package org
+  :straight (:type git :host github :repo "bzg/org-mode" :local-repo "org"
+                   :branch "releaes_9.3.3"))
+
 (use-package org-roam
   :after org
   :straight t
@@ -555,7 +576,7 @@
 
 (use-package ox-hugo
   :straight t
-  :after ox)
+  :after (ox org-mode))
 
 (use-package org-roam-server
   :straight (:host github :repo "org-roam/org-roam-server"
@@ -583,7 +604,10 @@
 (use-package php-mode :straight t)
 (use-package kotlin-mode :straight t)
 (use-package dockerfile-mode :straight t)
-;; (use-package cmake-mode :straight t)
+(use-package cmake-mode
+  :straight (:host github :flavor melpa
+                   :files ("Auxiliary/*.el" "cmake-mode-pkg.el")
+                   :repo "Kitware/CMake"))
 
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
@@ -650,14 +674,10 @@
   (keypression-combine-same-keystrokes t)
   (keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
 
-(use-package rainbow-fart
-  :straight (:host github :repo "stardiviner/emacs-rainbow-fart" :branch "master"
-                   :files ("*.el" "voices"))
-  :hook
-  (prog-mode . rainbow-fart-mode))
+(use-package urlview
+  :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
 
 ;; backup
-
 (use-package backup-walker
   :straight t
   :custom
@@ -701,6 +721,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
+ '(org-agenda-files
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210118"))
  '(uniquify-buffer-name-style nil nil (uniquify)))
 
 (custom-set-faces

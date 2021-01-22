@@ -40,5 +40,9 @@
 (if (fboundp 'mac-auto-operator-composition-mode)
     (mac-auto-operator-composition-mode))
 
+(when window-system
+  (set-frame-position (selected-frame) 0 0)
+  (set-frame-size (selected-frame) 208 48))
+
 (provide 'init-darwin)
 ;; init-darwin.el ends here
