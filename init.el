@@ -203,6 +203,7 @@
                   ".venv"
                   ".gradle"
                   ".meghanada"
+                  ".clangd"
                   "out"
                   "repl"
                   "target"
@@ -283,6 +284,11 @@
   :config
   (with-eval-after-load 'flycheck
     (flycheck-swiftlint-setup)))
+
+(use-package lsp-java
+  :straight t
+  :hook
+  (java-mode . lsp))
 
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
@@ -439,22 +445,6 @@
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   :after (web-mode flycheck company))
 
-(use-package meghanada
-  :straight t
-  :hook
-  (java-mode .
-                  (lambda ()
-                    ;; meghanada-mode on
-                    (meghanada-mode t)
-                    (flycheck-mode +1)
-                    (setq c-basic-offset 2)
-                    ;; use code format
-                    (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-  :init
-  (setq meghanada-java-path "java")
-  (setq meghanada-maven-path "mvn"))
-
-
 (use-package slime
   :straight t
   :custom
@@ -536,10 +526,10 @@
     "Custom function to create journal header."
     (concat
      (pcase org-journal-file-type
-       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
-       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
-       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal")
-       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal"))))
+       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U"))))
   (setq org-journal-file-header 'org-journal-file-header-func)
   (setq org-journal-enable-agenda-integration t))
 
@@ -712,6 +702,10 @@
   ;; tramp for remote edit
   (setq tramp-backup-directory-alist backup-directory-alist))
 
+(use-package leetcode
+  :straight (leetcode :host github :repo "kaiwk/leetcode.el")
+  :custom
+  (leetcode-prefer-language "cpp"))
 
 ;;; init.el ends here
 (custom-set-variables
@@ -722,7 +716,7 @@
  '(custom-safe-themes
    '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
  '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210118"))
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210222"))
  '(uniquify-buffer-name-style nil nil (uniquify)))
 
 (custom-set-faces
