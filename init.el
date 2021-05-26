@@ -6,7 +6,6 @@
 ;;;
 ;;; Code:
 ;;;
-
 ;; use package
 (eval-when-compile
   (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -82,6 +81,14 @@
 (use-package dashboard
   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
                        :files ("*.el" "banners"))
+  :custom
+  (dashboard-center-content 1)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-items '((projects . 5)
+                     (recents . 5)
+                     (agenda . 5)
+                     (registers . 5)))
   :init
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
@@ -285,11 +292,7 @@
   (with-eval-after-load 'flycheck
     (flycheck-swiftlint-setup)))
 
-(use-package lsp-java
-  :straight t
-  :hook
-  (java-mode . lsp))
-
+;; lsp-mode must come above of all lsp-packages
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
@@ -305,6 +308,11 @@
   (lsp-rust-server 'rust-analyzer)
   (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
   :after (company flycheck))
+
+(use-package lsp-java
+  :straight t
+  :hook
+  (java-mode . lsp))
 
 (use-package helm-lsp :straight :commands helm-lsp-workspace-symbol)
 
@@ -460,11 +468,29 @@
 (defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
 (use-package org
-  :straight t
+  :straight (:type git :host github :repo "bzg/org-mode")
   :after ein
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
+  :custom
+  (org-startup-indented t)
+  (org-hide-leading-stars t)
+  (org-odd-level-only nil)
+  (org-insert-heading-respect-content nil)
+  (org-M-RET-may-split-line '((item) (default . t)))
+  (org-special-ctrl-a/e t)
+  (org-return-follows-link nil)
+  (org-use-speed-commands t)
+  (org-startup-align-all-tables nil)
+  (org-log-into-drawer nil)
+  (org-tags-column 1)
+  (org-ellipsis " \u25bc" )
+  (org-speed-commands-user nil)
+  (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+  (org-completion-use-ido t)
+  (org-indent-mode t)
+  (org-startup-truncated nil)
   :init
   (setq org-agenda-files
         (list
@@ -532,10 +558,6 @@
        (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U"))))
   (setq org-journal-file-header 'org-journal-file-header-func)
   (setq org-journal-enable-agenda-integration t))
-
-(use-package org
-  :straight (:type git :host github :repo "bzg/org-mode" :local-repo "org"
-                   :branch "releaes_9.3.3"))
 
 (use-package org-roam
   :after org
@@ -707,6 +729,13 @@
   :custom
   (leetcode-prefer-language "cpp"))
 
+(use-package wakatime-mode
+  :straight t
+  :custom
+  (wakatime-api-key secret-wakatime-api-key)
+  :init
+  (global-wakatime-mode))
+
 ;;; init.el ends here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -716,7 +745,7 @@
  '(custom-safe-themes
    '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
  '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210222"))
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210524"))
  '(uniquify-buffer-name-style nil nil (uniquify)))
 
 (custom-set-faces
