@@ -1,3 +1,7 @@
+<p align="center">
+    ![Emacs Configuration](./logo.png)
+</p>
+
 ## About
 
 My Emacs configuration that includes:

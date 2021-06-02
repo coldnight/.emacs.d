@@ -85,6 +85,7 @@
   (dashboard-center-content 1)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
+  (dashboard-startup-banner "~/.emacs.d/logo.png")
   (dashboard-items '((projects . 5)
                      (recents . 5)
                      (agenda . 5)
@@ -114,6 +115,19 @@
 
 (use-package goto-line-preview :straight t
   :bind (("M-g g" . goto-line-preview)))
+
+
+(use-package centaur-tabs
+  :straight t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :custom
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-style "wave")
+  :bind
+  ("C-c t p" . centaur-tabs-backward)
+  ("C-c t n" . centaur-tabs-forward))
 
 ;;; Shell
 (use-package exec-path-from-shell
@@ -311,6 +325,7 @@
 
 (use-package lsp-java
   :straight t
+  :after lsp-mode
   :hook
   (java-mode . lsp))
 
@@ -339,8 +354,11 @@
   (dap-mode 1)
   (dap-ui-mode 1)
   (require 'dap-go)
+  (dap-go-setup)
   :custom
-  (dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
+  ;; (dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
+  (dap-auto-configure-features '(sessions locals controls tooltip))
+  (dap-print-io t)
   :after (lsp-mode))
 
 ;; (use-package company-lsp
@@ -515,26 +533,27 @@
    '((ein . t)
      (dot . t))))
 
-(use-package org-wiki
-  :straight (org-wiki :host github :repo "caiorss/org-wiki")
-  :init
-  (setq org-wiki-location "~/codes/incubating/notes")
-  (setq org-wiki-template
-        (string-trim
-"
-#+TITLE: %n
-#+DESCRIPTION:
-#+KEYWORDS:
-#+STARTUP:  content
-#+DATE: %d
-#+SETUPFILE: assets/themes/theme.setup
-
-- [[wiki:index][Index]]
-
-- Related:
-
-* %n
-")))
+;; ;; Now we are using org-roam
+;; (use-package org-wiki
+;;   :straight (org-wiki :host github :repo "caiorss/org-wiki")
+;;   :init
+;;   (setq org-wiki-location "~/codes/incubating/notes")
+;;   (setq org-wiki-template
+;;         (string-trim
+;; "
+;; #+TITLE: %n
+;; #+DESCRIPTION:
+;; #+KEYWORDS:
+;; #+STARTUP:  content
+;; #+DATE: %d
+;; #+SETUPFILE: assets/themes/theme.setup
+;;
+;; - [[wiki:index][Index]]
+;;
+;; - Related:
+;;
+;; * %n
+;; ")))
 
 (use-package org-journal
   :after org
@@ -745,8 +764,7 @@
  '(custom-safe-themes
    '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
  '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210524"))
- '(uniquify-buffer-name-style nil nil (uniquify)))
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210531")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

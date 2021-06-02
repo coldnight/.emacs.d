@@ -83,8 +83,6 @@
 (global-auto-revert-mode 1)
 ;; emacs启动时显示的内容可以通过变量initial-scratch-message来设置
 (setq initial-scratch-message nil)
-;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名
-(toggle-uniquify-buffer-names t)
 ;; 指针不要闪
 (blink-cursor-mode -1)
 ;; 当一行文字太长时,不自动换行
@@ -133,6 +131,7 @@
 (global-set-key (kbd "C-c w j") 'windmove-down)
 
 ;; Making Buffer Names Unique
+;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; make a temp buffer
@@ -160,6 +159,6 @@
 
 (defvar usr-bin-path "/usr/bin/"
   "The /usr/bin path to custom in each OS.")
-
+(message "%s" "initialized common configuration!")
 (provide 'init-common)
 ;;; init-common.el ends here
