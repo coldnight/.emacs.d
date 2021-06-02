@@ -1,5 +1,5 @@
 <p align="center">
-    ![Emacs Configuration](./logo.png)
+    <img src="https://raw.githubusercontent.com/coldnight/.emacs.d/master/logo.png" alt="Emacs Configuration" />
 </p>
 
 ## About
