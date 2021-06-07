@@ -485,6 +485,11 @@
 (defvar-local my/gtd-tickler (s-concat my/gtd-root "tickler.org"))
 (defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
 
+(defun ck/org-confirm-babel-evaluate (lang body)
+  "LANG and BODY."
+  (message "LANG: %s" lang)
+  (not (or (string= lang "dot"))))
+
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
   :after ein
@@ -509,6 +514,7 @@
   (org-completion-use-ido t)
   (org-indent-mode t)
   (org-startup-truncated nil)
+  (org-confirm-babel-evaluate 'ck/org-confirm-babel-evaluate)
   :init
   (setq org-agenda-files
         (list
@@ -622,6 +628,12 @@
         org-roam-server-network-label-truncate t
         org-roam-server-network-label-truncate-length 60
         org-roam-server-network-label-wrap-length 20))
+
+
+(use-package org-superstar
+  :straight t
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1))))
 
 ;; Some useful modes
 (use-package indent-guide :straight t)
@@ -764,7 +776,7 @@
  '(custom-safe-themes
    '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
  '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210531")))
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210607")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
