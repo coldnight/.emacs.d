@@ -214,10 +214,8 @@
 
 (use-package projectile
   :straight t
-  :init
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-globally-ignored-directories
+  :custom
+  (projectile-globally-ignored-directories
         (append '(".git"
                   ".svn"
                   ".tox"
@@ -231,7 +229,7 @@
                   "venv")
                 projectile-globally-ignored-directories))
 
-  (setq projectile-globally-ignored-files
+  (projectile-globally-ignored-files
         (append '(".DS_Store"
                   "*.gz"
                   "*.pyc"
@@ -240,12 +238,22 @@
                   "*.tgz"
                   "*.zip"
                   )
-                projectile-globally-ignored-files)))
+                projectile-globally-ignored-files))
+  :init
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
+                                  :project-file "config.toml"
+				  :compile "hugo"
+				  :test "hugo"
+				  :run "hugo server -D --disableFastRender"))
 
 (use-package helm-projectile
   :straight t
+  :after (projectile helm)
+  :custom
+  (projectile-completion-system 'helm))
   :init
-  (setq projectile-completion-system 'helm)
   (helm-projectile-on))
 
 (use-package company
