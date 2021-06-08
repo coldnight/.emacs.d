@@ -57,3 +57,7 @@ Set GOPROXY:
 ``` shell
 go env -w GOPROXY="https://goproxy.io,direct"
 ```
+
+### Graphviz
+
+[Install Graphviz](https://graphviz.org/download/) to draw it in org-mode with evaluate code block.
