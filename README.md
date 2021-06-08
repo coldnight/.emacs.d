@@ -12,6 +12,8 @@ My Emacs configuration that includes:
 
 ## Installation
 
+
+
 ```shell
 $ git clone https://github.com/coldnight/.emacs.d ~/.emacs.d
 $ git submodule init
@@ -20,6 +22,13 @@ $ git submodule update --init
 
 Open your Emacs and wait initialize done.
 
+### Optional
+
+ You can configure Git to connect to GitHub over SSH, if you have issues to connect to GitHub with HTTPs.
+
+```shell
+$ git config --global url."git@github.com:".insteadOf "https://github.com/"
+```
 
 ## Setup
 
