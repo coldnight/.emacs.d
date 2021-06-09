@@ -214,8 +214,10 @@
 
 (use-package projectile
   :straight t
-  :custom
-  (projectile-globally-ignored-directories
+  :init
+  (projectile-mode +1)
+
+  (setq projectile-globally-ignored-directories
         (append '(".git"
                   ".svn"
                   ".tox"
@@ -229,7 +231,7 @@
                   "venv")
                 projectile-globally-ignored-directories))
 
-  (projectile-globally-ignored-files
+  (setq projectile-globally-ignored-files
         (append '(".DS_Store"
                   "*.gz"
                   "*.pyc"
@@ -239,20 +241,18 @@
                   "*.zip"
                   )
                 projectile-globally-ignored-files))
-  :init
-  (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
                                   :project-file "config.toml"
 				  :compile "hugo"
-				  :test "hugo"
-				  :run "hugo server -D --disableFastRender"))
+				  :test "open http://localhost:1313/"
+				  :run "hugo server -D --disableFastRender --navigateToChanged"))
 
 (use-package helm-projectile
   :straight t
   :after (projectile helm)
   :custom
-  (projectile-completion-system 'helm))
+  (projectile-completion-system 'helm)
   :init
   (helm-projectile-on))
 
@@ -768,12 +768,13 @@
   :custom
   (leetcode-prefer-language "cpp"))
 
-(use-package wakatime-mode
-  :straight t
-  :custom
-  (wakatime-api-key secret-wakatime-api-key)
-  :init
-  (global-wakatime-mode))
+(if (not (string= secret-wakatime-api-key ""))
+    (use-package wakatime-mode
+      :straight t
+      :custom
+      (wakatime-api-key secret-wakatime-api-key)
+      :init
+      (global-wakatime-mode)))
 
 ;;; init.el ends here
 (custom-set-variables
