@@ -776,21 +776,13 @@
       :init
       (global-wakatime-mode)))
 
-;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("e1ecb0536abec692b5a5e845067d75273fe36f24d01210bf0aa5842f2a7e029f" default))
- '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org")))
+(use-package which-key
+  :straight t
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration)
+  :custom
+  (which-key-show-early-on-C-h t)
+  :init
+  (which-key-mode))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'set-goal-column 'disabled nil)
+;;; init.el ends here
