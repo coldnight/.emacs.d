@@ -17,7 +17,14 @@
   (if(file-exists-p secret-el-path)
       (load-file secret-el-path)))
 
-(setq straight-vc-git-default-protocol 'ssh)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210614"))
+ '(straight-vc-git-default-protocol 'ssh))
 
 ;; straight.el to manage package
 (defvar bootstrap-version)
@@ -65,8 +72,15 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
+(use-package nyan-mode
+  :straight t
+  :init
+  (nyan-mode 1)
+  (nyan-start-animation))
+
 (use-package doom-modeline
-  :straight (doom-modeline :host github :repo "seagle0128/doom-modeline")
+  :straight t
+  :after nyan-mode
   :init
   (doom-modeline-mode 1))
 
@@ -327,7 +341,7 @@
   (cmake-mode . lsp)
   (lsp-mode . lsp-lens-mode)
   :custom
-  (lsp-rust-server 'rust-analyzer)
+  (lsp-rust-server 'rls)
   (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
   :after (company flycheck))
 
@@ -386,7 +400,8 @@
   (before-save . delete-trailing-whitespace)
   :custom
   (whitespace-line-column 79)
-  (whitespace-style '(face lines-tail)))
+  (whitespace-style '(face lines-tail))
+  (delete-trailing-lines t))
 
 ;; Python black
 (use-package blacken
@@ -421,8 +436,6 @@
   "Return suffix of current buffer."
 
   (nth 0 (cdr (split-string (buffer-name) "\\."))))
-
-
 (use-package web-mode
   :straight t
   :hook
@@ -580,6 +593,8 @@
   :custom
   (org-journal-file-type 'weekly)
   (org-journal-dir "~/codes/notes/roam-research-notes-hugo/journal")
+  ;; (org-journal-enable-encryption t)
+  ;; (org-journal-encrypt-journal t)
   :init
   (defun org-journal-file-header-func (time)
     "Custom function to create journal header."
@@ -775,7 +790,6 @@
       (wakatime-api-key secret-wakatime-api-key)
       :init
       (global-wakatime-mode)))
-
 (use-package which-key
   :straight t
   :hook
@@ -786,3 +800,9 @@
   (which-key-mode))
 
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

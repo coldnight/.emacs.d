@@ -162,3 +162,4 @@
 (message "%s" "initialized common configuration!")
 (provide 'init-common)
 ;;; init-common.el ends here
+
