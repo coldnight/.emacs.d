@@ -75,12 +75,14 @@
 (use-package nyan-mode
   :straight t
   :init
-  (nyan-mode 1)
-  (nyan-start-animation))
+  (nyan-mode 1))
 
 (use-package doom-modeline
   :straight t
   :after nyan-mode
+  :custom
+  (doom-modeline-mu4e nil)
+  (doom-modeline-gnus nil)
   :init
   (doom-modeline-mode 1))
 
@@ -142,6 +144,33 @@
   :bind
   ("C-c t p" . centaur-tabs-backward)
   ("C-c t n" . centaur-tabs-forward))
+
+(use-package ligature
+  :straight
+  (ligature :host github :repo "mickeynp/ligature.el")
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 ;;; Shell
 (use-package exec-path-from-shell
