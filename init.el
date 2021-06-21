@@ -6,6 +6,13 @@
 ;;;
 ;;; Code:
 ;;;
+
+;; custom file
+(setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
+
+(if (file-exists-p custom-file)
+    (load custom-file))
+
 ;; use package
 (eval-when-compile
   (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -16,15 +23,6 @@
 
   (if(file-exists-p secret-el-path)
       (load-file secret-el-path)))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   '("~/codes/notes/roam-research-notes-hugo/gtd/inbox.org" "~/codes/notes/roam-research-notes-hugo/gtd/gtd.org" "~/codes/notes/roam-research-notes-hugo/gtd/tickler.org" "/Users/wh/codes/notes/roam-research-notes-hugo/journal/20210614"))
- '(straight-vc-git-default-protocol 'ssh))
 
 ;; straight.el to manage package
 (defvar bootstrap-version)
@@ -829,9 +827,3 @@
   (which-key-mode))
 
 ;;; init.el ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
