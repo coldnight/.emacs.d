@@ -20,8 +20,19 @@
 ;;
 ;;   (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
 ;;   (set-frame-parameter (selected-frame) 'alpha <both>)
-(set-frame-parameter (selected-frame) 'alpha '(100 . 90))
-(add-to-list 'default-frame-alist '(alpha . (100 . 90)))
+(defvar my-transparent-enabled t "Indicates if transparent enabled.")
+(defun toggle-frame-transparent()
+  "Toggle frame transparent when lose focus."
+  (interactive)
+  (cond (my-transparent-enabled
+         (progn
+           (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+           (add-to-list 'default-frame-alist '(alpha . (100 . 100)))))
+        ((not my-transparent-enabled)
+         (progn
+           (set-frame-parameter (selected-frame) 'alpha '(100 . 90))
+           (add-to-list 'default-frame-alist '(alpha . (100 . 90))))))
+  (setq my-transparent-enabled (not my-transparent-enabled)))
 
 ;; share clipboard between os
 (defun copy-from-osx ()
