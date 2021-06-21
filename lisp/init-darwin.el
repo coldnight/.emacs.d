@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; Go
-(setenv "GOPATH" "/Users/wh/codes/go")
+(setenv "GOPATH" (expand-file-name "~/codes/go"))
 
 ;; Shell
 (setq usr-bin-path "/usr/local/bin/")
