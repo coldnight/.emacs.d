@@ -70,3 +70,16 @@ go env -w GOPROXY="https://goproxy.io,direct"
 ### Graphviz
 
 [Install Graphviz](https://graphviz.org/download/) to draw it in org-mode with evaluate code block.
+
+### C/C++
+
+Install [clangd](https://clangd.llvm.org/installation.html) for `lsp-mode`.
+
+Use cmake to generate clangd configurations:
+
+``` shell
+mkdir build
+cd build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+mv compile_commands.json ../
+```
