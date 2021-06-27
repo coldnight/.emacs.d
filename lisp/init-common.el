@@ -25,7 +25,7 @@
 (setq slime-net-coding-system 'utf-8-unix)
 (setenv "LC_CTYPE" "UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
-(setenv "LANG" "en_US.UTF-8")
+(setenv "LANG" "en_US.UTF-8")                           ; Iterate through CamelCase words
 
 ;; 基本设置
 ;; 在fringe上显示一个小箭头指示当前buffer的边界
@@ -67,8 +67,21 @@
 (setq show-paren-style 'parenthesis)
 ;; 鼠标靠近光标指针时,让鼠标自动让开
 (mouse-avoidance-mode 'animate)
-;; 在标题栏显示buffer的名字
-(setq frame-title-format "%b@emacs")
+;; 在标题栏显示buffer的名字和项目
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+
+
 ;; 打开压缩文件时自动解压缩
 (auto-compression-mode 1)
 ;; C-k时,同时删除该行
@@ -160,6 +173,25 @@
 (defvar usr-bin-path "/usr/bin/"
   "The /usr/bin path to custom in each OS.")
 (message "%s" "initialized common configuration!")
+
+
+;; Copied from https://tecosaur.github.io/emacs-config/
+(setq-default
+ delete-by-moving-to-trash t                      ; Delete files to trash
+ window-combination-resize t                      ; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+
+(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
+      password-cache-expiry nil                   ; I can trust my computers ... can't I?
+      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
+      scroll-margin 2)                            ; It's nice to maintain a little margin
+
+(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
+  (display-battery-mode 1))                       ; it's nice to know how much power you have
+(global-subword-mode 1)
+
 (provide 'init-common)
 ;;; init-common.el ends here
-
