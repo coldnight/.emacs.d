@@ -826,4 +826,8 @@
   :init
   (which-key-mode))
 
+(message "*** Emacs loaded in %s with %d garbage collections."
+     (format "%.2f seconds"
+             (float-time
+              (time-subtract after-init-time before-init-time))) gcs-done)
 ;;; init.el ends here
