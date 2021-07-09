@@ -266,6 +266,7 @@
                   ".gradle"
                   ".meghanada"
                   ".clangd"
+                  "eln-cache"
                   "out"
                   "repl"
                   "target"
@@ -280,6 +281,8 @@
                   "*.tar.gz"
                   "*.tgz"
                   "*.zip"
+                  "*.eln"
+                  "*.elc"
                   )
                 projectile-globally-ignored-files))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
