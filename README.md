@@ -2,6 +2,10 @@
     <img src="https://raw.githubusercontent.com/coldnight/.emacs.d/master/logo.png" alt="Emacs Configuration" />
 </p>
 
+## Screenshot
+
+[![Screenshot](https://gist.githubusercontent.com/coldnight/85f0ffc797d17754cdb20a93b5536e69/raw/6114fe94c4d8aa42cae8a946ee7a7a6eacde4b31/emacs.png)](https://gist.githubusercontent.com/coldnight/85f0ffc797d17754cdb20a93b5536e69/raw/6114fe94c4d8aa42cae8a946ee7a7a6eacde4b31/emacs.png)
+
 ## About
 
 My Emacs configuration that includes:
@@ -11,8 +15,6 @@ My Emacs configuration that includes:
 - Org-mode/org-roam/org-journal
 
 ## Installation
-
-
 
 ```shell
 $ git clone https://github.com/coldnight/.emacs.d ~/.emacs.d
