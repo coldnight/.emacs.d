@@ -204,6 +204,8 @@
 
 (use-package projectile
   :straight t
+  :custom
+  (projectile-enable-caching t)
   :init
   (projectile-mode +1)
 

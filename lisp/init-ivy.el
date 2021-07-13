@@ -62,7 +62,8 @@
   :after (ivy)
   :init
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  (ivy-rich-mode +1))
+  (ivy-rich-mode +1)
+  (ivy-rich-project-root-cache-mode +1))
 
 (use-package all-the-icons-ivy-rich
   :straight t
