@@ -635,14 +635,17 @@
   (org-pomodoro-finished . (lambda ()
                              (call-process "terminal-notifier" nil 0 nil
                                            "-message" "Take a break to eat 🍅！"
+                                           "-sound" "Pebble"
                                            "-sender" "org.gnu.Emacs")))
   (org-pomodoro-short-break-finished . (lambda ()
                                          (call-process "terminal-notifier" nil 0 nil
                                            "-message" "🍅 ready to go！"
+                                           "-sound" "Heroine"
                                            "-sender" "org.gnu.Emacs")))
   (org-pomodoro-long-break-finished . (lambda ()
                                         (call-process "terminal-notifier" nil 0 nil
                                                       "-message" "🍅🍅🍅 ready to go！"
+                                                      "-sound" "Heroine"
                                                       "-sender" "org.gnu.Emacs"))))
 
 ;; Some useful modes
