@@ -34,6 +34,7 @@
   :custom
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t)
+  (ivy-wrap t)
   :bind
   ("\C-s" . swiper)
   ("\C-r" . swiper-backward)
