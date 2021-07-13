@@ -15,3 +15,8 @@
 ;;
 (setq gc-cons-threshold 32000000) ;; 32mb
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
+
+;; Disable native compilation warnings
+(setq native-comp-async-report-warnings-errors nil)
+
+;; early-init.el ends here

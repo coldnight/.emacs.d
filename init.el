@@ -629,6 +629,22 @@
   :hook
   (org-mode . (lambda () (org-superstar-mode 1))))
 
+(use-package org-pomodoro
+  :straight t
+  :hook
+  (org-pomodoro-finished . (lambda ()
+                             (call-process "terminal-notifier" nil 0 nil
+                                           "-message" "Take a break to eat 🍅！"
+                                           "-sender" "org.gnu.Emacs")))
+  (org-pomodoro-short-break-finished . (lambda ()
+                                         (call-process "terminal-notifier" nil 0 nil
+                                           "-message" "🍅 ready to go！"
+                                           "-sender" "org.gnu.Emacs")))
+  (org-pomodoro-long-break-finished . (lambda ()
+                                        (call-process "terminal-notifier" nil 0 nil
+                                                      "-message" "🍅🍅🍅 ready to go！"
+                                                      "-sender" "org.gnu.Emacs"))))
+
 ;; Some useful modes
 (use-package indent-guide :straight t)
 (use-package highlight-indentation :straight t)
