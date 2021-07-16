@@ -5,6 +5,8 @@
 ;;; Code:
 (use-package counsel
   :straight t
+  :custom
+  (counsel-find-file-at-point t)
   :init
   (counsel-mode +1)
   :bind

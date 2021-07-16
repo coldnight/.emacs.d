@@ -510,6 +510,7 @@
   (org-startup-truncated nil)
   (org-confirm-babel-evaluate 'ck/org-confirm-babel-evaluate)
   :init
+  (set-face-attribute 'org-headline-done nil :strike-through t)
   (setq org-agenda-files
         (list
          my/gtd-inbox
