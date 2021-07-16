@@ -314,7 +314,7 @@
   (cmake-mode . lsp)
   (lsp-mode . lsp-lens-mode)
   :custom
-  (lsp-rust-server 'rls)
+  (lsp-rust-server 'rust-analyzer)
   (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
   :after (company flycheck))
 
