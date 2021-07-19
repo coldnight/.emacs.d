@@ -11,5 +11,9 @@
 
 ;; Go
 (setenv "GOPATH" "/home/wh/codes/go")
+
+
+(defun my/activate-terminal()
+  (error "TODO"))
 (provide 'init-linux)
 ;; init-darwin.el ends here

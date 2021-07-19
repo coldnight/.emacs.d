@@ -55,5 +55,10 @@
   (set-frame-position (selected-frame) 0 0)
   (set-frame-size (selected-frame) 208 48))
 
+
+(defun my/activate-terminal(args)
+  (call-process-shell-command "open -a \"iTerm\"" nil nil nil)
+  args)
+
 (provide 'init-darwin)
 ;; init-darwin.el ends here

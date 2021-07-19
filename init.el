@@ -183,6 +183,11 @@
 
 (use-package emamux
   :straight (emamux :host github :repo "coldnight/emamux" :branch "out-of-tmux")
+  :init
+  (advice-add 'emamux:send-command :filter-return #'my/activate-terminal)
+  (advice-add 'emamux:run-command :filter-return #'my/activate-terminal)
+  (advice-add 'emamux:run-last-command :filter-return #'my/activate-terminal)
+  (advice-add 'emamux:run-region :filter-return #'my/activate-terminal)
   :bind
   ("C-c t s" . emamux:send-command)
   ("C-c t !" . emamux:run-command)
