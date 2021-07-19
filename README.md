@@ -95,7 +95,6 @@ mv compile_commands.json ../
 brew install terminal-notifier
 ```
 
-
 # Awesome .emacs.d
 
 - https://tecosaur.github.io/emacs-config/

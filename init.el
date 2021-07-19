@@ -181,6 +181,14 @@
 (use-package quickrun
   :straight t)
 
+(use-package emamux
+  :straight (emamux :host github :repo "coldnight/emamux" :branch "out-of-tmux")
+  :bind
+  ("C-c t s" . emamux:send-command)
+  ("C-c t !" . emamux:run-command)
+  ("C-c t r" . emamux:run-last-command)
+  ("C-c t w" . emamux:run-region))
+
 ;;; Enhance Emacs
 ;; (use-package init-helm)
 (use-package init-ivy)
