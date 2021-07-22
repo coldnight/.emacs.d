@@ -598,48 +598,34 @@
 (use-package org-roam
   :after org
   :straight t
-  :hook
-  (after-init . org-roam-mode)
+  :config
+  (org-roam-setup)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
   :bind
-  (:map org-roam-mode-map
-        (("C-c n n" . org-roam-new-file)
-         ("C-c n l" . org-roam)
-         ("C-c n t" . org-roam-today)
-         ("C-c n f" . org-roam-find-file)
-         ("C-c n b" . org-roam-switch-to-buffer)
-         ("C-c n g" . org-roam-graph-show))
-        :map org-mode-map
-        (("C-c n i" . org-roam-insert)))
+  ("C-c n l" . org-roam-buffer-toggle)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n g" . org-roam-graph)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n c" . org-roam-capture)
+  ;; Dailies
+  ("C-c n j" . org-roam-dailies-capture-today)
   :custom
+  (org-roam-v2-ack t)
   (org-roam-directory "~/codes/notes/roam-research-notes-hugo/content-org")
-  (org-roam-capture-templates `(("d" "default"
-                                 plain #'org-roam-capture--get-point "%?"
-                                 :file-name "%<%Y%m%d%H%M%S>-${slug}"
-                                 :head "#+TITLE: ${title}
+  (org-roam-capture-templates `(("d" "default" plain "%?"
+                                 :unnarrowed t
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                    "#+TITLE: ${title}
 #+AUTHOR: Gray King
 #+DATE: %U
 #+HUGO_BASE_DIR: ../
 #+HUGO_SECTION: notes
-" :unnarrowed t))))
+")))))
 
 (use-package ox-hugo
-  :straight t
+  :straight (ox-hugo :type git :flavor melpa :host github :repo "coldnight/ox-hugo" :branch "external-id-links")
   :after (ox org-mode))
-
-(use-package org-roam-server
-  :straight (:host github :repo "org-roam/org-roam-server"
-             :files ("*.el" "*.html" "assets"))
-  :after simple-httpd org-roam
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 1212
-        org-roam-server-export-inline-images t
-        org-roam-server-authenticate nil
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
-
 
 (use-package org-superstar
   :straight t
