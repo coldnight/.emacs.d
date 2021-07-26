@@ -503,6 +503,7 @@
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
+  ("C-c C-." . org-mark-ring-goto)
   :custom
   (org-startup-indented t)
   (org-hide-leading-stars t)
