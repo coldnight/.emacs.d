@@ -81,6 +81,7 @@
   :custom
   (doom-modeline-mu4e nil)
   (doom-modeline-gnus nil)
+  (doom-modeline-buffer-file-name-style 'truncate-all)
   :init
   (doom-modeline-mode 1))
 
@@ -497,6 +498,7 @@
   (message "LANG: %s" lang)
   (not (or (string= lang "dot"))))
 
+
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
   :after ein
@@ -526,6 +528,11 @@
   :custom-face
   (org-headline-done ((nil (:strike-through t))))
   :init
+  (require 'org-id)
+  (defun my/org-id-update-id-locations-current-dir()
+    "Update id locations from current dir."
+    (interactive)
+    (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
   (setq org-agenda-files
         (list
          my/gtd-inbox
