@@ -128,10 +128,6 @@
 
 (use-package all-the-icons :straight t)
 
-(use-package goto-line-preview :straight t
-  :bind (("M-g g" . goto-line-preview)))
-
-
 (use-package centaur-tabs
   :straight t
   :demand
@@ -196,6 +192,18 @@
   ("C-c t w" . emamux:run-region))
 
 ;;; Enhance Emacs
+(use-package goto-line-preview :straight t
+  :bind (("M-g g" . goto-line-preview)))
+
+(use-package which-key
+  :straight t
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration)
+  :custom
+  (which-key-show-early-on-C-h t)
+  :init
+  (which-key-mode))
+
 ;; (use-package init-helm)
 (use-package init-ivy)
 
@@ -495,7 +503,6 @@
 
 (defun ck/org-confirm-babel-evaluate (lang body)
   "LANG and BODY."
-  (message "LANG: %s" lang)
   (not (or (string= lang "dot"))))
 
 
@@ -630,6 +637,12 @@
 #+HUGO_BASE_DIR: ../
 #+HUGO_SECTION: notes
 ")))))
+
+(use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :hook (org-roam . org-roam-ui-mode))
 
 (use-package ox-hugo
   :straight (ox-hugo :type git :flavor melpa :host github :repo "coldnight/ox-hugo" :branch "external-id-links")
@@ -792,14 +805,6 @@
       :init
       (global-wakatime-mode)))
 
-(use-package which-key
-  :straight t
-  :hook
-  (lsp-mode . lsp-enable-which-key-integration)
-  :custom
-  (which-key-show-early-on-C-h t)
-  :init
-  (which-key-mode))
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"

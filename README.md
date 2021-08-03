@@ -37,7 +37,7 @@ $ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 ### icons
 
-Install all-the-icons fonts: `M-x all-the-icons-install-fonts`
+Install all-the-icons fonts: `M-x all-the-icons-install-fonts RET`
 
 ### org-roam & org-journal & org-agenda &ox-hugo
 

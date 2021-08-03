@@ -46,7 +46,12 @@
 (use-package ivy-posframe
   :straight t
   :custom
-  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+  (ivy-posframe-display-functions-alist
+   '((swiper          . ivy-posframe-display-at-point)
+     (complete-symbol . ivy-posframe-display-at-point)
+     (t . ivy-posframe-display)))
+  (ivy-posframe-parameters '((left-fringe . 8)
+                             (right-fringe . 8)))
   :init
   (ivy-posframe-mode 1))
 
