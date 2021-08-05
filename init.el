@@ -60,6 +60,7 @@
   ;; may have their own settings.
   ;; (load-theme 'doom-nord t)
   (load-theme 'doom-vibrant t)
+  ;; (load-theme 'doom-city-lights t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -640,9 +641,17 @@
 
 (use-package org-roam-ui
   :straight
-    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-    :after org-roam
-    :hook (org-roam . org-roam-ui-mode))
+  (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+  :after org-roam
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 (use-package ox-hugo
   :straight (ox-hugo :type git :flavor melpa :host github :repo "coldnight/ox-hugo" :branch "external-id-links")
@@ -671,6 +680,11 @@
                                                       "-message" "🍅🍅🍅 ready to go！"
                                                       "-sound" "Heroine"
                                                       "-sender" "org.gnu.Emacs"))))
+
+(use-package org-fragtog
+  :straight t
+  :hook
+  (org-mode . org-fragtog-mode))
 
 ;; Some useful modes
 (use-package indent-guide :straight t)
