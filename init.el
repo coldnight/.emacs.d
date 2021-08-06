@@ -691,7 +691,7 @@
         org-roam-ui-open-on-start t))
 
 (use-package ox-hugo
-  :straight (ox-hugo :type git :flavor melpa :host github :repo "coldnight/ox-hugo" :branch "external-id-links")
+  :straight t
   :after (ox org-mode))
 
 (use-package org-superstar
