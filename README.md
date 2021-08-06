@@ -94,6 +94,11 @@ mv compile_commands.json ../
 ``` shell
 brew install terminal-notifier
 ```
+### vterm
+
+``` shell
+brew install cmake libvterm
+```
 
 # Awesome .emacs.d
 
