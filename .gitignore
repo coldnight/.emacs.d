@@ -76,3 +76,6 @@ el-get/
 /lsp-cache/
 /request/
 /eln-cache/
+/.cache/
+/workspace/
+/projects
