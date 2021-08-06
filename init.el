@@ -192,6 +192,43 @@
   ("C-c t r" . emamux:run-last-command)
   ("C-c t w" . emamux:run-region))
 
+(use-package vterm
+  :after centaur-tabs
+  :straight t
+  :config
+  (setq centaur-tabs-buffer-groups-function 'vmacs-awesome-tab-buffer-groups)
+  (defun vmacs-awesome-tab-buffer-groups ()
+    "`vmacs-awesome-tab-buffer-groups' control buffers' group rules. "
+    (list
+     (cond
+      ((derived-mode-p 'eshell-mode 'term-mode 'shell-mode 'vterm-mode)
+       "Term")
+      ((string-match-p (rx (or
+                            "\*Helm"
+                            "\*helm"
+                            "\*tramp"
+                            "\*Completions\*"
+                            "\*sdcv\*"
+                            "\*Messages\*"
+                            "\*Ido Completions\*"
+                            ))
+                       (buffer-name))
+       "Emacs")
+      (t "Common"))))
+
+  (setq vterm-toggle--vterm-buffer-p-function 'vmacs-term-mode-p)
+  (defun vmacs-term-mode-p(&optional args)
+    (derived-mode-p 'eshell-mode 'term-mode 'shell-mode 'vterm-mode)))
+
+(use-package multi-vterm
+  :straight t
+  :bind
+  ("C-c v v" . multi-vterm)
+  ("C-c v P" . multi-vterm-project)
+  ("C-c v n" . multi-vterm-next)
+  ("C-c v p" . multi-vterm-prev)
+  ("C-c v d" . multi-vterm-dedicated-toggle))
+
 ;;; Enhance Emacs
 (use-package goto-line-preview :straight t
   :bind (("M-g g" . goto-line-preview)))
