@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;;
 ;;; Code:
+(eval-when-compile
+  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
+  (require 'use-package))
+
 (defun my//helm-hide-minibuffer-maybe ()
   "Hide minibuffer in Helm session if we use the header line as input field."
   (when (with-helm-buffer helm-echo-input-in-header-line)
@@ -70,3 +74,5 @@
   :init
   (helm-projectile-on))
 (provide 'init-helm)
+
+;;; init-helm.el ends here

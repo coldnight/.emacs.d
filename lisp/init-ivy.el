@@ -3,6 +3,10 @@
 ;;; Commentary:
 ;;;
 ;;; Code:
+(eval-when-compile
+  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
+  (require 'use-package))
+
 (use-package counsel
   :straight t
   :custom
@@ -78,3 +82,5 @@
   :init (all-the-icons-ivy-rich-mode 1))
 
 (provide 'init-ivy)
+
+;;; init-ivy.el ends here

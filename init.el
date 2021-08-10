@@ -80,8 +80,6 @@
   :straight t
   :after nyan-mode
   :custom
-  (doom-modeline-mu4e nil)
-  (doom-modeline-gnus nil)
   (doom-modeline-buffer-file-name-style 'truncate-all)
   :init
   (doom-modeline-mode 1))
@@ -134,12 +132,15 @@
   :demand
   :config
   (centaur-tabs-mode t)
+  (centaur-tabs-group-by-projectile-project)
   :custom
   (centaur-tabs-set-icons t)
   (centaur-tabs-style "wave")
+  (centaur-tabs-cycle-scope 'groups)
   :bind
   ("C-c t p" . centaur-tabs-backward)
-  ("C-c t n" . centaur-tabs-forward))
+  ("C-c t n" . centaur-tabs-forward)
+  ("C-c t t" . centaur-tabs-counsel-switch-group))
 
 (use-package ligature
   :straight
@@ -193,29 +194,8 @@
   ("C-c t w" . emamux:run-region))
 
 (use-package vterm
-  :after centaur-tabs
   :straight t
   :config
-  (setq centaur-tabs-buffer-groups-function 'vmacs-awesome-tab-buffer-groups)
-  (defun vmacs-awesome-tab-buffer-groups ()
-    "`vmacs-awesome-tab-buffer-groups' control buffers' group rules. "
-    (list
-     (cond
-      ((derived-mode-p 'eshell-mode 'term-mode 'shell-mode 'vterm-mode)
-       "Term")
-      ((string-match-p (rx (or
-                            "\*Helm"
-                            "\*helm"
-                            "\*tramp"
-                            "\*Completions\*"
-                            "\*sdcv\*"
-                            "\*Messages\*"
-                            "\*Ido Completions\*"
-                            ))
-                       (buffer-name))
-       "Emacs")
-      (t "Common"))))
-
   (setq vterm-toggle--vterm-buffer-p-function 'vmacs-term-mode-p)
   (defun vmacs-term-mode-p(&optional args)
     (derived-mode-p 'eshell-mode 'term-mode 'shell-mode 'vterm-mode)))
@@ -364,6 +344,13 @@
 ;; lsp-mode must come above of all lsp-packages
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
+  :init
+  ;; Make sure you don't have other gofmt/goimports hooks enabled.
+  (defun lsp-go-install-save-hooks ()
+    "Set up before-save hooks to format buffer and add/delete imports."
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
   :hook
   (python-mode . lsp)
   (go-mode . lsp)
@@ -385,13 +372,6 @@
   (java-mode . lsp))
 
 (use-package helm-lsp :straight :commands helm-lsp-workspace-symbol)
-
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  "Set up before-save hooks to format buffer and add/delete imports."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
@@ -415,12 +395,6 @@
   (dap-auto-configure-features '(sessions locals controls tooltip))
   (dap-print-io t)
   :after (lsp-mode))
-
-;; (use-package company-lsp
-;;   :straight t
-;;   :init
-;;   (push 'company-lsp company-backends)
-;;   :after (company lsp-mode))
 
 (use-package lsp-ui
   :straight t
