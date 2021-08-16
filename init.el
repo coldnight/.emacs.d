@@ -21,7 +21,8 @@
   (defconst secret-el-path (expand-file-name ".secret.el" user-emacs-directory))
 
   (if(file-exists-p secret-el-path)
-      (load-file secret-el-path)))
+      (load-file secret-el-path)
+    (defconst secret-wakatime-api-key "")))
 
 ;; straight.el to manage package
 (defvar bootstrap-version)
