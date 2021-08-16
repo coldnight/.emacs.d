@@ -6,7 +6,6 @@
 ;;;
 ;;; Code:
 ;;;
-
 ;; custom file
 (setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
 
@@ -560,7 +559,8 @@
 (defun my/enable-optional-packages()
   "Enable optional packages."
   (interactive)
-  (use-package init-optional))
+  (use-package init-optional)
+  (use-package init-mu4e))
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"

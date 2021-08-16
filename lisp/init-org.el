@@ -32,6 +32,7 @@
   (org-insert-heading-respect-content nil)
   (org-M-RET-may-split-line '((item) (default . t)))
   (org-special-ctrl-a/e t)
+  (org-hide-emphasis-markers t) ;; 隐藏标记
   (org-return-follows-link nil)
   (org-use-speed-commands t)
   (org-startup-align-all-tables nil)
