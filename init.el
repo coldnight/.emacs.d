@@ -228,7 +228,9 @@
   (projectile-enable-caching t)
   :init
   (projectile-mode +1)
-
+  ;; see https://github.com/syl20bnr/spacemacs/issues/11381#issuecomment-481239700
+  (defadvice projectile-project-root (around ignore-remote first activate)
+    (unless (file-remote-p default-directory) ad-do-it))
   (setq projectile-globally-ignored-directories
         (append '(".git"
                   ".svn"
