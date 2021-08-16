@@ -136,6 +136,7 @@
   :custom
   (centaur-tabs-set-icons t)
   (centaur-tabs-style "wave")
+  (centaur-tabs-set-bar 'under)
   (centaur-tabs-cycle-scope 'groups)
   :bind
   ("C-c t p" . centaur-tabs-backward)
