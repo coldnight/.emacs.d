@@ -178,9 +178,6 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
-(use-package quickrun
-  :straight t)
-
 (use-package vterm
   :straight t
   :config
@@ -212,11 +209,6 @@
 
 ;; (use-package init-helm)
 (use-package init-ivy)
-
-(use-package neotree
-  :straight (neotree :host github :repo "jaypei/emacs-neotree")
-  :bind
-  ("C-c s n" . neotree-toggle))
 
 ;; Effective
 (use-package magit
@@ -282,17 +274,6 @@
   :defer t
   :after company)
 
-(use-package yasnippet-snippets
-  :straight t)
-
-(use-package yasnippet
-  :straight t
-  :init
-  (setq yas-snippet-dirs
-      '("~/.emacs.d/straight/build/yasnippet-snippets/snippets/"
-        "~/.emacs.d/snippets"))
-  (yas-global-mode 1))
-
 ;; Programming Tools
 (use-package autopair
   :straight (autopair :host github :repo "joaotavora/autopair")
@@ -316,9 +297,6 @@
   :after (flycheck pos-tip)
   :init
   (flycheck-pos-tip-mode))
-
-(use-package swift-mode
-  :straight t)
 
 (use-package posframe
   :straight t)
@@ -487,16 +465,11 @@
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   :after (web-mode flycheck company))
 
-(use-package slime
-  :straight t
-  :custom
-  (inferior-lisp-program "sbcl"))
-
-
 ;; Org Mode
 (use-package init-org)
 
 ;; Some useful modes
+(use-package swift-mode :straight t)
 (use-package indent-guide :straight t)
 (use-package highlight-indentation :straight t)
 (use-package json-mode :straight t)
@@ -532,51 +505,6 @@
    minibuffer-local-completion-map)
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
    (setq sbt:program-options '("-Dsbt.supershell=false")))
-
-;; ERC to chat via IRC
-
-;; ;; enable TLS
-;; (use-package tls
-;;   :straight t
-;;   :custom
-;;   (tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
-;;                     "gnutls-cli --priority secure256"
-;;                     "gnutls-cli --priority secure256 -p %p %h")))
-
-; M-x my/start-irc
-(defun my/start-irc ()
-  "Connect to IRC."
-  (interactive)
-  (erc-tls :server "irc.freenode.net" :port 7000
-           :full-name secret-freenode-full-name
-           :nick secret-freenode-nick
-           :password secret-freenode-password))
-
-
-(defun my/start-mozilla-irc ()
-  "Connect to Mozilla-irc."
-  (interactive)
-  (erc-tls :server "irc.mozilla.org" :port 6697
-           :full-name secret-freenode-full-name
-           :nick secret-freenode-nick
-           :password secret-freenode-password))
-
-
-(use-package erc
-  :straight t
-  :after tls
-  :commands (my/start-irc my/start-mozilla-irc))
-
-(use-package keypression
-  :straight (:host github :repo "chuntaro/emacs-keypression" :branch "master")
-  :custom
-  ;; (keypression-use-child-frame t)
-  ;; (keypression-frame-justify 'keypression-left-justified)
-  (keypression-fade-out-delay 1.0)
-  (keypression-cast-command-name t)
-  (keypression-cast-command-name-format "%s  %s")
-  (keypression-combine-same-keystrokes t)
-  (keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
 
 (use-package urlview
   :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
@@ -629,6 +557,10 @@
       :init
       (global-wakatime-mode)))
 
+(defun my/enable-optional-packages()
+  "Enable optional packages."
+  (interactive)
+  (use-package init-optional))
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"
