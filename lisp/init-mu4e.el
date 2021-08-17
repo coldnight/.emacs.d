@@ -10,6 +10,8 @@
       (eval-when-compile
         (add-to-list 'load-path my/mu4e-sys-path)
         (require 'mu4e))
+      ;; http://pragmaticemacs.com/emacs/fixing-duplicate-uid-errors-when-using-mbsync-and-mu4e/
+      (setq mu4e-change-filenames-when-moving t)
       (setq mu4e-get-mail-command "mbsync gmail")
       (defun my-make-mu4e-context (name address signature)
         "Return a mu4e context named NAME with :match-func matching
