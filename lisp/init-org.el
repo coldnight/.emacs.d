@@ -127,6 +127,9 @@
   (setq org-journal-file-header 'org-journal-file-header-func)
   (setq org-journal-enable-agenda-integration t))
 
+;; use-package defer not works, set here to avoid warning.
+(setq org-roam-v2-ack t)
+
 (use-package org-roam
   :after org
   :straight t
