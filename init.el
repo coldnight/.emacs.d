@@ -9,6 +9,7 @@
 
 ;; straight.el to manage package
 (eval-when-compile
+  (setq straight-fix-flycheck t)
   ;; custom file
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
