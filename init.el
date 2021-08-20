@@ -6,35 +6,37 @@
 ;;;
 ;;; Code:
 ;;;
-;; custom file
-(setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
 
-(if (file-exists-p custom-file)
-    (load custom-file))
-
-;; use package
+;; straight.el to manage package
 (eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp")
+  ;; custom file
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+  (if (file-exists-p custom-file)
+      (load custom-file))
+
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
   (defconst secret-el-path (expand-file-name ".secret.el" user-emacs-directory))
 
   (if(file-exists-p secret-el-path)
       (load-file secret-el-path)
     (defconst secret-wakatime-api-key "")))
 
-;; straight.el to manage package
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
+;; use package
 (straight-use-package 'use-package)
 
 ;;; Common
@@ -557,11 +559,8 @@
       :init
       (global-wakatime-mode)))
 
-(defun my/enable-optional-packages()
-  "Enable optional packages."
-  (interactive)
-  (use-package init-optional)
-  (use-package init-mu4e))
+(use-package init-optional)
+(use-package init-mu4e)
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"
