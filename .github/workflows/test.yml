@@ -39,5 +39,5 @@ jobs:
         with:
           version: ${{ matrix.emacs_version }}
         if: matrix.os == 'windows-latest'
-      - name: Generate hugo site
+      - name: Bootstrap Emacs
         run: make --no-print-directory -j1 init
