@@ -342,13 +342,13 @@
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
   :straight (lsp-metals :host github :repo "emacs-lsp/lsp-metals")
-  :config (setq lsp-metals-treeview-show-when-views-received t))
+  :custom (lsp-metals-treeview-show-when-views-received t))
 
 (use-package lsp-sourcekit
   :straight t
   :after lsp-mode
-  :config
-  (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
+  :custom
+  (lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
 
 (use-package dap-mode
   :init
@@ -383,9 +383,6 @@
   (blacken-fast-unsafe t)
   :bind
   ("C-c f p" . blacken-buffer))
-
-(use-package ein
-  :straight t)
 
 ;; Programming Language Mode
 (use-package go-mode
@@ -508,6 +505,10 @@
 
 (use-package urlview
   :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
+
+;; speedup
+;; M-x esup
+(use-package esup :straight t)
 
 ;; backup
 (use-package backup-walker

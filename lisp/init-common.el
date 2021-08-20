@@ -52,6 +52,7 @@
  initial-scratch-message nil
  dired-listing-switches "-vha" ;;  dired 列出文件的参数（man ls）
  show-paren-style 'parenthesis ;; 括号匹配时高亮显示另一边的括号，而不是跳到另一个括号处
+ vc-follow-symlinks t          ;; 跟随版本控制中的符号链接
  )
 ;; 在标题栏显示buffer的名字和项目
 (setq frame-title-format

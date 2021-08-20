@@ -18,6 +18,10 @@
   "LANG and BODY."
   (not (or (string= lang "dot"))))
 
+;; Emacs IPython Notebook
+(use-package ein
+  :straight t)
+
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
   :after ein
