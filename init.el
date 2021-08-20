@@ -6,17 +6,29 @@
 ;;;
 ;;; Code:
 ;;;
-;; custom file
-(setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
 
-(if (file-exists-p custom-file)
-    (load custom-file))
-
-;; use package
+;; straight.el to manage package
 (eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp")
-  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
-  (require 'use-package)
+  ;; custom file
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+  (if (file-exists-p custom-file)
+      (load custom-file))
+
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
 
   (defconst secret-el-path (expand-file-name ".secret.el" user-emacs-directory))
 
@@ -24,19 +36,8 @@
       (load-file secret-el-path)
     (defconst secret-wakatime-api-key "")))
 
-;; straight.el to manage package
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; use package
+(straight-use-package 'use-package)
 
 ;;; Common
 (use-package init-common)
@@ -344,13 +345,13 @@
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
   :straight (lsp-metals :host github :repo "emacs-lsp/lsp-metals")
-  :config (setq lsp-metals-treeview-show-when-views-received t))
+  :custom (lsp-metals-treeview-show-when-views-received t))
 
 (use-package lsp-sourcekit
   :straight t
   :after lsp-mode
-  :config
-  (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
+  :custom
+  (lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
 
 (use-package dap-mode
   :init
@@ -385,9 +386,6 @@
   (blacken-fast-unsafe t)
   :bind
   ("C-c f p" . blacken-buffer))
-
-(use-package ein
-  :straight t)
 
 ;; Programming Language Mode
 (use-package go-mode
@@ -511,6 +509,10 @@
 (use-package urlview
   :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
 
+;; speedup
+;; M-x esup
+(use-package esup :straight t)
+
 ;; backup
 (use-package backup-walker
   :straight t
@@ -559,11 +561,8 @@
       :init
       (global-wakatime-mode)))
 
-(defun my/enable-optional-packages()
-  "Enable optional packages."
-  (interactive)
-  (use-package init-optional)
-  (use-package init-mu4e))
+(use-package init-optional)
+(use-package init-mu4e)
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"
