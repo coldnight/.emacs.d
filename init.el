@@ -15,9 +15,6 @@
 ;; use package
 (eval-when-compile
   (add-to-list 'load-path "~/.emacs.d/lisp")
-  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
-  (require 'use-package)
-
   (defconst secret-el-path (expand-file-name ".secret.el" user-emacs-directory))
 
   (if(file-exists-p secret-el-path)
@@ -37,6 +34,8 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
 
 ;;; Common
 (use-package init-common)
