@@ -2,10 +2,11 @@
 ;;;
 ;;; Commentary:
 ;;; Code:
-(eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
-  (require 'use-package))
 
+;; happy flycheck
+(eval-when-compile
+  (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
+  (require 'use-package))
 
 ;; ERC to chat via IRC
 

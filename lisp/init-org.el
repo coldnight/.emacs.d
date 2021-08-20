@@ -4,7 +4,7 @@
 ;;;
 ;;; Code:
 (eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
+  (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
 ;; See also: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html

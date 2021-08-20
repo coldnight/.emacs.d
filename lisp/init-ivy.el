@@ -3,8 +3,10 @@
 ;;; Commentary:
 ;;;
 ;;; Code:
+
+;; happy flycheck
 (eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp/use-package")
+  (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
 (use-package counsel
