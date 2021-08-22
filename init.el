@@ -90,8 +90,8 @@
                      :files ("*.el" "data"))
   :hook
   (after-init . global-emojify-mode)
-  :init
-  (setq emojify-emoji-styles '(unicode github)))
+  :custom
+  (emojify-emoji-styles '(unicode github)))
 
 (use-package dashboard
   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
@@ -145,18 +145,18 @@
 (use-package cnfonts
   :straight (cnfonts :host github :repo "tumashu/cnfonts")
   :after init-darwin
-  :init
-  (setq cnfonts--custom-set-fontnames
+  :custom
+  (cnfonts--custom-set-fontnames
       '(
         ("Victor Mono")
         ("Hiragino Sans GB")
         ("HanaMinB")))
 
-  (setq cnfonts--custom-set-fontsizes
+  (cnfonts--custom-set-fontsizes
         '(
           (14  16.5 16.5)
           ))
-
+  :init
   (cnfonts-enable))
 
 (use-package all-the-icons :straight t)
@@ -324,8 +324,7 @@
   ;; .rst 文件禁用 flycheck
   (setq-default flycheck-disabled-checkers '(rst)))
 
-(use-package pos-tip
-  :straight t)
+(use-package pos-tip :straight t)
 
 (use-package flycheck-pos-tip
 ;;  :straight (flycheck :host github :repo "flycheck/flycheck-pos-tip")
@@ -334,8 +333,7 @@
   :init
   (flycheck-pos-tip-mode))
 
-(use-package posframe
-  :straight t)
+(use-package posframe :straight t)
 
 (use-package flycheck-swiftlint
   :straight t
@@ -343,64 +341,8 @@
   (with-eval-after-load 'flycheck
     (flycheck-swiftlint-setup)))
 
-;; lsp-mode must come above of all lsp-packages
-(use-package lsp-mode
-  :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
-  :init
-  ;; Make sure you don't have other gofmt/goimports hooks enabled.
-  (defun lsp-go-install-save-hooks ()
-    "Set up before-save hooks to format buffer and add/delete imports."
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-  :hook
-  (python-mode . lsp)
-  (go-mode . lsp)
-  (c++-mode . lsp)
-  (rust-mode . lsp)
-  (php-mode . lsp)
-  (scala-mode . lsp)
-  (cmake-mode . lsp)
-  (lsp-mode . lsp-lens-mode)
-  :custom
-  (lsp-rust-server 'rust-analyzer)
-  (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
-  :after (company flycheck))
-
-(use-package lsp-java
-  :straight t
-  :after lsp-mode
-  :hook
-  (java-mode . lsp))
-
-(use-package helm-lsp :straight :commands helm-lsp-workspace-symbol)
-
-;; Add metals backend for lsp-mode
-(use-package lsp-metals
-  :straight (lsp-metals :host github :repo "emacs-lsp/lsp-metals")
-  :custom (lsp-metals-treeview-show-when-views-received t))
-
-(use-package lsp-sourcekit
-  :straight t
-  :after lsp-mode
-  :custom
-  (lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
-
-(use-package dap-mode
-  :init
-  (dap-mode 1)
-  (dap-ui-mode 1)
-  (require 'dap-go)
-  (dap-go-setup)
-  :custom
-  ;; (dap-go-debug-program `("node" ,(expand-file-name "~/.vscode/extensions/ms-vscode.go-0.9.2/out/src/debugAdapter/goDebug.js")))
-  (dap-auto-configure-features '(sessions locals controls tooltip))
-  (dap-print-io t)
-  :after (lsp-mode))
-
-(use-package lsp-ui
-  :straight t
-  :after lsp-mode)
+;; Language Server Mode
+(use-package init-lsp)
 
 (use-package whitespace
   :straight whitespace

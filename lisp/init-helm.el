@@ -75,6 +75,9 @@
   (projectile-completion-system 'helm)
   :init
   (helm-projectile-on))
+
+(use-package helm-lsp :straight t :commands helm-lsp-workspace-symbol :after lsp-mode)
+
 (provide 'init-helm)
 
 ;;; init-helm.el ends here
