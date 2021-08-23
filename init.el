@@ -38,7 +38,7 @@
 
 ;; use package
 (straight-use-package 'use-package)
-
+
 ;;; Common
 (use-package init-common)
 
@@ -47,7 +47,7 @@
 
 (use-package init-linux
   :if (memq window-system '(x)))
-
+
 ;;; Appearance
 (use-package doom-themes
   :ensure t
@@ -149,8 +149,8 @@
   (cnfonts--custom-set-fontnames
       '(
         ("Victor Mono")
-        ("Hiragino Sans GB")
-        ("HanaMinB")))
+        ("STKaiti" "Hiragino Sans GB")
+        ("HanaMinB" "SimSun-ExtB" "MingLiU-ExtB")))
 
   (cnfonts--custom-set-fontsizes
         '(
@@ -205,6 +205,11 @@
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
 
+(use-package page-break-lines
+  :straight t
+  :config
+  (global-page-break-lines-mode))
+
 ;;; Shell
 (use-package exec-path-from-shell
   :straight (exec-path-from-shell :host github :repo "purcell/exec-path-from-shell")
@@ -227,7 +232,7 @@
   ("C-c v n" . multi-vterm-next)
   ("C-c v p" . multi-vterm-prev)
   ("C-c v d" . multi-vterm-dedicated-toggle))
-
+
 ;;; Enhance Emacs
 (use-package goto-line-preview :straight t
   :bind (("M-g g" . goto-line-preview)))
@@ -244,6 +249,9 @@
 ;; (use-package init-helm)
 (use-package init-ivy)
 
+(use-package urlview
+  :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
+
 ;; Effective
 (use-package magit
   :straight (magit :host github :repo "magit/magit")
@@ -340,10 +348,11 @@
   :config
   (with-eval-after-load 'flycheck
     (flycheck-swiftlint-setup)))
-
-;; Language Server Mode
+
+;;; Language Server Mode
 (use-package init-lsp)
-
+
+;;; Edit
 (use-package whitespace
   :straight whitespace
   :hook
@@ -353,7 +362,8 @@
   (whitespace-line-column 79)
   (whitespace-style '(face lines-tail))
   (delete-trailing-lines t))
-
+
+;;; Programming Language Specific
 ;; Python black
 (use-package blacken
   :straight (blacken :host github :repo "pythonic-emacs/blacken")
@@ -378,7 +388,6 @@
 
 ;; 设置缩进级别空格数
 (defvar-local my/web-mode-offset 2)
-
 
 (defun my/current-buffer-suffix()
   "Return suffix of current buffer."
@@ -439,10 +448,7 @@
   :init
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   :after (web-mode flycheck company))
-
-;; Org Mode
-(use-package init-org)
-
+
 ;; Some useful modes
 (use-package swift-mode :straight t)
 (use-package indent-guide :straight t)
@@ -479,11 +485,12 @@
    'self-insert-command
    minibuffer-local-completion-map)
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-   (setq sbt:program-options '("-Dsbt.supershell=false")))
+  (setq sbt:program-options '("-Dsbt.supershell=false")))
 
-(use-package urlview
-  :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
-
+;; Org Mode
+(use-package init-org)
+
+;;; Misc
 ;; speedup
 ;; M-x esup
 (use-package esup :straight t)
@@ -538,7 +545,7 @@
 
 (use-package init-optional)
 (use-package init-mu4e)
-
+
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"
              (float-time

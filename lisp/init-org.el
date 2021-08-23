@@ -52,6 +52,13 @@
   :custom-face
   (org-headline-done ((nil (:strike-through t))))
   :init
+  ;; 中文行内格式不用加空格
+  ;; https://emacs-china.org/t/orgmode/9740/18?u=grayking
+  (require 'org)
+  (setq org-emphasis-regexp-components '("-[:multibyte:][:space:]('\"{" "-[:multibyte:][:space:].,:!?;'\")}\\[" "[:space:]" "." 1))
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (org-element-update-syntax)
+
   (require 'org-id)
   (defun my/org-id-update-id-locations-current-dir()
     "Update id locations from current dir."
