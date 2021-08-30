@@ -214,7 +214,11 @@
 
 (use-package org-download
   :straight t
+  :after org-roam
+  :custom
+  (org-download-image-dir "images")
   :hook
-  (dired-mode . org-download-enable))
+  (dired-mode . org-download-enable)
+  (org-mode . org-download-enable))
 (provide 'init-org)
 ;;; init-org.el ends here
