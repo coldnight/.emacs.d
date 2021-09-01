@@ -231,7 +231,6 @@
                   "*.elc"
                   )
                 projectile-globally-ignored-files))
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
                                   :project-file "config.toml"
 				  :compile "hugo"
