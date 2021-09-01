@@ -64,12 +64,7 @@
     "Update id locations from current dir."
     (interactive)
     (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
-  (setq org-agenda-files
-        (list
-         my/gtd-inbox
-         my/gtd-main
-         my/gtd-tickler))
-
+  ;; (setq org-agenda-files (list my/gtd-inbox my/gtd-main my/gtd-tickler))
   (setq org-capture-templates `(("t" "Todo [inbox]" entry
                                  (file+headline ,(s-concat my/gtd-root "inbox.org") "Tasks")
                                  "* TODO %i%?")
@@ -172,7 +167,8 @@
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :commands org-roam-ui-mode
   :config
   (setq org-roam-ui-sync-theme t
         org-roam-ui-follow t

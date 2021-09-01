@@ -51,6 +51,7 @@
 
 (use-package ivy-posframe
   :straight t
+  :after ivy
   :custom
   (ivy-posframe-display-functions-alist
    '((swiper          . ivy-posframe-display-at-point)

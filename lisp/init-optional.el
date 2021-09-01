@@ -44,6 +44,7 @@
 
 (use-package keypression
   :straight (:host github :repo "chuntaro/emacs-keypression" :branch "master")
+  :commands keypression-mode
   :custom
   ;; (keypression-use-child-frame t)
   ;; (keypression-frame-justify 'keypression-left-justified)
@@ -54,26 +55,17 @@
   (keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
 
 (use-package quickrun
-  :straight t)
+  :straight t
+  :commands quickrun)
 
 (use-package neotree
   :straight (neotree :host github :repo "jaypei/emacs-neotree")
   :bind
   ("C-c s n" . neotree-toggle))
 
-(use-package yasnippet-snippets
-  :straight t)
-
-(use-package yasnippet
-  :straight t
-  :init
-  (setq yas-snippet-dirs
-      '("~/.emacs.d/straight/build/yasnippet-snippets/snippets/"
-        "~/.emacs.d/snippets"))
-  (yas-global-mode 1))
-
 (use-package slime
   :straight t
+  :commands slime
   :custom
   (inferior-lisp-program "sbcl"))
 

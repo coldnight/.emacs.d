@@ -38,6 +38,11 @@
 
 ;; use package
 (straight-use-package 'use-package)
+
+
+;; ;; 开启 use-package 记录包加载时间
+;; (setq use-package-verbose t)
+
 
 ;;; Common
 (use-package init-common)
@@ -137,6 +142,9 @@
 
 (use-package vterm
   :straight t
+  ;; commands to defer
+  :commands (vterm vterm-buffer)
+  :after multi-vterm
   :config
   (setq vterm-toggle--vterm-buffer-p-function 'vmacs-term-mode-p)
   (defun vmacs-term-mode-p(&optional args)
@@ -371,13 +379,19 @@
 (use-package swift-mode :straight t)
 (use-package indent-guide :straight t)
 (use-package highlight-indentation :straight t)
-(use-package json-mode :straight t)
+(use-package json-mode :straight t
+  ;; mode to defer
+  :mode "\\.json\\'")
 (use-package yaml-mode :straight t)
-(use-package less-css-mode :straight t)
+(use-package less-css-mode :straight t
+  ;; mode to defer
+  :mode "\\.less\\'")
 (use-package gradle-mode :straight t)
 (use-package rust-mode :straight t)
 (use-package htmlize :straight t)
-(use-package php-mode :straight t)
+(use-package php-mode :straight t
+  ;; mode to defer
+  :mode "\\.php\\'")
 (use-package kotlin-mode :straight t)
 (use-package dockerfile-mode :straight t)
 (use-package cmake-mode
@@ -450,6 +464,7 @@
 
 (use-package leetcode
   :straight (leetcode :host github :repo "kaiwk/leetcode.el")
+  :commands leetcode
   :custom
   (leetcode-prefer-language "cpp"))
 
@@ -462,7 +477,8 @@
       (global-wakatime-mode)))
 
 (use-package init-optional)
-(use-package init-mu4e)
+(use-package init-mu4e
+  :commands mu4e)
 
 (message "*** Emacs loaded in %s with %d garbage collections."
      (format "%.2f seconds"

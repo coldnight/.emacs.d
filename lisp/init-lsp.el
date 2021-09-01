@@ -11,7 +11,7 @@
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
-  ((python-mode go-mode c++-mode rust-mode php-mode scala-mode cmake-mode) . lsp)
+  ((python-mode go-mode c++-mode rust-mode php-mode cmake-mode) . lsp)
   (go-mode . (lambda ()
               "Set up before-save hooks to format buffer and add/delete imports."
               ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -38,7 +38,11 @@
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
   :straight (lsp-metals :host github :repo "emacs-lsp/lsp-metals")
-  :custom (lsp-metals-treeview-show-when-views-received t))
+  :custom (lsp-metals-treeview-show-when-views-received t)
+  :after lsp-mode
+  :hook
+  ;; DO NOT move this to lsp-mode, that will break use-package defer
+  (scala-mode . lsp))
 
 (use-package lsp-sourcekit
   :straight t
@@ -61,5 +65,6 @@
 (use-package lsp-ui
   :straight t
   :after lsp-mode)
+
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
