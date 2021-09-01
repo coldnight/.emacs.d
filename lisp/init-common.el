@@ -54,19 +54,23 @@
  show-paren-style 'parenthesis ;; 括号匹配时高亮显示另一边的括号，而不是跳到另一个括号处
  vc-follow-symlinks t          ;; 跟随版本控制中的符号链接
  )
+
 ;; 在标题栏显示buffer的名字和项目
 (setq frame-title-format
       '(""
         (:eval
-         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+         (if (and
+              (boundp 'org-roam-directory)
+              (s-contains-p org-roam-directory (or buffer-file-name "")))
              (replace-regexp-in-string
               ".*/[0-9]*-?" "☰ "
               (subst-char-in-string ?_ ?  buffer-file-name))
            "%b"))
         (:eval
-         (let ((project-name (projectile-project-name)))
-           (unless (string= "-" project-name)
-             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+         (if (boundp 'projectile-project-name)
+             (let ((project-name (projectile-project-name)))
+               (unless (string= "-" project-name)
+                 (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))))
 
 (menu-bar-mode -1)            ;; 取消菜单栏
 (scroll-bar-mode -1)          ;; 取消滚动条（在 Emacs 26 中无效）
@@ -125,7 +129,6 @@
 
 (global-set-key (kbd "C-c g b") 'my/generate-buffer)
 
-
 (defun my/open-remark-org()
   "Open my own remark in 'org-mode'."
   (interactive)
@@ -142,8 +145,6 @@
 
 (defvar usr-bin-path "/usr/bin/"
   "The /usr/bin path to custom in each OS.")
-(message "%s" "initialized common configuration!")
-
 
 ;; Copied from https://tecosaur.github.io/emacs-config/
 (setq-default
