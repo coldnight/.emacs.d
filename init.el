@@ -41,6 +41,7 @@
 
 
 ;; ;; 开启 use-package 记录包加载时间
+;; ;; see also: https://emacstalk.github.io/post/004/
 ;; (setq use-package-verbose t)
 
 
@@ -176,7 +177,9 @@
 (use-package init-ivy)
 
 (use-package urlview
-  :straight (:host github :repo "coldnight/emacs-urlview" :branch "master"))
+  :straight (:host github :repo "coldnight/emacs-urlview" :branch "master")
+  :bind
+  ("C-c u v" . uv/browse-url))
 
 ;; Effective
 (use-package magit
@@ -194,7 +197,9 @@
   :straight t
   :custom
   (projectile-enable-caching t)
-  :init
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
   (projectile-mode +1)
   ;; see https://github.com/syl20bnr/spacemacs/issues/11381#issuecomment-481239700
   (defadvice projectile-project-root (around ignore-remote first activate)
@@ -254,26 +259,28 @@
   :straight t
   :hook
   (after-init . global-flycheck-mode)
-  :init
+  :custom
   ;; .rst 文件禁用 flycheck
-  (setq-default flycheck-disabled-checkers '(rst)))
+  (flycheck-disabled-checkers '(rst)))
 
-(use-package pos-tip :straight t)
+(use-package pos-tip
+  :straight t
+  :after flycheck)
 
 (use-package flycheck-pos-tip
 ;;  :straight (flycheck :host github :repo "flycheck/flycheck-pos-tip")
   :straight t
   :after (flycheck pos-tip)
-  :init
+  :config
   (flycheck-pos-tip-mode))
 
 (use-package posframe :straight t)
 
 (use-package flycheck-swiftlint
   :straight t
+  :after flycheck
   :config
-  (with-eval-after-load 'flycheck
-    (flycheck-swiftlint-setup)))
+  (flycheck-swiftlint-setup))
 
 ;;; Language Server Mode
 (use-package init-lsp)
@@ -371,30 +378,38 @@
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (my/setup-tide-mode))))
-  :init
+  :config
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   :after (web-mode flycheck company))
 
 ;; Some useful modes
-(use-package swift-mode :straight t)
-(use-package indent-guide :straight t)
-(use-package highlight-indentation :straight t)
+(use-package swift-mode :straight t
+  :mode "\\.swift\'")
+;; (use-package indent-guide :straight t)
+;; (use-package highlight-indentation :straight t)
 (use-package json-mode :straight t
   ;; mode to defer
   :mode "\\.json\\'")
-(use-package yaml-mode :straight t)
+(use-package yaml-mode :straight t
+  :mode ("\\.yaml\\'" "\\.yml\\'"))
 (use-package less-css-mode :straight t
   ;; mode to defer
   :mode "\\.less\\'")
-(use-package gradle-mode :straight t)
-(use-package rust-mode :straight t)
-(use-package htmlize :straight t)
+(use-package gradle-mode :straight t
+  :mode "\\.gradle\\'")
+(use-package rust-mode :straight t
+  :mode "\\.rs\\'")
+(use-package htmlize :straight t
+  :mode "\\.html\\'")
 (use-package php-mode :straight t
   ;; mode to defer
   :mode "\\.php\\'")
-(use-package kotlin-mode :straight t)
-(use-package dockerfile-mode :straight t)
+(use-package kotlin-mode :straight t
+  :mode "\\.kt\\'")
+(use-package dockerfile-mode :straight t
+  :mode "Dockerfile\\'")
 (use-package cmake-mode
+  :mode "CMakeLists.txt\\'"
   :straight (:host github :flavor melpa
                    :files ("Auxiliary/*.el" "cmake-mode-pkg.el")
                    :repo "Kitware/CMake"))
@@ -425,11 +440,14 @@
 ;;; Misc
 ;; speedup
 ;; M-x esup
-(use-package esup :straight t)
+(use-package esup :straight t
+  :commands esup)
 
 ;; backup
 (use-package backup-walker
   :straight t
+  :hook
+  (before-save . (lambda () (setq buffer-backed-up nil)))
   :custom
   ;; 备份设置
   (make-backup-files t)
@@ -444,20 +462,12 @@
   (delete-old-versions t)
   ;; 备份设置方法,直接拷贝
   (backup-by-copying t)
-  :init
+  :config
   ;; 设置备份文件的路径
   (defvar-local backup-dir (concat user-emacs-directory "backups") "Backup directory.")
-
   (if (not (file-exists-p backup-dir))
       (make-directory backup-dir))
-
   (add-to-list 'backup-directory-alist `(".*" . ,backup-dir))
-
-  (defun force-backup-of-buffer()
-    "Force backup buffer."
-    (setq buffer-backed-up nil))
-
-  (add-hook 'before-save-hook 'force-backup-of-buffer)
 
   ;; tramp for remote edit
   (setq tramp-backup-directory-alist backup-directory-alist))

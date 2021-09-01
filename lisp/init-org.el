@@ -20,11 +20,12 @@
 
 ;; Emacs IPython Notebook
 (use-package ein
-  :straight t)
+  :straight t
+  :defer
+  :after org)
 
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
-  :after ein
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -51,7 +52,7 @@
   (org-confirm-babel-evaluate 'ck/org-confirm-babel-evaluate)
   :custom-face
   (org-headline-done ((nil (:strike-through t))))
-  :init
+  :config
   ;; 中文行内格式不用加空格
   ;; https://emacs-china.org/t/orgmode/9740/18?u=grayking
   (require 'org)
@@ -181,11 +182,13 @@
 
 (use-package org-superstar
   :straight t
+  :after org
   :hook
   (org-mode . (lambda () (org-superstar-mode 1))))
 
 (use-package org-pomodoro
   :straight t
+  :commands org-pomodoro
   :hook
   (org-pomodoro-finished . (lambda ()
                              (call-process "terminal-notifier" nil 0 nil

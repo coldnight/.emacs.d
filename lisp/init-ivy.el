@@ -13,7 +13,7 @@
   :straight t
   :custom
   (counsel-find-file-at-point t)
-  :init
+  :config
   (counsel-mode +1)
   :bind
   ("C-x b" . counsel-switch-buffer)
@@ -37,7 +37,7 @@
 
 (use-package ivy
   :straight t
-  :init
+  :config
   (ivy-mode 1)
   :custom
   (ivy-use-virtual-buffers t)
@@ -59,7 +59,7 @@
      (t . ivy-posframe-display)))
   (ivy-posframe-parameters '((left-fringe . 8)
                              (right-fringe . 8)))
-  :init
+  :config
   (ivy-posframe-mode 1))
 
 (use-package counsel-projectile
@@ -68,13 +68,13 @@
   :bind
   (:map projectile-mode-map
         (("C-c p" . projectile-command-map)))
-  :init
+  :config
   (counsel-projectile-mode +1))
 
 (use-package ivy-rich
   :straight t
   :after (ivy)
-  :init
+  :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode +1)
   (ivy-rich-project-root-cache-mode +1))
@@ -82,7 +82,7 @@
 (use-package all-the-icons-ivy-rich
   :straight t
   :after (ivy-rich)
-  :init (all-the-icons-ivy-rich-mode 1))
+  :config (all-the-icons-ivy-rich-mode 1))
 
 (provide 'init-ivy)
 
