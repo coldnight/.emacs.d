@@ -8,7 +8,7 @@
   (require 'use-package))
 
 ;; See also: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
-(defvar-local my/gtd-root "~/codes/notes/roam-research-notes-hugo/gtd/")
+(defvar-local my/gtd-root (expand-file-name "codes/notes/roam-research-notes-hugo/gtd/" "~"))
 (defvar-local my/gtd-main (s-concat my/gtd-root "gtd.org"))
 (defvar-local my/gtd-inbox (s-concat my/gtd-root "inbox.org"))
 (defvar-local my/gtd-tickler (s-concat my/gtd-root "tickler.org"))
@@ -115,7 +115,7 @@
   ("C-c j j" . org-journal-new-entry)
   :custom
   (org-journal-file-type 'weekly)
-  (org-journal-dir "~/codes/notes/roam-research-notes-hugo/journal")
+  (org-journal-dir (expand-file-name "codes/notes/roam-research-notes-hugo/journal" "~"))
   ;; (org-journal-enable-encryption t)
   ;; (org-journal-encrypt-journal t)
   :init
@@ -150,7 +150,7 @@
   ("C-c n j" . org-roam-dailies-capture-today)
   :custom
   (org-roam-v2-ack t)
-  (org-roam-directory "~/codes/notes/roam-research-notes-hugo/content-org")
+  (org-roam-directory (expand-file-name "codes/notes/roam-research-notes-hugo/content-org" "~"))
   (org-roam-capture-templates `(("d" "default" plain "%?"
                                  :unnarrowed t
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
