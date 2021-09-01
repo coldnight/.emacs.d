@@ -7,13 +7,6 @@
   (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
-;; See also: https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
-(defvar-local my/gtd-root (expand-file-name "codes/notes/roam-research-notes-hugo/gtd/" "~"))
-(defvar-local my/gtd-main (s-concat my/gtd-root "gtd.org"))
-(defvar-local my/gtd-inbox (s-concat my/gtd-root "inbox.org"))
-(defvar-local my/gtd-tickler (s-concat my/gtd-root "tickler.org"))
-(defvar-local my/gtd-someday (s-concat my/gtd-root "someday.org"))
-
 (defun ck/org-confirm-babel-evaluate (lang body)
   "LANG and BODY."
   (not (or (string= lang "dot"))))
@@ -65,18 +58,6 @@
     "Update id locations from current dir."
     (interactive)
     (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
-  ;; (setq org-agenda-files (list my/gtd-inbox my/gtd-main my/gtd-tickler))
-  (setq org-capture-templates `(("t" "Todo [inbox]" entry
-                                 (file+headline ,(s-concat my/gtd-root "inbox.org") "Tasks")
-                                 "* TODO %i%?")
-                                ("T" "Tickler" entry
-                                 (file+headline ,(s-concat my/gtd-root "tickler.org") "Tickler")
-                                 "* %i%? \n %U")))
-
-  (setq org-refile-targets `((,(s-concat my/gtd-root "gtd.org") :maxlevel . 3)
-                             (,(s-concat my/gtd-root "someday.org") :level . 1)
-                             (,(s-concat my/gtd-root "tickler.org") :maxlevel . 2)))
-
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-babel-do-load-languages
    'org-babel-load-languages
