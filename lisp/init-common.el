@@ -84,8 +84,14 @@
 (blink-cursor-mode -1)            ;; 指针不要闪
 (toggle-truncate-lines t)         ;; 当一行文字太长时,不自动换行
 (column-number-mode t)            ;; 在minibuffer上面的状态栏显示文件的行号,列号
-(line-number-mode t)              ;;设定显示文件的参数,以版本/人性化的显示,就是ls的参数
-(global-linum-mode t)             ;; 显示行号
+(line-number-mode t)              ;; Modeline 中显示行号
+
+;; 显示行号
+(if (>= emacs-major-version 26)
+    ;; Emacs 26 中更快的行号显示
+    (global-display-line-numbers-mode t)
+  (global-linum-mode t))
+
 (require 'saveplace)
 (save-place-mode 1)               ;; 记住上次打开文件光标的位置
 
