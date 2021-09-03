@@ -106,6 +106,11 @@
 (use-package centaur-tabs
   :straight t
   :demand
+  :hook
+  (dashboard-mode . centaur-tabs-local-mode)
+  (calendar-mode . centaur-tabs-local-mode)
+  (org-agenda-mode . centaur-tabs-local-mode)
+  (helpful-mode . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-group-by-projectile-project)
@@ -164,6 +169,11 @@
   ;; commands to defer
   :commands (vterm vterm-buffer)
   :after multi-vterm
+  :hook
+  (vterm-mode . (lambda ()
+                  (linum-mode -1)
+                  (when (>= emacs-major-version 26)
+                    (display-line-numbers-mode -1))))
   :config
   (setq vterm-toggle--vterm-buffer-p-function 'vmacs-term-mode-p)
   (defun vmacs-term-mode-p(&optional args)

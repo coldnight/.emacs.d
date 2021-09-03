@@ -11,7 +11,7 @@
   :ensure t
   :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
                          :files ("*.el" "themes"))
-  :init
+  :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -32,17 +32,24 @@
 
  (use-package nyan-mode
    :straight t
-   :init
+   :config
    (nyan-mode 1))
 
 
  (use-package doom-modeline
    :straight t
    :after nyan-mode
+   :config
+   (doom-modeline-mode 1)
    :custom
-   (doom-modeline-buffer-file-name-style 'truncate-all)
-   :init
-   (doom-modeline-mode 1))
+   (doom-modeline-buffer-file-name-style 'truncate-all))
+
+(use-package hide-mode-line
+  :straight (hide-mode-line :host github :repo "hlissner/emacs-hide-mode-line")
+  :hook
+  (dashboard-mode . hide-mode-line-mode)
+  (vterm-mode . hide-mode-line-mode)
+  (magit-mode . hide-mode-line-mode))
 
 (use-package dashboard
   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
@@ -90,9 +97,13 @@
             "Thaw straight.el packages to latest version."
             (lambda (&rest _) (counsel-M-x "^straight-thaw-versions$")) nil "<" ">"))))
   (dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
-  :init
+  :hook
+  (dashboard-after-initialize . (lambda () (dashboard-mode)))
+  :config
   (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+  (setq initial-buffer-choice (lambda ()
+                                (get-buffer "*dashboard*")
+                                (dashboard-mode))))
 
 (provide 'init-theme-doom)
 ;;; init-theme-doom.el ends here
