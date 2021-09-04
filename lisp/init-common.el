@@ -140,6 +140,19 @@
   (interactive)
   (find-file "~/Documents/org-modes/remark.org"))
 
+
+(defun my/proxy-on()
+  (interactive)
+  (setq url-proxy-services
+        '(("http" . "127.0.0.1:1087")
+          ("https" . "127.0.0.1:1087")))
+  (message "Proxy services set."))
+
+(defun my/proxy-off()
+  (interactive)
+  (setq url-proxy-services nil)
+  (message "Porxy services removed."))
+
 (global-set-key (kbd "C-c s r") 'my/open-remark-org)
 
 ;; C/C++
