@@ -8,6 +8,10 @@
   (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
+(use-package yasnippet :straight t
+  :hook
+  (lsp-mode . yas-minor-mode))
+
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
@@ -21,7 +25,7 @@
   :custom
   (lsp-rust-server 'rust-analyzer)
   (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
-  :after (company flycheck))
+  :after (company flycheck yasnippet))
 
 (use-package lsp-java
   :straight t
