@@ -140,31 +140,30 @@
   (interactive)
   (find-file "~/Documents/org-modes/remark.org"))
 
-(defvar-local my/http-proxy-service "127.0.0.1:1087")
+(defvar-local my/url-http-proxy-service "127.0.0.1:1087")
 
-(defun my/current-public-ip()
-  "Return current public IPv4 address."
-  (let ((r (url-retrieve-synchronously "https://api-ipv4.ip.sb/ip")))
+(defun my/url-current-public-ip()
+  "Return current public IPv4 address with url."
+  (let ((r (url-retrieve-synchronously "https://api-ipv4.ip.sb/ip" t nil 10)))
     (with-current-buffer r
       (goto-char (point-min))
       (re-search-forward "^$")
       (delete-region (point) (point-min))
       (string-trim (buffer-string)))))
 
-(defun my/proxy-on()
-  "Enable HTTP proxy."
+(defun my/url-proxy-on()
+  "Enable HTTP proxy for url."
   (interactive)
-  (message my/http-proxy-service)
   (setq url-proxy-services
-        `(("http" . ,my/http-proxy-service)
-          ("https" . ,my/http-proxy-service)))
-  (message "Proxy services set and public IP is: %s" (my/current-public-ip)))
+        `(("http" . ,my/url-http-proxy-service)
+          ("https" . ,my/url-http-proxy-service)))
+  (message "Proxy services set and public IP is: %s" (my/url-current-public-ip)))
 
-(defun my/proxy-off()
-  "Disable HTTP proxy."
+(defun my/url-proxy-off()
+  "Disable HTTP proxy for url."
   (interactive)
   (setq url-proxy-services nil)
-  (message "Porxy services removed and public IP is: %s." (my/current-public-ip)))
+  (message "Porxy services removed and public IP is: %s." (my/url-current-public-ip)))
 
 (global-set-key (kbd "C-c s r") 'my/open-remark-org)
 
