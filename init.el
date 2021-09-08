@@ -47,14 +47,21 @@
 
 ;;; Common
 (use-package init-common)
+(use-package init-my
+  :bind
+  ("C-c s p" . my/url-proxy-toggle)
+  ("C-c s g" . my/generate-buffer))
 
 (use-package init-darwin
+  :after init-common-mode
   :if (memq window-system '(mac ns)))
 
 (use-package init-linux
+  :after init-common-mode
   :if (memq window-system '(x)))
 
 ;;; Appearance
+(use-package init-common-mode :defer 1)
 (use-package init-theme-doom)
 ;; (use-package init-theme-nano)
 
@@ -100,12 +107,12 @@
               :slant 'normal
               :size 16.5)))
 
-
 (use-package all-the-icons :straight t)
 
 (use-package centaur-tabs
   :straight t
   :demand
+  :defer 2
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
@@ -154,6 +161,7 @@
 
 (use-package page-break-lines
   :straight t
+  :after init-common-mode
   :config
   (global-page-break-lines-mode))
 
@@ -267,30 +275,32 @@
 
 (use-package company
   :straight t
-  :defer t
-  :init
+  :defer 2
+  :config
   (global-company-mode))
 
 (use-package company-jedi
   :straight t
-  :defer t
   :after company)
 
 ;; Programming Tools
 (use-package autopair
   :straight (autopair :host github :repo "joaotavora/autopair")
+  :defer 2
   :config
   (autopair-global-mode))
 
 (use-package flycheck
   :straight t
-  :hook
-  (after-init . global-flycheck-mode)
+  :defer 2
+  :config
+  (global-flycheck-mode)
   :custom
   ;; .rst 文件禁用 flycheck
   (flycheck-disabled-checkers '(rst)))
 
 (use-package pos-tip
+  :defer 2
   :straight t
   :after flycheck)
 
@@ -301,7 +311,7 @@
   :config
   (flycheck-pos-tip-mode))
 
-(use-package posframe :straight t)
+(use-package posframe :defer 1 :straight t)
 
 (use-package flycheck-swiftlint
   :straight t
@@ -310,7 +320,8 @@
   (flycheck-swiftlint-setup))
 
 ;;; Language Server Mode
-(use-package init-lsp)
+(use-package init-lsp
+  :after (init-common-mode flycheck))
 
 ;;; Edit
 (use-package whitespace
@@ -462,7 +473,8 @@
   (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 ;; Org Mode
-(use-package init-org)
+(use-package init-org
+  :after init-common-mode)
 
 ;;; Misc
 ;; speedup
@@ -473,6 +485,7 @@
 ;; backup
 (use-package backup-walker
   :straight t
+  :defer 3
   :hook
   (before-save . (lambda () (setq buffer-backed-up nil)))
   :custom
@@ -508,6 +521,7 @@
 (if (not (string= secret-wakatime-api-key ""))
     (use-package wakatime-mode
       :straight t
+      :defer 4
       :custom
       (wakatime-api-key secret-wakatime-api-key)
       :init

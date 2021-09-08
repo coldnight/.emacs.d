@@ -1,4 +1,4 @@
-;;; init-commont.el -- Emacs 基本配置
+;;; init-common.el -- Emacs 基本配置
 ;;;
 ;;; Commentary:
 ;;;
@@ -55,63 +55,9 @@
  vc-follow-symlinks t          ;; 跟随版本控制中的符号链接
  )
 
-;; 在标题栏显示buffer的名字和项目
-(setq frame-title-format
-      '(""
-        (:eval
-         (if (and
-              (boundp 'org-roam-directory)
-              (s-contains-p org-roam-directory (or buffer-file-name "")))
-             (replace-regexp-in-string
-              ".*/[0-9]*-?" "☰ "
-              (subst-char-in-string ?_ ?  buffer-file-name))
-           "%b"))
-        (:eval
-         (if (boundp 'projectile-project-name)
-             (let ((project-name (projectile-project-name)))
-               (unless (string= "-" project-name)
-                 (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))))
-
-(menu-bar-mode -1)            ;; 取消菜单栏
-(scroll-bar-mode -1)          ;; 取消滚动条（在 Emacs 26 中无效）
-(tool-bar-mode -1)            ;; 取消工具栏
-(fset 'yes-or-no-p 'y-or-n-p) ;; 按y或space表示yes,n表示no
-(global-font-lock-mode t)     ;; 语法高亮
-(show-paren-mode t)           ;; 打开括号匹配显示模式
-(mouse-avoidance-mode 'animate) ;; 鼠标靠近光标指针时,让鼠标自动让开
-(auto-compression-mode 1) ;; 打开压缩文件时自动解压缩
-(global-auto-revert-mode 1)       ;; 自动重载更改的文件
-(blink-cursor-mode -1)            ;; 指针不要闪
-(toggle-truncate-lines t)         ;; 当一行文字太长时,不自动换行
-(column-number-mode t)            ;; 在minibuffer上面的状态栏显示文件的行号,列号
-(line-number-mode t)              ;; Modeline 中显示行号
-
-;; 显示行号
-(if (>= emacs-major-version 26)
-    ;; Emacs 26 中更快的行号显示
-    (global-display-line-numbers-mode t)
-  (global-linum-mode t))
-
-(require 'saveplace)
-(save-place-mode 1)               ;; 记住上次打开文件光标的位置
-
-
 ;; 设置4个空格缩进
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4) ; or any other preferred value
-
-;; 时间显示设置
-;; <s>启用时间显示设置,在minibuffer上面的那个杠上</s>
-;; 禁用时间显示
-(display-time-mode -1)
-;; (setq
-;;  display-time-24hr-format t  ;; 时间使用24小时制
-;;  display-time-day-and-date t ;; 时间显示包括日期和具体时间
-;;  display-time-use-mail-icon t ;; 时间栏旁边启用邮件设置
-;;  display-time-interval 10 ;; 时间的变化频率
-;;  setq display-time-format "%A %H:%M" ;; 显示时间的格式
-;;  )
-
 ;;
 (setq-local default-directory "~/.emacs.d/data/autosave")
 (setq-default auto-save-default t)
@@ -126,46 +72,6 @@
 ;; Making Buffer Names Unique
 ;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-
-;; make a temp buffer
-(defun my/generate-buffer ()
-  "Generate a tmp buffer."
-  (interactive)
-  (switch-to-buffer (make-temp-name "scratch")))
-
-(global-set-key (kbd "C-c g b") 'my/generate-buffer)
-
-(defun my/open-remark-org()
-  "Open my own remark in 'org-mode'."
-  (interactive)
-  (find-file "~/Documents/org-modes/remark.org"))
-
-(defvar-local my/url-http-proxy-service "127.0.0.1:1087")
-
-(defun my/url-current-public-ip()
-  "Return current public IPv4 address with url."
-  (let ((r (url-retrieve-synchronously "https://api-ipv4.ip.sb/ip" t nil 10)))
-    (with-current-buffer r
-      (goto-char (point-min))
-      (re-search-forward "^$")
-      (delete-region (point) (point-min))
-      (string-trim (buffer-string)))))
-
-(defun my/url-proxy-on()
-  "Enable HTTP proxy for url."
-  (interactive)
-  (setq url-proxy-services
-        `(("http" . ,my/url-http-proxy-service)
-          ("https" . ,my/url-http-proxy-service)))
-  (message "Proxy services set and public IP is: %s" (my/url-current-public-ip)))
-
-(defun my/url-proxy-off()
-  "Disable HTTP proxy for url."
-  (interactive)
-  (setq url-proxy-services nil)
-  (message "Porxy services removed and public IP is: %s." (my/url-current-public-ip)))
-
-(global-set-key (kbd "C-c s r") 'my/open-remark-org)
 
 ;; C/C++
 (require 'cc-vars)
@@ -190,9 +96,22 @@
       ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
       scroll-margin 2)                            ; It's nice to maintain a little margin
 
-(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
-  (display-battery-mode 1))                       ; it's nice to know how much power you have
-(global-subword-mode 1)
+;; 在标题栏显示buffer的名字和项目
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (and
+              (boundp 'org-roam-directory)
+              (s-contains-p org-roam-directory (or buffer-file-name "")))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (if (boundp 'projectile-project-name)
+             (let ((project-name (projectile-project-name)))
+               (unless (string= "-" project-name)
+                 (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))))
 
 (provide 'init-common)
 ;;; init-common.el ends here

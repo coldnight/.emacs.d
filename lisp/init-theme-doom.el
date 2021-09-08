@@ -30,11 +30,11 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
- (use-package nyan-mode
-   :straight t
-   :config
-   (nyan-mode 1))
-
+(use-package nyan-mode
+  :defer 0.5
+  :straight t
+  :config
+  (nyan-mode 1))
 
  (use-package doom-modeline
    :straight t
@@ -98,12 +98,21 @@
             (lambda (&rest _) (counsel-M-x "^straight-thaw-versions$")) nil "<" ">"))))
   (dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   :hook
-  (dashboard-after-initialize . (lambda () (dashboard-mode)))
+  (dashboard-after-initialize . (lambda ()
+                                  (dashboard-mode)
+                                  (if (>= emacs-major-version 26)
+                                      ;; Emacs 26 中更快的行号显示
+                                      (display-line-numbers-mode -1)
+                                    (linum-mode -1))))
   :config
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda ()
                                 (get-buffer "*dashboard*")
-                                (dashboard-mode))))
+                                (dashboard-mode)
+                                (if (>= emacs-major-version 26)
+                                      ;; Emacs 26 中更快的行号显示
+                                      (display-line-numbers-mode -1)
+                                    (linum-mode -1)))))
 
 (provide 'init-theme-doom)
 ;;; init-theme-doom.el ends here
