@@ -140,18 +140,31 @@
   (interactive)
   (find-file "~/Documents/org-modes/remark.org"))
 
+(defvar-local my/http-proxy-service "127.0.0.1:1087")
+
+(defun my/current-public-ip()
+  "Return current public IPv4 address."
+  (let ((r (url-retrieve-synchronously "https://api-ipv4.ip.sb/ip")))
+    (with-current-buffer r
+      (goto-char (point-min))
+      (re-search-forward "^$")
+      (delete-region (point) (point-min))
+      (string-trim (buffer-string)))))
 
 (defun my/proxy-on()
+  "Enable HTTP proxy."
   (interactive)
+  (message my/http-proxy-service)
   (setq url-proxy-services
-        '(("http" . "127.0.0.1:1087")
-          ("https" . "127.0.0.1:1087")))
-  (message "Proxy services set."))
+        `(("http" . ,my/http-proxy-service)
+          ("https" . ,my/http-proxy-service)))
+  (message "Proxy services set and public IP is: %s" (my/current-public-ip)))
 
 (defun my/proxy-off()
+  "Disable HTTP proxy."
   (interactive)
   (setq url-proxy-services nil)
-  (message "Porxy services removed."))
+  (message "Porxy services removed and public IP is: %s." (my/current-public-ip)))
 
 (global-set-key (kbd "C-c s r") 'my/open-remark-org)
 
