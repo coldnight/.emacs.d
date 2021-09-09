@@ -87,7 +87,6 @@
 ;; ")))
 
 (use-package org-journal
-  :after org
   :straight t
   :bind
   ("C-c j s" . org-journal-search)

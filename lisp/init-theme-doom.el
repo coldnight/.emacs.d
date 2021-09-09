@@ -62,7 +62,6 @@
   (dashboard-startup-banner "~/.emacs.d/logo.png")
   (dashboard-items '((projects . 5)
                      (recents . 5)
-                     (agenda . 5)
                      (registers . 5)))
   (dashboard-set-navigator t)
   ;; Format: "(icon title help action face prefix suffix)"
@@ -98,21 +97,12 @@
             (lambda (&rest _) (counsel-M-x "^straight-thaw-versions$")) nil "<" ">"))))
   (dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   :hook
-  (dashboard-after-initialize . (lambda ()
-                                  (dashboard-mode)
-                                  (if (>= emacs-major-version 26)
-                                      ;; Emacs 26 中更快的行号显示
-                                      (display-line-numbers-mode -1)
-                                    (linum-mode -1))))
+  (dashboard-after-initialize . (lambda () (dashboard-mode)))
   :config
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda ()
                                 (get-buffer "*dashboard*")
-                                (dashboard-mode)
-                                (if (>= emacs-major-version 26)
-                                      ;; Emacs 26 中更快的行号显示
-                                      (display-line-numbers-mode -1)
-                                    (linum-mode -1)))))
+                                (dashboard-mode))))
 
 (provide 'init-theme-doom)
 ;;; init-theme-doom.el ends here
