@@ -108,11 +108,7 @@
         (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
         (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U"))))))
 
-;; use-package defer not works, set here to avoid warning.
-(setq org-roam-v2-ack t)
-
 (use-package org-roam
-  :after org
   :straight t
   :config
   (org-roam-setup)

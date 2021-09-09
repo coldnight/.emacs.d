@@ -25,4 +25,6 @@
 ;; Disable native compilation warnings
 (setq native-comp-async-report-warnings-errors nil)
 
+;; ACK org-roam-v2
+(setq org-roam-v2-ack t)
 ;; early-init.el ends here

@@ -100,9 +100,7 @@
   (dashboard-after-initialize . (lambda () (dashboard-mode)))
   :config
   (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda ()
-                                (get-buffer "*dashboard*")
-                                (dashboard-mode))))
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
 (provide 'init-theme-doom)
 ;;; init-theme-doom.el ends here
