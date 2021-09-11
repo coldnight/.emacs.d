@@ -268,10 +268,10 @@
                   )
                 projectile-globally-ignored-files))
   (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
-                                  :project-file "config.toml"
-				  :compile "hugo"
-				  :test "open http://localhost:1313/"
-				  :run "hugo server -D --disableFastRender --navigateToChanged"))
+                                    :project-file "config.toml"
+				    :compile "hugo"
+				    :test "open http://localhost:1313/"
+				    :run "hugo server -D --disableFastRender --navigateToChanged"))
 
 (use-package company
   :straight t
@@ -318,6 +318,11 @@
   :after flycheck
   :config
   (flycheck-swiftlint-setup))
+
+(use-package aggressive-indent-mode
+  :straight t
+  :hook
+  (emacs-lisp-mode  . aggressive-indent-mode))
 
 ;;; Language Server Mode
 (use-package init-lsp
