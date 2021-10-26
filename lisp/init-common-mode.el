@@ -25,9 +25,14 @@
 (if (>= emacs-major-version 26)
     ;; Emacs 26 中更快的行号显示
     (progn
+      ;; No fringe when display-line-numbers-mode enabled
+      (add-hook 'display-line-numbers-mode-hook (lambda () (fringe-mode '(0 . 0))))
+
       (global-display-line-numbers-mode t)
       ;; hide line-numbers in dashboard buffer because we are defered
       (display-line-numbers-mode -1))
+  ;; No fringe when display-line-numbers-mode enabled
+  (add-hook 'linum-mode-hook (lambda () (fringe-mode '(0 . 0))))
   (global-linum-mode t))
 
 ;; 时间显示设置

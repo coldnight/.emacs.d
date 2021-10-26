@@ -53,6 +53,7 @@
  dired-listing-switches "-vha" ;;  dired 列出文件的参数（man ls）
  show-paren-style 'parenthesis ;; 括号匹配时高亮显示另一边的括号，而不是跳到另一个括号处
  vc-follow-symlinks t          ;; 跟随版本控制中的符号链接
+ x-underline-at-descent-line t ;; Underline line at descent position, not baseline position
  )
 
 ;; 设置4个空格缩进

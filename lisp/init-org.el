@@ -193,5 +193,12 @@
   :hook
   (dired-mode . org-download-enable)
   (org-mode . org-download-enable))
+
+(use-package org-krita
+  :straight (org-krita :host github :repo "lepisma/org-krita" :files ("*.el" "resources"))
+  :custom
+  (org-krita-executable "/Applications/krita.app/Contents/MacOS/krita")
+  :config
+  (add-hook 'org-mode-hook 'org-krita-mode))
 (provide 'init-org)
 ;;; init-org.el ends here
