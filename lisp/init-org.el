@@ -18,7 +18,7 @@
   :after org)
 
 (use-package org
-  :straight (:type git :host github :repo "bzg/org-mode")
+  :straight (:type git :host github :repo "bzg/org-mode" :branch "release_9.5")
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -195,10 +195,11 @@
   (org-mode . org-download-enable))
 
 (use-package org-krita
-  :straight (org-krita :host github :repo "lepisma/org-krita" :files ("*.el" "resources"))
+  :straight
+  (org-krita :host github :repo "lepisma/org-krita" :files ("*.el" "resources"))
   :custom
   (org-krita-executable "/Applications/krita.app/Contents/MacOS/krita")
-  :config
-  (add-hook 'org-mode-hook 'org-krita-mode))
+  :hook
+  (org-mode . org-krita-mode))
 (provide 'init-org)
 ;;; init-org.el ends here

@@ -15,12 +15,13 @@
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
-  ((python-mode go-mode c++-mode rust-mode php-mode cmake-mode) . lsp)
+  (python-mode . lsp)
+  ((go-mode c++-mode rust-mode php-mode cmake-mode) . lsp)
   (go-mode . (lambda ()
-              "Set up before-save hooks to format buffer and add/delete imports."
-              ;; Make sure you don't have other gofmt/goimports hooks enabled.
-              (add-hook 'before-save-hook #'lsp-format-buffer t t)
-              (add-hook 'before-save-hook #'lsp-organize-imports t t)))
+               "Set up before-save hooks to format buffer and add/delete imports."
+               ;; Make sure you don't have other gofmt/goimports hooks enabled.
+               (add-hook 'before-save-hook #'lsp-format-buffer t t)
+               (add-hook 'before-save-hook #'lsp-organize-imports t t)))
   (lsp-mode . lsp-lens-mode)
   :custom
   (lsp-rust-server 'rust-analyzer)

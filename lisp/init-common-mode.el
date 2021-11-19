@@ -53,5 +53,7 @@
 (require 'saveplace)
 (save-place-mode 1)               ;; 记住上次打开文件光标的位置
 
+(fringe-mode '(0 . 0))
+
 (provide 'init-common-mode)
 ;;; init-common-appearance.el ends here
