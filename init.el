@@ -534,11 +534,11 @@
       (global-wakatime-mode)))
 
 (use-package init-optional)
-(use-package init-mu4e
-  :commands mu4e)
+(use-package init-mu4e :commands mu4e)
+(use-package init-writing)
 
 (message "*** Emacs loaded in %s with %d garbage collections."
-     (format "%.2f seconds"
-             (float-time
-              (time-subtract after-init-time before-init-time))) gcs-done)
+         (format "%.2f seconds"
+                 (float-time
+                  (time-subtract after-init-time before-init-time))) gcs-done)
 ;;; init.el ends here
