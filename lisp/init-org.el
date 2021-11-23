@@ -139,16 +139,16 @@
   :straight
   (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
   :after org-roam
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
   ;;  :hook (after-init . org-roam-ui-mode)
   :commands org-roam-ui-mode
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
+  :custom
+  (org-roam-ui-sync-theme t)
+  (org-roam-ui-follow t)
+  (org-roam-ui-update-on-save t)
+  (org-roam-ui-open-on-start t))
 
 (use-package ox-hugo
   :straight t
@@ -201,5 +201,13 @@
   (org-krita-executable "/Applications/krita.app/Contents/MacOS/krita")
   :hook
   (org-mode . org-krita-mode))
+
+(use-package org-fc
+  :straight (:host github :repo "l3kn/org-fc" :files ("*.el" "*.org" "awk"))
+  :commands
+  (org-fc-review org-fc-type-normal-init)
+  :custom
+  (org-fc-directories ((expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~"))))
+
 (provide 'init-org)
 ;;; init-org.el ends here
