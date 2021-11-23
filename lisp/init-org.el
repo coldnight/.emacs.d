@@ -207,7 +207,7 @@
   :commands
   (org-fc-review org-fc-type-normal-init)
   :custom
-  (org-fc-directories ((expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~"))))
+  (org-fc-directories (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~")))
 
 (provide 'init-org)
 ;;; init-org.el ends here
