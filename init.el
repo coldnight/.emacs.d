@@ -68,8 +68,7 @@
 (use-package emojify
   :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
                      :files ("*.el" "data"))
-  :hook
-  (after-init . global-emojify-mode)
+  :commands emojify-mode
   :custom
   (emojify-emoji-styles '(unicode github)))
 
