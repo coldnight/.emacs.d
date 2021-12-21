@@ -54,6 +54,7 @@
 
     (with-current-buffer buffer
       (insert (format "** %s\n" id))
+      (insert "*** Back\n")
       (oxfc--write-results results))))
 
 
@@ -66,7 +67,7 @@
 
 (defun oxfc--write-lexical-entry(lex-entry)
   "Write LEX-ENTRY to the current buffer."
-  (insert (format "*** %s\n" (gethash "text" (gethash "lexicalCategory" lex-entry))))
+  (insert (format "**** %s\n" (gethash "text" (gethash "lexicalCategory" lex-entry))))
   (dolist (entry (gethash "entries" lex-entry))
     (oxfc--write-entry entry)))
 
