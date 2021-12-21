@@ -32,17 +32,17 @@
 (defun oxfc--fetch-word (word)
   "Fetch WORD's defination in Oxford Dictionaries over its API."
 
-  (let (
-        (url (s-concat oxfc-oxford-api-base-url "/entries/" oxfc-oxford-language "/" word))
+  (let ((url (s-concat oxfc-oxford-api-base-url "/entries/" oxfc-oxford-language "/" word))
         (url-request-extra-headers `(
                                      ("app_id" . ,oxfc-oxford-appid)
-                                     ("app_key" . ,oxfc-oxford-appkey))))
-    (url-retrieve url (lambda (status)
-                        (oxfc--on-fetch-word status)))))
+                                     ("app_key" . ,oxfc-oxford-appkey)))
+        (buffer (current-buffer)))
+    (url-retrieve url (lambda (status l-buffer)
+                        (oxfc--on-fetch-word status l-buffer)) `(,buffer))))
 
 
-(defun oxfc--on-fetch-word(status)
-  "Callback of fetch Oxford Dictionaries API with STATUS."
+(defun oxfc--on-fetch-word(status buffer)
+  "Callback of fetch Oxford Dictionaries API with STATUS, and write result to BUFFER."
   (goto-char (point-min))
   (re-search-forward "^$")
   (let* ((regionp (buffer-substring (point) (point-max)))
@@ -52,10 +52,9 @@
          (id (gethash "id" json))
          (results (gethash "results" json)))
 
-    (with-temp-buffer
+    (with-current-buffer buffer
       (insert (format "** %s\n" id))
-      (oxfc--write-results results)
-      (kill-append (buffer-string) nil))))
+      (oxfc--write-results results))))
 
 
 (defun oxfc--write-results (results)
@@ -102,7 +101,8 @@
         (examples (gethash "examples" sense)))
     (insert (format "- %s\n" (apply 's-concat defs)))
     (insert (format "  Synonyms: %s"
-                    (s-join "/" (mapcar (lambda (x) (gethash "text" x)) synonyms))))
+                    (s-join "/" (mapcar (lambda (x) (gethash "text" x))
+                                        synonyms))))
     (insert "\n  Examples: \n")
     (dolist (example examples)
       (insert (format "  + %s\n" (gethash "text" example))))))
