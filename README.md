@@ -20,11 +20,11 @@ My Emacs configuration that includes:
 $ git clone https://github.com/coldnight/.emacs.d ~/.emacs.d
 ```
 
-Open your Emacs and wait initialize done.
+Open your Emacs and wait the initialization done.
 
 ### Optional
 
- You can configure Git to connect to GitHub over SSH, if you have issues to connect to GitHub with HTTPs.
+ You can configure Git to connect to GitHub over SSH, if you encountered network issues when connected to GitHub over HTTPs.
 
 ```shell
 $ git config --global url."git@github.com:".insteadOf "https://github.com/"
