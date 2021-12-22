@@ -297,7 +297,7 @@
   (global-flycheck-mode)
   :custom
   ;; .rst 文件禁用 flycheck
-  (flycheck-disabled-checkers '(rst)))
+  (flycheck-disabled-checkers '(rst grammarly)))
 
 (use-package pos-tip
   :defer 2
