@@ -85,7 +85,11 @@ mv compile_commands.json ../
 ```
 ### Rust
 
-[Install rust-analyzer](https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary).
+``` shell
+cargo install cargo-add cargo-expand cargo-watch
+```
+
+`M-x lsp-install-server RET rust-analyzer RET`
 
 ### Notify
 
