@@ -70,7 +70,7 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
 
 (defun oxfc--write-lexical-entry(lex-entry)
   "Write LEX-ENTRY to the current buffer."
-  (insert (format "**** %s\n" (gethash "text" (gethash "lexicalCategory" lex-entry))))
+  (insert (format "=%s=" (gethash "text" (gethash "lexicalCategory" lex-entry))))
   (dolist (entry (gethash "entries" lex-entry))
     (oxfc--write-entry entry)))
 
@@ -81,7 +81,6 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
         (senses (gethash "senses" entry)))
     (if (listp pronuns)
         (progn
-          (insert "Pronunciations ")
           (dolist (p pronuns)
             (oxfc--write-entry-pronun p)
             (insert "\n"))))
@@ -93,9 +92,8 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
 
 (defun oxfc--write-entry-pronun(p)
   "Write P to the current buffer."
-  (insert (format " [[%s][%s /%s/]] "
+  (insert (format " [[%s][/%s/]] "
                   (gethash "audioFile" p)
-                  (gethash "phoneticNotation" p)
                   (gethash "phoneticSpelling" p))))
 
 (defun oxfc--write-entry-sense (sense)
@@ -104,12 +102,15 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
         (synonyms (gethash "synonyms" sense))
         (examples (gethash "examples" sense)))
     (insert (format "- %s\n" (apply 's-concat defs)))
-    (insert (format "  Synonyms: %s"
-                    (s-join "/" (mapcar (lambda (x) (gethash "text" x))
-                                        synonyms))))
-    (insert "\n  Examples: \n")
-    (dolist (example examples)
-      (insert (format "  + %s\n" (gethash "text" example))))))
+    (if (length> synonyms 0)
+        (insert (format "\n  Synonyms: %s"
+                        (s-join "/" (mapcar (lambda (x) (gethash "text" x))
+                                            synonyms)))))
+    (if (length> examples 0)
+        (progn
+          (insert "\n\n  Examples: \n")
+          (dolist (example examples)
+            (insert (format "  + %s\n" (gethash "text" example))))))))
 
 
 (defun oxfc-lookup-word(word)
@@ -124,5 +125,4 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
                            (re-search-backward "^\\*\\* ")
                            (org-fc-type-normal-init))))
 
-(oxfc-lookup-word "word")
 ;;; oxfc.el ends here
