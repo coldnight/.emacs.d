@@ -29,20 +29,22 @@
   "Language that used for Oxford Dictionaries."
   :type '(string))
 
-(defun oxfc--fetch-word (word)
-  "Fetch WORD's defination in Oxford Dictionaries over its API."
+(defun oxfc--fetch-word (word &optional callback)
+  "Fetch WORD's defination in Oxford Dictionaries over its API.
+Apply CALLBACK if it was provided."
 
   (let ((url (s-concat oxfc-oxford-api-base-url "/entries/" oxfc-oxford-language "/" word))
         (url-request-extra-headers `(
                                      ("app_id" . ,oxfc-oxford-appid)
                                      ("app_key" . ,oxfc-oxford-appkey)))
         (buffer (current-buffer)))
-    (url-retrieve url (lambda (status l-buffer)
-                        (oxfc--on-fetch-word status l-buffer)) `(,buffer))))
+    (url-retrieve url (lambda (status l-buffer l-callback)
+                        (oxfc--on-fetch-word status l-buffer l-callback)) `(,buffer ,callback))))
 
 
-(defun oxfc--on-fetch-word(status buffer)
-  "Callback of fetch Oxford Dictionaries API with STATUS, and write result to BUFFER."
+(defun oxfc--on-fetch-word(status buffer &optional callback)
+  "Callback of fetch Oxford Dictionaries API with STATUS.
+Then write result to BUFFER.  Apply CALLBACK when write is done."
   (goto-char (point-min))
   (re-search-forward "^$")
   (let* ((regionp (buffer-substring (point) (point-max)))
@@ -55,8 +57,9 @@
     (with-current-buffer buffer
       (insert (format "** %s\n" id))
       (insert "*** Back\n")
-      (oxfc--write-results results))))
-
+      (oxfc--write-results results)
+      (if callback
+          (funcall callback)))))
 
 (defun oxfc--write-results (results)
   "Write RESULTS to the current buffer."
@@ -113,6 +116,13 @@
   "Lookup defination of WORD by Oxford Dicttionaries."
   (interactive "sEnter word: ")
   (oxfc--fetch-word word))
+
+(defun oxfc-lookup-word-fc(word)
+  "Lookup defination of WORD by Oxford Dicttionaries and make it to a org-fc card."
+  (interactive "sEnter word: ")
+  (oxfc--fetch-word word (lambda ()
+                           (re-search-backward "^\\*\\* ")
+                           (org-fc-type-normal-init))))
 
 (oxfc-lookup-word "word")
 ;;; oxfc.el ends here
