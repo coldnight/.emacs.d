@@ -114,5 +114,10 @@
                (unless (string= "-" project-name)
                  (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))))
 
+
+(when window-system
+  (set-frame-position (selected-frame) 0 0)
+  (set-frame-size (selected-frame) 208 48))
+
 (provide 'init-common)
 ;;; init-common.el ends here
