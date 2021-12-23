@@ -54,10 +54,9 @@
 
 (use-package awesome-tray
   :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
-  :custom
-  (awesome-tray-active-modules '("location" "git" "buffer-name" "belong" "file-path" "mode-name" "input-method"))
-  (awesome-tray-info-padding-right 1)
   :config
+  (setq awesome-tray-active-modules '("location" "git" "buffer-name" "belong" "file-path" "mode-name" "input-method")
+        awesome-tray-info-padding-right 1)
   (awesome-tray-mode 1))
 
 (use-package dashboard
