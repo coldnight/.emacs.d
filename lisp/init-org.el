@@ -205,9 +205,10 @@
 (use-package org-fc
   :straight (:host github :repo "l3kn/org-fc" :files ("*.el" "*.org" "awk"))
   :commands
-  (org-fc-review org-fc-type-normal-init)
+  (org-fc-review org-fc-type-normal-init org-fc-review org-fc-review-buffer)
   :custom
-  (org-fc-directories (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~")))
+  (org-fc-directories (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~"))
+  (org-fc-review-history-file (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards/org-fc-reviews.tsv" "~")))
 
 (provide 'init-org)
 ;;; init-org.el ends here
