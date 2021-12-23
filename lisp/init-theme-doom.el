@@ -55,7 +55,7 @@
 (use-package awesome-tray
   :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
   :config
-  (setq awesome-tray-active-modules '("location" "git" "buffer-name" "belong" "file-path" "mode-name" "input-method")
+  (setq awesome-tray-active-modules '("location" "git" "belong" "file-path" "mode-name")
         awesome-tray-info-padding-right 1)
   (awesome-tray-mode 1))
 
