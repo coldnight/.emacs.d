@@ -12,6 +12,9 @@
 ;; Go
 (setenv "GOPATH" "/home/wh/codes/go")
 
+(when window-system
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "www-browser"))
 
 (defun my/activate-terminal()
   (error "TODO"))
