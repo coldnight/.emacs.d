@@ -125,4 +125,5 @@ Then write result to BUFFER.  Apply CALLBACK when write is done."
                            (re-search-backward "^\\*\\* ")
                            (org-fc-type-normal-init))))
 
+(provide 'oxfc)
 ;;; oxfc.el ends here

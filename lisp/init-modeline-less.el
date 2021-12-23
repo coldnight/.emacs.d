@@ -8,7 +8,7 @@
 (use-package awesome-tray
   :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
   :config
-  (setq awesome-tray-active-modules '("location" "git" "belong" "file-path" "mode-name")
+  (setq awesome-tray-active-modules '("location" "git" "belong" "mode-name")
         awesome-tray-info-padding-right 1)
   (awesome-tray-mode 1))
 (provide 'init-modeline-less)
