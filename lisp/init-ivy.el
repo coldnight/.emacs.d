@@ -84,6 +84,14 @@
   :after (ivy-rich)
   :config (all-the-icons-ivy-rich-mode 1))
 
-(provide 'init-ivy)
+(use-package avy
+  :straight t
+  :bind
+  ("C-:" . avy-goto-char)
+  ("C-'" . avy-goto-char-timer)
+  ("M-g f" . avy-goto-line)
+  ("M-g w" . avy-goto-word-1)
+  ("M-g e" . avy-goto-word-0))
 
+(provide 'init-ivy)
 ;;; init-ivy.el ends here
