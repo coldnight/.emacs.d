@@ -31,26 +31,34 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package nyan-mode
-  :defer 0.5
-  :straight t
+;; (use-package nyan-mode
+;;   :defer 0.5
+;;   :straight t
+;;   :config
+;;   (nyan-mode 1))
+;;
+;; (use-package doom-modeline
+;;   :straight t
+;;   :after nyan-mode
+;;   :config
+;;   (doom-modeline-mode 1)
+;;   :custom
+;;   (doom-modeline-buffer-file-name-style 'truncate-all))
+;;
+;; (use-package hide-mode-line
+;;   :straight (hide-mode-line :host github :repo "hlissner/emacs-hide-mode-line")
+;;   :hook
+;;   (dashboard-mode . hide-mode-line-mode)
+;;   (vterm-mode . hide-mode-line-mode)
+;;   (magit-mode . hide-mode-line-mode))
+
+(use-package awesome-tray
+  :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
+  :custom
+  (awesome-tray-active-modules '("location" "git" "buffer-name" "belong" "file-path" "mode-name" "input-method"))
+  (awesome-tray-info-padding-right 1)
   :config
-  (nyan-mode 1))
-
- (use-package doom-modeline
-   :straight t
-   :after nyan-mode
-   :config
-   (doom-modeline-mode 1)
-   :custom
-   (doom-modeline-buffer-file-name-style 'truncate-all))
-
-(use-package hide-mode-line
-  :straight (hide-mode-line :host github :repo "hlissner/emacs-hide-mode-line")
-  :hook
-  (dashboard-mode . hide-mode-line-mode)
-  (vterm-mode . hide-mode-line-mode)
-  (magit-mode . hide-mode-line-mode))
+  (awesome-tray-mode 1))
 
 (use-package dashboard
   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
@@ -67,35 +75,35 @@
   (dashboard-set-navigator t)
   ;; Format: "(icon title help action face prefix suffix)"
   (dashboard-navigator-buttons
-        `(;; line1
-          ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-            "Homepage"
-            "Browse homepage"
-            (lambda (&rest _) (browse-url "http://github.com/coldnight")))
-           (,(all-the-icons-octicon "mail" :height 1.1 :v-adjust 0.0)
-            "Mail"
-            "Open mu4e"
-            (lambda (&rest _) (counsel-M-x "^mu4e$")))
-           (,(all-the-icons-octicon "issue-opened" :height 1.1 :v-adjust 0.0)
-            "Help"
-            "?/h"
-            (lambda (&rest _) (counsel-M-x "^help$")))
-           (,(all-the-icons-octicon "x" :height 1.1 :v-adjust 0.0)
-            "Quit"
-            "Quit Emacs"
-            (lambda (&rest _) (counsel-M-x "^kill-emacs$"))))
-          ((,(all-the-icons-octicon "sync" :height 1.1 :v-adjust 0.0)
-            "Update"
-            "Upate straight.el Packages."
-            (lambda (&rest _) (counsel-M-x "^straight-pull-all$")) nil "<" ">")
-           (,(all-the-icons-octicon "pin" :height 1.1 :v-adjust 0.0)
-            "Freeze"
-            "Freeze straight.el packages."
-            (lambda (&rest _) (counsel-M-x "^straight-freeze-versions$")) nil "<" ">")
-           (,(all-the-icons-octicon "clock" :height 1.1 :v-adjust 0.0)
-            "Thaw"
-            "Thaw straight.el packages to latest version."
-            (lambda (&rest _) (counsel-M-x "^straight-thaw-versions$")) nil "<" ">"))))
+   `(;; line1
+     ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+       "Homepage"
+       "Browse homepage"
+       (lambda (&rest _) (browse-url "http://github.com/coldnight")))
+      (,(all-the-icons-octicon "mail" :height 1.1 :v-adjust 0.0)
+       "Mail"
+       "Open mu4e"
+       (lambda (&rest _) (counsel-M-x "^mu4e$")))
+      (,(all-the-icons-octicon "issue-opened" :height 1.1 :v-adjust 0.0)
+       "Help"
+       "?/h"
+       (lambda (&rest _) (counsel-M-x "^help$")))
+      (,(all-the-icons-octicon "x" :height 1.1 :v-adjust 0.0)
+       "Quit"
+       "Quit Emacs"
+       (lambda (&rest _) (counsel-M-x "^kill-emacs$"))))
+     ((,(all-the-icons-octicon "sync" :height 1.1 :v-adjust 0.0)
+       "Update"
+       "Upate straight.el Packages."
+       (lambda (&rest _) (counsel-M-x "^straight-pull-all$")) nil "<" ">")
+      (,(all-the-icons-octicon "pin" :height 1.1 :v-adjust 0.0)
+       "Freeze"
+       "Freeze straight.el packages."
+       (lambda (&rest _) (counsel-M-x "^straight-freeze-versions$")) nil "<" ">")
+      (,(all-the-icons-octicon "clock" :height 1.1 :v-adjust 0.0)
+       "Thaw"
+       "Thaw straight.el packages to latest version."
+       (lambda (&rest _) (counsel-M-x "^straight-thaw-versions$")) nil "<" ">"))))
   (dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   :hook
   (dashboard-after-initialize . (lambda () (dashboard-mode)))

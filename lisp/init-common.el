@@ -36,7 +36,7 @@
 (setq
  fringes-outside-margins t   ;; fringe 放在外面
  echo-keystrokes 0.1         ;; 尽快显示按键序列
- system-time-locale "zh_CN"  ;; 设置系统时间显示格式
+ system-time-locale "en_US"  ;; 设置系统时间显示格式
  tab-always-indent 'complete ;; Tab 键优先格式化再补全
  font-lock-global-modes '(not shell-mode text-mode) ;; 设置语法高亮.除shell-mode和text-mode之外的模式
  mouse-yank-at-point t       ;; 不在鼠标点击的地方插入剪贴板内容
