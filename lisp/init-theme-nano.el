@@ -27,6 +27,4 @@
   (nano-theme))
 
 (provide 'init-theme-nano)
-
-
 ;;; init-theme-nano.el ends here

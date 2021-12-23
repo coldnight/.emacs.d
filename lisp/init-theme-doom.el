@@ -31,34 +31,6 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;; (use-package nyan-mode
-;;   :defer 0.5
-;;   :straight t
-;;   :config
-;;   (nyan-mode 1))
-;;
-;; (use-package doom-modeline
-;;   :straight t
-;;   :after nyan-mode
-;;   :config
-;;   (doom-modeline-mode 1)
-;;   :custom
-;;   (doom-modeline-buffer-file-name-style 'truncate-all))
-;;
-;; (use-package hide-mode-line
-;;   :straight (hide-mode-line :host github :repo "hlissner/emacs-hide-mode-line")
-;;   :hook
-;;   (dashboard-mode . hide-mode-line-mode)
-;;   (vterm-mode . hide-mode-line-mode)
-;;   (magit-mode . hide-mode-line-mode))
-
-(use-package awesome-tray
-  :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
-  :config
-  (setq awesome-tray-active-modules '("location" "git" "belong" "file-path" "mode-name")
-        awesome-tray-info-padding-right 1)
-  (awesome-tray-mode 1))
-
 (use-package dashboard
   :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
                        :files ("*.el" "banners"))
