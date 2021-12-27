@@ -36,11 +36,20 @@
                       ;; :height of mode-line is also unspecified, so we set it directly.
                       :height 150
                       :box (face-attribute 'mode-line :box))
-
+  ;; colors are copied from https://github.com/mclear-tools/bespoke-themes
   (setq awesome-tray-active-modules '("location" "buffer-state" "buffer-name" "git" "belong" "mode-name")
         awesome-tray-info-padding-right 1
-        awesome-tray-mode-line-active-color "#727d97"
-        awesome-tray-mode-line-inactive-color "#959eb1")
+        awesome-tray-mode-line-active-color "#eceff1"
+        awesome-tray-mode-line-inactive-color "#282b35"
+        awesome-tray-buffer-name-max-length 20)
+  (set-face-attribute 'awesome-tray-module-location-face nil
+                      :foreground "#bc85cf")
+  (set-face-attribute 'awesome-tray-module-buffer-name-face nil
+                      :foreground "#bc85cf")
+  (set-face-attribute 'awesome-tray-module-git-face nil
+                      :foreground "#bf616a")
+  (set-face-attribute 'awesome-tray-module-mode-name-face nil
+                      :foreground "#8eb89d")
   (add-to-list 'awesome-tray-module-alist
                '("buffer-state" . (my/module-buffer-state-info my/module-buffer-state-face)))
   (awesome-tray-mode 1))
