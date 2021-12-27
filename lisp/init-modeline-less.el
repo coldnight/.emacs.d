@@ -19,9 +19,9 @@
 
 (defface my/module-buffer-state-face
   '((((background light))
-     :foreground "#cc7700" :bold t)
+     :foreground "#00796b" :bold t)
     (t
-     :foreground "#ff9500" :bold t))
+     :foreground "#8eb89d" :bold t))
   "Buffer-state module face."
   :group 'awesome-tray)
 
