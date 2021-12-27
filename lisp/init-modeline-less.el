@@ -10,12 +10,12 @@
   (if (not (eq buffer-file-name nil))
       (if (eq buffer-read-only t)
           (if (buffer-modified-p)
-              "%*"
-            "%%")
+              "*RO"
+            "RO")
         (if (buffer-modified-p)
-            "**"
-          "--"))
-    "%%"))
+            "*RW"
+          "RW"))
+    "--"))
 
 (defface my/module-buffer-state-face
   '((((background light))
