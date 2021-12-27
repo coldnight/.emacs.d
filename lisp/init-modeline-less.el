@@ -5,6 +5,26 @@
   (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
+(defun my/module-buffer-state-info ()
+  "Module for awesome-tray to show state of buffer."
+  (if (not (eq buffer-file-name nil))
+      (if (eq buffer-read-only t)
+          (if (buffer-modified-p)
+              "%*"
+            "%%")
+        (if (buffer-modified-p)
+            "**"
+          "--"))
+    "%%"))
+
+(defface my/module-buffer-state-face
+  '((((background light))
+     :foreground "#cc7700" :bold t)
+    (t
+     :foreground "#ff9500" :bold t))
+  "Buffer-state module face."
+  :group 'awesome-tray)
+
 (use-package awesome-tray
   :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
   :config
@@ -17,10 +37,12 @@
                       :height 150
                       :box (face-attribute 'mode-line :box))
 
-  (setq awesome-tray-active-modules '("buffer-read-only" "location" "git" "belong" "mode-name")
+  (setq awesome-tray-active-modules '("buffer-state" "buffer-name" "location" "git" "belong" "mode-name")
         awesome-tray-info-padding-right 1
         awesome-tray-mode-line-active-color "#727d97"
         awesome-tray-mode-line-inactive-color "#959eb1")
+  (add-to-list 'awesome-tray-module-alist
+               '("buffer-state" . (my/module-buffer-state-info my/module-buffer-state-face)))
   (awesome-tray-mode 1))
 
 ;; (use-package taoline
