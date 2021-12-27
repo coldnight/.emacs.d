@@ -37,7 +37,7 @@
                       :height 150
                       :box (face-attribute 'mode-line :box))
 
-  (setq awesome-tray-active-modules '("buffer-state" "buffer-name" "location" "git" "belong" "mode-name")
+  (setq awesome-tray-active-modules '("location" "buffer-state" "buffer-name" "git" "belong" "mode-name")
         awesome-tray-info-padding-right 1
         awesome-tray-mode-line-active-color "#727d97"
         awesome-tray-mode-line-inactive-color "#959eb1")
