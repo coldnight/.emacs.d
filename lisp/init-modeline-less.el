@@ -45,15 +45,5 @@
                '("buffer-state" . (my/module-buffer-state-info my/module-buffer-state-face)))
   (awesome-tray-mode 1))
 
-;; (use-package taoline
-;;   :straight (taoline :host github :repo "11111000000/taoline")
-;;   :custom
-;;   (taoline-show-git-branch      t)
-;;   (taoline-show-dir             nil)
-;;   (taoline-show-time            nil)
-;;   (taoline-show-previous-buffer nil)
-;;   :config
-;;   (taoline-mode t))
-
 (provide 'init-modeline-less)
 ;;; init-modeline-less.el ends here
