@@ -62,9 +62,9 @@
 
 ;;; Appearance
 (use-package init-common-mode :defer 1)
-(use-package init-theme-doom)
+;; (use-package init-theme-doom)
 ;; (use-package init-theme-nano)
-;; (use-package init-theme-bespoke)
+(use-package init-theme-bespoke)
 
 ;; (use-package init-modeline-doom)
 (use-package init-modeline-less)
@@ -112,28 +112,6 @@
                 :size 16.5))))
 
 (use-package all-the-icons :straight t)
-
-(use-package centaur-tabs
-  :straight t
-  :demand
-  :defer 2
-  :hook
-  (dashboard-mode . centaur-tabs-local-mode)
-  (calendar-mode . centaur-tabs-local-mode)
-  (org-agenda-mode . centaur-tabs-local-mode)
-  (helpful-mode . centaur-tabs-local-mode)
-  :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-group-by-projectile-project)
-  :custom
-  (centaur-tabs-set-icons t)
-  (centaur-tabs-style "wave")
-  (centaur-tabs-set-bar 'under)
-  (centaur-tabs-cycle-scope 'groups)
-  :bind
-  ("C-c t p" . centaur-tabs-backward)
-  ("C-c t n" . centaur-tabs-forward)
-  ("C-c t t" . centaur-tabs-counsel-switch-group))
 
 (use-package ligature
   :straight

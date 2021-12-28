@@ -45,18 +45,24 @@
   (setq-default window-resize-pixelwise t)
   (setq-default frame-resize-pixelwise t))
 
-  ;; Dim inactive windows
-  (use-package dimmer
-    :straight (:host github :repo "gonewest818/dimmer.el")
-    :hook (after-init . dimmer-mode)
-    :config
-    (setq dimmer-fraction 0.5)
-    (setq dimmer-adjustment-mode :foreground)
-    (setq dimmer-use-colorspace :rgb)
-    (setq dimmer-watch-frame-focus-events nil)
-    (dimmer-configure-which-key)
-    (dimmer-configure-magit)
-    (dimmer-configure-posframe))
+;; Dim inactive windows
+(use-package dimmer
+  :straight (:host github :repo "gonewest818/dimmer.el")
+  :hook (after-init . dimmer-mode)
+  :config
+  (setq dimmer-fraction 0.5)
+  (setq dimmer-adjustment-mode :foreground)
+  (setq dimmer-use-colorspace :rgb)
+  (setq dimmer-watch-frame-focus-events nil)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-posframe)
+  (dimmer-mode t))
+
+(use-package splash-screen
+  :straight (:host github :repo "rougier/emacs-splash")
+  :config
+  (require 'splash-screen))
 
 (provide 'init-theme-bespoke)
 ;;; init-theme-bespoke.el ends here
