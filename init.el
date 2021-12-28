@@ -111,33 +111,7 @@
 
 (use-package all-the-icons :straight t)
 
-(use-package ligature
-  :straight
-  (ligature :host github :repo "mickeynp/ligature.el")
-  :after (s org-roam projectile)
-  :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; Enable all Cascadia Code ligatures in programming modes
-  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                       "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
+
 
 ;;; Shell
 (use-package exec-path-from-shell
@@ -182,6 +156,8 @@
   (which-key-show-early-on-C-h t)
   :init
   (which-key-mode))
+
+(use-package posframe :defer 1 :straight t)
 
 ;; (use-package init-helm)
 (use-package init-ivy)
@@ -246,57 +222,9 @@
 				    :compile "hugo"
 				    :test "open http://localhost:1313/"
 				    :run "hugo server -D --disableFastRender --navigateToChanged"))
-
-(use-package company
-  :straight t
-  :defer 2
-  :config
-  (global-company-mode))
-
-(use-package company-jedi
-  :straight t
-  :after company)
-
 ;; Programming Tools
-(use-package autopair
-  :straight (autopair :host github :repo "joaotavora/autopair")
-  :defer 2
-  :config
-  (autopair-global-mode))
+(use-package init-programming)
 
-(use-package flycheck
-  :straight t
-  :defer 2
-  :config
-  (global-flycheck-mode)
-  :custom
-  ;; .rst 文件禁用 flycheck
-  (flycheck-disabled-checkers '(rst grammarly)))
-
-(use-package pos-tip
-  :defer 2
-  :straight t
-  :after flycheck)
-
-(use-package flycheck-pos-tip
-;;  :straight (flycheck :host github :repo "flycheck/flycheck-pos-tip")
-  :straight t
-  :after (flycheck pos-tip)
-  :config
-  (flycheck-pos-tip-mode))
-
-(use-package posframe :defer 1 :straight t)
-
-(use-package flycheck-swiftlint
-  :straight t
-  :after flycheck
-  :config
-  (flycheck-swiftlint-setup))
-
-(use-package aggressive-indent-mode
-  :straight t
-  :hook
-  (emacs-lisp-mode  . aggressive-indent-mode))
 
 ;;; Language Server Mode
 (use-package init-lsp

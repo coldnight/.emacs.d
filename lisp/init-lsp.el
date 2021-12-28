@@ -15,20 +15,20 @@
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
-  (python-mode . lsp)
-  (c++-mode . lsp)
-  (rust-mode . lsp)
-  (php-mode . lsp)
-  (cmake-mode . lsp)
-  (go-mode . lsp)
-  (go-mode . (lambda ()
-               "Set up before-save hooks to format buffer and add/delete imports."
-               ;; Make sure you don't have other gofmt/goimports hooks enabled.
-               (add-hook 'before-save-hook #'lsp-format-buffer t t)
-               (add-hook 'before-save-hook #'lsp-organize-imports t t)))
-  (lsp-mode . lsp-lens-mode)
-  (lsp-mode . lsp-enable-which-key-integration)
-  (lsp-mode . yas-minor-mode)
+  ((python-mode . lsp)
+   (c++-mode . lsp)
+   (rust-mode . lsp)
+   (php-mode . lsp)
+   (cmake-mode . lsp)
+   (go-mode . lsp)
+   (go-mode . (lambda ()
+                "Set up before-save hooks to format buffer and add/delete imports."
+                ;; Make sure you don't have other gofmt/goimports hooks enabled.
+                (add-hook 'before-save-hook #'lsp-format-buffer t t)
+                (add-hook 'before-save-hook #'lsp-organize-imports t t)))
+   (lsp-mode . lsp-lens-mode)
+   (lsp-mode . lsp-enable-which-key-integration)
+   (lsp-mode . yas-minor-mode))
   :commands lsp
   :custom
   (lsp-keymap-prefix "C-c l")
@@ -75,8 +75,8 @@
   (dap-print-io t)
   :after (lsp-mode))
 
-(use-package lsp-ui :straight t  :commands lsp-ui-mode)
-(use-package lsp-ivy :straight t :commands lsp-ivy-workspace-symbol)
+(use-package lsp-ui :after lsp-mode :straight t  :commands lsp-ui-mode)
+(use-package lsp-ivy :after lsp-mode :straight t :commands lsp-ivy-workspace-symbol)
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
