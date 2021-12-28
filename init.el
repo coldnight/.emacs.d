@@ -65,9 +65,7 @@
 ;; (use-package init-theme-doom)
 ;; (use-package init-theme-nano)
 (use-package init-theme-bespoke)
-
-;; (use-package init-modeline-doom)
-(use-package init-modeline-less)
+(use-package init-screen)
 
 (use-package emojify
   :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
