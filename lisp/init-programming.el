@@ -49,6 +49,7 @@
   ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode php-mode web-mode org-mode prog-mode) . autopair-mode))
 
 
+;; Check
 (use-package flycheck
   :straight t
   :hook
@@ -62,18 +63,16 @@
   :after flycheck)
 
 (use-package flycheck-pos-tip
-  ;;  :straight (flycheck :host github :repo "flycheck/flycheck-pos-tip")
   :straight t
   :after (flycheck pos-tip)
   :init
   (flycheck-pos-tip-mode))
 
-
 (use-package flycheck-swiftlint
   :straight t
   :after flycheck
-  :init
-  (flycheck-swiftlint-setup))
+  :hook
+  (swift-mode . flycheck-swiftlint-setup))
 
 (use-package aggressive-indent-mode
   :straight t
