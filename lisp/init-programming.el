@@ -22,7 +22,7 @@
   (ligature :host github :repo "mickeynp/ligature.el")
   :hook
   ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode php-mode web-mode prog-mode) . ligature-mode)
-  :init
+  :config
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
   ;; Enable traditional ligature support in eww-mode, if the
@@ -65,7 +65,7 @@
 (use-package flycheck-pos-tip
   :straight t
   :after (flycheck pos-tip)
-  :init
+  :config
   (flycheck-pos-tip-mode))
 
 (use-package flycheck-swiftlint
