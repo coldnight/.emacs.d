@@ -35,19 +35,9 @@
   (add-hook 'linum-mode-hook (lambda () (fringe-mode '(0 . 0))))
   (global-linum-mode t))
 
-;; 时间显示设置
-;; <s>启用时间显示设置,在minibuffer上面的那个杠上</s>
 ;; 禁用时间显示
 (display-time-mode -1)
-;; (setq
-;;  display-time-24hr-format t  ;; 时间使用24小时制
-;;  display-time-day-and-date t ;; 时间显示包括日期和具体时间
-;;  display-time-use-mail-icon t ;; 时间栏旁边启用邮件设置
-;;  display-time-interval 10 ;; 时间的变化频率
-;;  setq display-time-format "%A %H:%M" ;; 显示时间的格式
-;;  )
-(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
-  (display-battery-mode 1))                       ; it's nice to know how much power you have
+
 (global-subword-mode 1)
 
 (require 'saveplace)
