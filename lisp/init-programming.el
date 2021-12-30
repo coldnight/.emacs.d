@@ -48,6 +48,10 @@
   :hook
   ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode php-mode web-mode org-mode prog-mode) . autopair-mode))
 
+(use-package rainbow-delimiters
+  :straight t
+  :hook
+  ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode php-mode web-mode org-mode prog-mode) . rainbow-delimiters-mode))
 
 ;; Check
 (use-package flycheck
