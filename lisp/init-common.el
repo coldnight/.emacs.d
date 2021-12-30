@@ -59,27 +59,17 @@
 ;; 设置4个空格缩进
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4) ; or any other preferred value
-;;
-(setq-local default-directory "~/.emacs.d/data/autosave")
-(setq-default auto-save-default t)
 
-;; key bindings
-;; windmove
-(global-set-key (kbd "C-c w h") 'windmove-left)
-(global-set-key (kbd "C-c w l") 'windmove-right)
-(global-set-key (kbd "C-c w k") 'windmove-up)
-(global-set-key (kbd "C-c w j") 'windmove-down)
+;;; Tidy workdir
+(make-directory "~/.emacs.d/data/backup/" t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/data/backup/" t)) ; Write auto-save files to a separate directory
+      backup-directory-alist '(("." . "~/.emacs.d/data/backup/"))          ; Write backup files to a separate directory
+      create-lockfiles nil                                                 ; Disable lockfiles as I use only one Emacs instance
+      )
 
 ;; Making Buffer Names Unique
 ;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-
-;; C/C++
-(require 'cc-vars)
-(setq c-default-style "linux"
-      c-basic-offset 4
-      tab-width 4
-      indent-tabs-mode t)
 
 (defvar usr-bin-path "/usr/bin/"
   "The /usr/bin path to custom in each OS.")
@@ -91,10 +81,8 @@
  x-stretch-cursor t)                              ; Stretch cursor to the glyph width
 
 (setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
-      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
       truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
       password-cache-expiry nil                   ; I can trust my computers ... can't I?
-      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
       scroll-margin 2)                            ; It's nice to maintain a little margin
 
 ;; 在标题栏显示buffer的名字和项目

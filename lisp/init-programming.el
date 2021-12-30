@@ -90,6 +90,16 @@
   :straight t
   :after company)
 
+;; C/C++
+(use-package cc-vars
+  :straight (:type built-in)
+  :custom
+  (c-default-style "linux")
+  (c-basic-offset 4)
+  (tab-width 4)
+  (indent-tabs-mode t)
+  :hook
+  ((c-mode c++-mode) . (lambda() t)))
 
 (provide 'init-programming)
 ;;; init-programming.el ends here
