@@ -210,5 +210,14 @@
   (org-fc-directories (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards" "~"))
   (org-fc-review-history-file (expand-file-name "codes/notes/roam-research-notes-hugo/flashcards/org-fc-reviews.tsv" "~")))
 
+
+(use-package org-zotxt
+  :straight (:host github :repo "egh/zotxt-emacs")
+  :bind
+  (:map org-mode-map
+        ("C-c z i" . org-zotxt-insert-reference-link))
+  :hook
+  (org-mode . org-zotxt-mode))
+
 (provide 'init-org)
 ;;; init-org.el ends here
