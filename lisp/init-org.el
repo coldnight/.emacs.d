@@ -215,7 +215,8 @@
   :straight (:host github :repo "egh/zotxt-emacs")
   :bind
   (:map org-mode-map
-        ("C-c z i" . org-zotxt-insert-reference-link))
+        ("C-c z i" . org-zotxt-insert-reference-link)
+        ("C-c z a" . org-zotxt-open-attachment))
   :hook
   (org-mode . org-zotxt-mode))
 
