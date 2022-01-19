@@ -194,6 +194,8 @@
 (use-package less-css-mode :straight t
   ;; mode to defer
   :mode "\\.less\\'")
+(use-package groovy-mode :straight t
+  :mode "\\.gradle\\'")
 (use-package gradle-mode :straight t
   :mode "\\.gradle\\'")
 (use-package rust-mode :straight t

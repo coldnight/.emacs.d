@@ -39,6 +39,13 @@
 (use-package lsp-java
   :straight t
   :after lsp-mode
+  :custom
+  ;; We are using Java8 and the 0.57 is the latest version to support Java 8,
+  ;; otherwise Java 11 is required.
+  (lsp-java-jdt-download-url  "https://download.eclipse.org/jdtls/milestones/0.57.0/jdt-language-server-0.57.0-202006172108.tar.gz")
+  (lsp-java-configuration-runtimes '[(:name "JavaSE-1.8"
+											:path "/Users/wh/.sdkman/candidates/java/8.0.292.hs-adpt"
+											:default t)])
   :hook
   (java-mode . lsp))
 
