@@ -7,6 +7,15 @@
 ;;; Code:
 ;;;
 
+(defgroup my nil
+  "Configurations of myself."
+  :group 'convenience)
+
+(defcustom my-url-http-proxy-service
+  "127.0.0.1:1087"
+  "HTTP proxy that apply to 'url-retrieve'."
+  :type '(string))
+
 ;; make a temp buffer
 (defun my/generate-buffer ()
   "Generate a tmp buffer."
@@ -17,8 +26,6 @@
   "Open my own remark in 'org-mode'."
   (interactive)
   (find-file "~/Documents/org-modes/remark.org"))
-
-(defvar-local my/url-http-proxy-service "127.0.0.1:1087")
 
 (defun my/url-current-public-ip()
   "Return current public IPv4 address with url."
@@ -33,8 +40,8 @@
   "Enable HTTP proxy for url."
   (interactive)
   (setq url-proxy-services
-        `(("http" . ,my/url-http-proxy-service)
-          ("https" . ,my/url-http-proxy-service)))
+        `(("http" . ,my-url-http-proxy-service)
+          ("https" . ,my-url-http-proxy-service)))
   (message "Proxy services set and public IP is: %s" (my/url-current-public-ip)))
 
 (defun my/url-proxy-off()

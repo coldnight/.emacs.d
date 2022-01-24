@@ -63,7 +63,8 @@
 (use-package init-builtin-mode :defer 1 :after init-common)
 ;; (use-package init-theme-doom)
 ;; (use-package init-theme-nano)
-(use-package init-theme-bespoke)
+;; (use-package init-theme-bespoke)
+(use-package init-theme-modus)
 (use-package init-screen)
 
 (use-package emojify
