@@ -1,5 +1,8 @@
 ;;; init-theme-modus.el -- Use modus to define the look of Emacs.
 ;;; Commentary:
+;;;
+;;;  More information to see the documentation at:
+;;;    https://protesilaos.com/emacs/modus-themes
 ;;; Code:
 (eval-when-compile
   (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
@@ -21,6 +24,7 @@
   ;; OR
   ;; (modus-themes-load-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
+
 ;; Dim inactive windows
 (use-package dimmer
   :straight (:host github :repo "gonewest818/dimmer.el")
