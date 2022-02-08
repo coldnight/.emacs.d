@@ -16,17 +16,6 @@
   "HTTP proxy that apply to 'url-retrieve'."
   :type '(string))
 
-;; make a temp buffer
-(defun my/generate-buffer ()
-  "Generate a tmp buffer."
-  (interactive)
-  (switch-to-buffer (make-temp-name "scratch")))
-
-(defun my/open-remark-org()
-  "Open my own remark in 'org-mode'."
-  (interactive)
-  (find-file "~/Documents/org-modes/remark.org"))
-
 (defun my/url-current-public-ip()
   "Return current public IPv4 address with url."
   (let ((r (url-retrieve-synchronously "https://api-ipv4.ip.sb/ip" t nil 10)))
@@ -50,13 +39,23 @@
   (setq url-proxy-services nil)
   (message "Porxy services removed and public IP is: %s." (my/url-current-public-ip)))
 
-
 (defun my/url-proxy-toggle()
   "Toggle HTTP proxy for url."
   (interactive)
   (if (eq url-proxy-services nil)
       (my/url-proxy-on)
     (my/url-proxy-off)))
+
+;; make a temp buffer
+(defun my/generate-buffer ()
+  "Generate a tmp buffer."
+  (interactive)
+  (switch-to-buffer (make-temp-name "scratch")))
+
+(defun my/open-remark-org()
+  "Open my own remark in 'org-mode'."
+  (interactive)
+  (find-file "~/Documents/org-modes/remark.org"))
 
 (defun my/activate-terminal(args)
   (call-process-shell-command "open -a \"iTerm\"" nil nil nil)
