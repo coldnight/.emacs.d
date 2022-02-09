@@ -199,7 +199,9 @@
 (use-package gradle-mode :straight t
   :mode "\\.gradle\\'")
 (use-package rust-mode :straight t
-  :mode "\\.rs\\'")
+  :mode "\\.rs\\'"
+  :hook
+  (rust-mode . (lambda () (setq indent-tabs-mode nil))))
 (use-package htmlize :straight t
   :mode "\\.html\\'")
 (use-package php-mode :straight t
