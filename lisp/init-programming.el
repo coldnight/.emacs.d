@@ -248,5 +248,14 @@
   :hook
   ((c-mode c++-mode) . (lambda() t)))
 
+(use-package graphviz-dot-mode
+  :straight t
+  :mode "\\.dot\\'"
+  :custom
+  (graphviz-dot-indent-width 2))
+
+(use-package company-graphviz-dot
+  :after graphviz-dot-mode)
+
 (provide 'init-programming)
 ;;; init-programming.el ends here
