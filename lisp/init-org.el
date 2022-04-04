@@ -30,8 +30,10 @@
   (org-insert-heading-respect-content nil)
   (org-M-RET-may-split-line '((item) (default . t)))
   (org-special-ctrl-a/e t)
+  (org-pretty-entities t)
   (org-hide-emphasis-markers t) ;; 隐藏标记
   (org-return-follows-link nil)
+  (org-catch-invisible-edits 'show-and-error)
   (org-use-speed-commands t)
   (org-startup-align-all-tables nil)
   (org-log-into-drawer nil)
@@ -43,6 +45,14 @@
   (org-indent-mode t)
   (org-startup-truncated nil)
   (org-confirm-babel-evaluate 'ck/org-confirm-babel-evaluate)
+  ;; Agenda styling
+  (org-agenda-block-separator ?─)
+  (org-agenda-time-grid
+   '((daily today require-timed)
+	 (800 1000 1200 1400 1600 1800 2000)
+	 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+  (org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
   :custom-face
   (org-headline-done ((nil (:strike-through t))))
   :config
@@ -154,11 +164,19 @@
   :straight t
   :after (ox org-mode))
 
-(use-package org-superstar
-  :straight t
+;;; (use-package org-superstar
+;;;   :straight t
+;;;   :after org
+;;;   :hook
+;;;   (org-mode . (lambda () (org-superstar-mode 1))))
+
+(use-package org-modern
+  :straight
+  (:host github :repo "minad/org-modern")
   :after org
   :hook
-  (org-mode . (lambda () (org-superstar-mode 1))))
+  (org-mode . org-modern-mode)
+  (org-agenda-finalize . org-modern-mode))
 
 (use-package org-pomodoro
   :straight t
@@ -171,9 +189,9 @@
                                            "-sender" "org.gnu.Emacs")))
   (org-pomodoro-short-break-finished . (lambda ()
                                          (call-process "terminal-notifier" nil 0 nil
-                                           "-message" "🍅 ready to go！"
-                                           "-sound" "Heroine"
-                                           "-sender" "org.gnu.Emacs")))
+													   "-message" "🍅 ready to go！"
+													   "-sound" "Heroine"
+													   "-sender" "org.gnu.Emacs")))
   (org-pomodoro-long-break-finished . (lambda ()
                                         (call-process "terminal-notifier" nil 0 nil
                                                       "-message" "🍅🍅🍅 ready to go！"
