@@ -18,7 +18,7 @@
   :after org)
 
 (use-package org
-  :straight (:type git :host github :repo "bzg/org-mode" :branch "release_9.5")
+  :straight (:type git :host github :repo "coldnight/org-mode" :branch "branch_9.5.2")
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
