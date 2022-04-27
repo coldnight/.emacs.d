@@ -69,5 +69,18 @@
   :custom
   (inferior-lisp-program "sbcl"))
 
+(use-package rime
+  :straight (rime :type git
+                  :host github
+                  :repo "DogLooksGood/emacs-rime"
+                  :files ("*.el" "Makefile" "lib.c"))
+  :if (memq window-system '(x))
+  :custom
+  ;; posframe 中顯示更加友好，但是無法在 posframe 中查看候選
+  (rime-show-candidate 'minibuffer)
+  (rime-share-data-dir "/usr/share/rime-data")
+  (rime-user-data-dir "~/.rime")
+  (default-input-method "rime"))
+
 (provide 'init-optional)
 ;;; init-optional.el ends here
