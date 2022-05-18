@@ -257,5 +257,12 @@
 (use-package company-graphviz-dot
   :after graphviz-dot-mode)
 
+(eval-when-compile
+  (add-to-list 'load-path "/usr/local/opt/protobuf/share/emacs/site-lisp/protobuf"))
+
+(use-package protobuf-mode
+  :straight (:type built-in)
+  :mode "\\.proto\\'")
+
 (provide 'init-programming)
 ;;; init-programming.el ends here
