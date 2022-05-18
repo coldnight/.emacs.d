@@ -18,6 +18,8 @@
   ((python-mode . lsp)
    (c++-mode . lsp)
    (rust-mode . lsp)
+   (rust-mode . (lambda()
+				  (add-hook 'before-save-hook #'lsp-format-buffer t t)))
    (php-mode . lsp)
    (cmake-mode . lsp)
    (go-mode . lsp)
