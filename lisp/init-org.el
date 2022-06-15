@@ -206,6 +206,7 @@
 (use-package org-download
   :straight t
   :after org-roam
+	:commands (org-download-image org-download-clipboard)
   :custom
   (org-download-image-dir "images")
   :hook
@@ -235,6 +236,11 @@
   (:map org-mode-map
         ("C-c z i" . org-zotxt-insert-reference-link)
         ("C-c z a" . org-zotxt-open-attachment))
+	:config
+	(org-link-set-parameters "zotero"
+													 :follow #'org-zotxt--link-follow
+													 :export (lambda (path desc format)
+																		 (format "%s" desc)))
   :hook
   (org-mode . org-zotxt-mode))
 
