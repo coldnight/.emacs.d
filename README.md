@@ -32,6 +32,10 @@ $ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 ## Setup
 
+### Fonts
+
+- [Victor Mono](https://github.com/rubjo/victor-mono)
+- STKaiti（macOS 华文楷体）
 
 ### icons
 
