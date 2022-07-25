@@ -242,11 +242,11 @@
   :straight (:type built-in)
   :custom
   (c-default-style "linux")
-  (c-basic-offset 4)
-  (tab-width 4)
-  (indent-tabs-mode t)
+  (c-basic-offset 2)
+  (tab-width 2)
+  (indent-tabs-mode nil)
   :hook
-  ((c-mode c++-mode) . (lambda() t)))
+  ((c-mode c++-mode protobuf-mode) . (lambda() t)))
 
 (use-package graphviz-dot-mode
   :straight t

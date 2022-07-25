@@ -19,7 +19,7 @@
    (c++-mode . lsp)
    (rust-mode . lsp)
    (rust-mode . (lambda()
-				  (add-hook 'before-save-hook #'lsp-format-buffer t t)))
+				          (add-hook 'before-save-hook #'lsp-format-buffer t t)))
    (php-mode . lsp)
    (cmake-mode . lsp)
    (go-mode . lsp)
@@ -28,6 +28,7 @@
                 ;; Make sure you don't have other gofmt/goimports hooks enabled.
                 (add-hook 'before-save-hook #'lsp-format-buffer t t)
                 (add-hook 'before-save-hook #'lsp-organize-imports t t)))
+   (dart-mode . lsp)
    (lsp-mode . lsp-lens-mode)
    (lsp-mode . lsp-enable-which-key-integration)
    (lsp-mode . yas-minor-mode))
@@ -86,6 +87,10 @@
 
 (use-package lsp-ui :after lsp-mode :straight t  :commands lsp-ui-mode)
 (use-package lsp-ivy :after lsp-mode :straight t :commands lsp-ivy-workspace-symbol)
+
+(use-package lsp-dart
+  :straight t
+  :after (lsp-mode))
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
