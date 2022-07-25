@@ -34,7 +34,8 @@ $ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 ### Fonts
 
-- [Victor Mono](https://github.com/rubjo/victor-mono)
+- <s>[Victor Mono](https://github.com/rubjo/victor-mono)</s>
+- [MonoLisa Nasy](https://www.monolisa.dev/)
 - STKaiti（macOS 华文楷体）
 
 ### icons
