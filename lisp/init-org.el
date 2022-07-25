@@ -49,8 +49,8 @@
   (org-agenda-block-separator ?─)
   (org-agenda-time-grid
    '((daily today require-timed)
-	 (800 1000 1200 1400 1600 1800 2000)
-	 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+	   (800 1000 1200 1400 1600 1800 2000)
+	   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
   (org-agenda-current-time-string
    "⭠ now ─────────────────────────────────────────────────")
   :custom-face
@@ -236,13 +236,13 @@
   (:map org-mode-map
         ("C-c z i" . org-zotxt-insert-reference-link)
         ("C-c z a" . org-zotxt-open-attachment))
-	:config
-	(org-link-set-parameters "zotero"
-													 :follow #'org-zotxt--link-follow
-													 :export (lambda (path desc format)
-																		 (format "%s" desc)))
   :hook
-  (org-mode . org-zotxt-mode))
+  (org-mode . (lambda ()
+                (org-zotxt-mode)
+                (org-link-set-parameters "zotero"
+												                 :follow #'org-zotxt--link-follow
+											                   :export (lambda (path desc format)
+																		               (format "%s" desc))))))
 
 (provide 'init-org)
 ;;; init-org.el ends here
