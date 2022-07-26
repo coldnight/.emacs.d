@@ -264,5 +264,9 @@
   :straight (:type built-in)
   :mode "\\.proto\\'")
 
+(use-package dart-mode
+  :straight t
+  :mode "\\.dart\\'")
+
 (provide 'init-programming)
 ;;; init-programming.el ends here
