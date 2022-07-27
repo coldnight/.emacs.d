@@ -105,7 +105,7 @@
 
 (when window-system
   (set-frame-position (selected-frame) 0 0)
-  (set-frame-size (selected-frame) 186 60))
+  (set-frame-size (selected-frame) 210 60))
 
 (provide 'init-common)
 ;;; init-common.el ends here

@@ -81,16 +81,15 @@
 ;;   (cnfonts--custom-set-fontnames
 ;;    '(
 ;;      ("MonoLisa Nasy" "Victor Mono")
-;;      ("STKaiti" "Hiragino Sans GB")
+;;      ("WenQuanYi Zen Hei Mono" "STKaiti" "Hiragino Sans GB")
 ;;      ("HanaMinB" "SimSun-ExtB" "MingLiU-ExtB")))
 ;;
 ;;   (cnfonts--custom-set-fontsizes
 ;;    '(
-;;      (14  18.5 18.5)
+;;      (14  16.5 16.5)
 ;;      ))
 ;;   :init
 ;;   (cnfonts-enable))
-
 
 
 (when window-system
@@ -106,10 +105,10 @@
     (set-fontset-font
      (frame-parameter nil 'font)
      charset
-     (font-spec :name "-*-STKaiti-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+     (font-spec :name "-*-WenQuanYi Zen Hei Mono-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
                 :weight 'normal
                 :slant 'normal
-                :size 18.5))))
+                :size 16.5))))
 
 (use-package all-the-icons :straight t)
 

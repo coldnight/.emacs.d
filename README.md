@@ -36,7 +36,8 @@ $ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 - <s>[Victor Mono](https://github.com/rubjo/victor-mono)</s>
 - [MonoLisa Nasy](https://www.monolisa.dev/)
-- STKaiti（macOS 华文楷体）
+- <s>STKaiti（macOS 华文楷体）</s>
+- [文泉驿正黑（包含等宽）](http://wenq.org/wqy2/index.cgi?Download#ZenHei_Stable)
 
 ### icons
 
