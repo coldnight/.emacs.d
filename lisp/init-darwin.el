@@ -10,7 +10,9 @@
 (setenv "GOPATH" (expand-file-name "~/codes/go"))
 
 ;; Shell
-(setq usr-bin-path "/usr/local/bin/")
+(if (file-exists-p "/opt/homebrew")
+    (setq usr-bin-path "/opt/homebrew/bin")
+  (setq usr-bin-path "/usr/local/bin/"))
 
 ;; share clipboard between os
 (defun copy-from-osx ()

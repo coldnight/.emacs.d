@@ -258,7 +258,9 @@
   :after graphviz-dot-mode)
 
 (eval-when-compile
-  (add-to-list 'load-path "/usr/local/opt/protobuf/share/emacs/site-lisp/protobuf"))
+  (add-to-list 'load-path (if (file-exists-p "/opt/homebrew")
+                              "/opt/homebrew/opt/protobuf/share/emacs/site-lisp/protobuf"
+                            "/usr/local/opt/protobuf/share/emacs/site-lisp/protobuf")))
 
 (use-package protobuf-mode
   :straight (:type built-in)
