@@ -266,6 +266,10 @@
   :straight (:type built-in)
   :mode "\\.proto\\'")
 
+(use-package move-mode
+  :straight (move-mode :host github :repo "coldnight/move-mode")
+  :mode "\\.move\\'")
+
 (use-package dart-mode
   :straight t
   :mode "\\.dart\\'")
