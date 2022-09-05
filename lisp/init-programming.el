@@ -264,6 +264,8 @@
 
 (use-package protobuf-mode
   :straight (:type built-in)
+  :custom
+  (c-basic-offset 2)
   :mode "\\.proto\\'")
 
 (use-package move-mode
