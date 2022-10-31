@@ -244,5 +244,13 @@
 											                   :export (lambda (path desc format)
 																		               (format "%s" desc))))))
 
+(use-package ob-restclient
+  :straight (:host github :repo "alf/ob-restclient.el")
+  :hook
+  (org-mode . (lambda()
+                (org-babel-do-load-languages
+                 'org-babel-load-languages
+                 '((restclient . t))))))
+
 (provide 'init-org)
 ;;; init-org.el ends here
