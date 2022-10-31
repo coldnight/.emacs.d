@@ -272,6 +272,10 @@
   :straight (move-mode :host github :repo "coldnight/move-mode")
   :mode "\\.move\\'")
 
+(use-package solidity-mode
+  :straight (solidity-mode :host github :repo "ethereum/emacs-solidity")
+  :mode "\\.sol\\'")
+
 (use-package dart-mode
   :straight t
   :mode "\\.dart\\'")
