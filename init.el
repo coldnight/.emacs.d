@@ -45,6 +45,7 @@
 
 
 ;;; Common
+(use-package init-local-early)
 (use-package init-common)
 (use-package init-my
   :bind
@@ -311,6 +312,7 @@
 (use-package init-optional)
 (use-package init-mu4e :commands mu4e)
 (use-package init-writing)
+(use-package init-local)
 
 (message "*** Emacs loaded in %s with %d garbage collections."
          (format "%.2f seconds"
