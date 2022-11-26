@@ -68,7 +68,6 @@
     "Update id locations from current dir."
     (interactive)
     (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((ein . t)
@@ -113,7 +112,7 @@
    (lambda (time)
      (concat
       (pcase org-journal-file-type
-        (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+        (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U\n#+FILETAGS: daily")
         (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
         (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
         (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U"))))))
@@ -189,9 +188,9 @@
                                            "-sender" "org.gnu.Emacs")))
   (org-pomodoro-short-break-finished . (lambda ()
                                          (call-process "terminal-notifier" nil 0 nil
-													   "-message" "🍅 ready to go！"
-													   "-sound" "Heroine"
-													   "-sender" "org.gnu.Emacs")))
+													                             "-message" "🍅 ready to go！"
+													                             "-sound" "Heroine"
+													                             "-sender" "org.gnu.Emacs")))
   (org-pomodoro-long-break-finished . (lambda ()
                                         (call-process "terminal-notifier" nil 0 nil
                                                       "-message" "🍅🍅🍅 ready to go！"
