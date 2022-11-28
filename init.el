@@ -225,7 +225,11 @@
                   ".gradle"
                   ".meghanada"
                   ".clangd"
+                  ".cargo"
+                  ".rustup"
+                  "/usr/"
                   "eln-cache"
+                  "straight"
                   "out"
                   "repl"
                   "target"
@@ -246,9 +250,9 @@
                 projectile-globally-ignored-files))
   (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
                                     :project-file "config.toml"
-				    :compile "hugo"
-				    :test "open http://localhost:1313/"
-				    :run "hugo server -D --disableFastRender --navigateToChanged"))
+				                            :compile "hugo"
+				                            :test "open http://localhost:1313/"
+				                            :run "hugo server -D --disableFastRender --navigateToChanged"))
 ;; Programming Tools
 (use-package init-programming)
 
@@ -257,6 +261,8 @@
 
 ;; Org Mode
 (use-package init-org :after init-builtin-mode)
+
+(use-package init-my-gtd :after init-org)
 
 ;;; Misc
 ;; speedup
@@ -310,7 +316,7 @@
       (global-wakatime-mode)))
 
 (use-package init-optional)
-(use-package init-mu4e :commands mu4e)
+(use-package init-mu4e)
 (use-package init-writing)
 (use-package init-local)
 
@@ -319,3 +325,4 @@
                  (float-time
                   (time-subtract after-init-time before-init-time))) gcs-done)
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)
