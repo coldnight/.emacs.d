@@ -107,7 +107,7 @@
   (org-journal-dir (expand-file-name "codes/notes/roam-research-notes-hugo/journal" "~"))
   ;; (org-journal-enable-encryption t)
   ;; (org-journal-encrypt-journal t)
-  (org-journal-enable-agenda-integration t)
+  (org-journal-enable-agenda-integration nil)
   (org-journal-file-header
    (lambda (time)
      (concat
