@@ -33,17 +33,44 @@
                                (when msg
                                  (or (mu4e-message-contact-field-matches msg :to addr-lex)
                                      (mu4e-message-contact-field-matches msg :cc addr-lex)))))))
+
+      ;; Most of the time, I merely want mu4e to re-index my local maildir (because
+      ;; I'm running mbsync as a cron job). However, sometimes I want to fetch mails
+      ;; immediately. Do this by changing the meaning of a prefix for
+      ;; mu4e-update-mail-and-index (bound to "U").
+      ;;
+      ;; A prefix usually means run in the background, but I don't think I ever want
+      ;; that. Change things so a prefix means to call mbsync.
+      (defun rjs/mu4e-update-mail-and-index (orig-fun prefix &rest args)
+        (interactive "P")
+        (if prefix (funcall orig-fun nil) (mu4e-update-index)))
+
+      (setq my/mu4e-unread-messages-count "Mail: -")
+
+      (defcustom my/inbox-count-command "echo -n ( mu find date:1w..now maildir:/INBOX flag:unread 2>/dev/null | wc -l )"
+        "Command to retrieve count of emails in Inbox."
+        :type 'string
+        :group 'inbox)
+
+      ;; I want to show unread messages count in awesome-tray, so add an advice
+      ;; function to set get it and set it to a global variable.
+      (defun my/count-mu4e-set-unread-messages ()
+        (let ((unread (shell-command-to-string my/inbox-count-command)))
+          (setq my/mu4e-unread-messages-count (format "Mail: %s" (string-trim unread)))))
+
       (use-package mu4e
         :straight (:type built-in)
         :bind
         ("C-c c" . mu4e-org-store-and-capture)  ;; org-agenda
         ("C-c c" . mu4e-org-store-and-capture)  ;; org-agenda
         :commands mu4e
+        :hook
+        (mu4e-index-updated . my/count-mu4e-set-unread-messages)
         :custom
         ;; http://pragmaticemacs.com/emacs/fixing-duplicate-uid-errors-when-using-mbsync-and-mu4e/
         (mu4e-change-filenames-when-moving t)
-        ;; Update mails every 2 minutes.
-        (mu4e-update-interval 120)
+        ;; Update mails every 10 minutes.
+        (mu4e-update-interval 600)
         ;; Don't save message to Sent Messages, Gmail/IMAP takes care of this
         ;; Override in context switching for other type of mailboxes
         (mu4e-sent-messages-behavior 'delete)
@@ -53,6 +80,10 @@
          `( ,(my-make-mu4e-context "main" "grayking.w@gmail.com" nil)))
         (message-send-mail-function 'smtpmail-send-it)
         (smtpmail-stream-type 'starttls)
+
+        (advice-add 'mu4e-update-mail-and-index
+                    :around #'rjs/mu4e-update-mail-and-index)
+
         (starttls-use-gnutls t)
         ;; Personal info
         (user-full-name "Gray King")
@@ -103,7 +134,7 @@
         :straight t
         :after mu4e
         :hook
-        (after-init mu4e-alert-enable-notifications)
+        (after-init . mu4e-alert-enable-notifications)
         :config
         (mu4e-alert-set-default-style 'notifier))))
 

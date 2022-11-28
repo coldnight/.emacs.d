@@ -65,6 +65,21 @@
   "Buffer-state module face."
   :group 'awesome-tray)
 
+
+(defun my/module-inbox-count-info()
+  "Show inbox count."
+  (if (stringp my/mu4e-unread-messages-count)
+      my/mu4e-unread-messages-count
+    "Mail: N/A"))
+
+(defface my/module-inbox-count-face
+  '((((background light))
+     :foreground "#00796b" :bold t)
+    (t
+     :foreground "#8eb89d" :bold t))
+  "Buffer-state module face."
+  :group 'awesome-tray)
+
 (use-package awesome-tray
   :straight (awesome-tray :host github :repo "manateelazycat/awesome-tray")
   :config
@@ -77,7 +92,7 @@
                       :height 150
                       :box (face-attribute 'mode-line :box))
   ;; colors are copied from https://github.com/mclear-tools/bespoke-themes
-  (setq awesome-tray-active-modules '("location" "buffer-state" "buffer-name" "git" "belong" "mode-name")
+  (setq awesome-tray-active-modules '("inbox-count" "location" "buffer-state" "buffer-name" "git" "belong" "mode-name")
         awesome-tray-info-padding-right 1
         awesome-tray-mode-line-active-color "#eceff1"
         awesome-tray-mode-line-inactive-color "#282b35"
@@ -92,6 +107,8 @@
                       :foreground "#8eb89d")
   (add-to-list 'awesome-tray-module-alist
                '("buffer-state" . (my/module-buffer-state-info my/module-buffer-state-face)))
+  (add-to-list 'awesome-tray-module-alist
+               '("inbox-count" . (my/module-inbox-count-info my/module-inbox-count-face)))
   (awesome-tray-mode 1))
 
 (provide 'init-theme-modus)
