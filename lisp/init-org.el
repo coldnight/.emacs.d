@@ -22,6 +22,7 @@
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
+  ("C-c a g")
   ("C-c C-." . org-mark-ring-goto)
   :custom
   (org-startup-indented t)
@@ -29,7 +30,6 @@
   (org-odd-level-only nil)
   (org-insert-heading-respect-content nil)
   (org-M-RET-may-split-line '((item) (default . t)))
-  (org-special-ctrl-a/e t)
   (org-pretty-entities t)
   (org-hide-emphasis-markers t) ;; 隐藏标记
   (org-return-follows-link nil)
@@ -37,22 +37,12 @@
   (org-use-speed-commands t)
   (org-startup-align-all-tables nil)
   (org-log-into-drawer nil)
-  (org-tags-column 1)
-  (org-ellipsis " \u25bc" )
   (org-speed-commands-user nil)
   (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
   (org-completion-use-ido t)
   (org-indent-mode t)
   (org-startup-truncated nil)
   (org-confirm-babel-evaluate 'ck/org-confirm-babel-evaluate)
-  ;; Agenda styling
-  (org-agenda-block-separator ?─)
-  (org-agenda-time-grid
-   '((daily today require-timed)
-	   (800 1000 1200 1400 1600 1800 2000)
-	   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
-  (org-agenda-current-time-string
-   "⭠ now ─────────────────────────────────────────────────")
   :custom-face
   (org-headline-done ((nil (:strike-through t))))
   :config
@@ -62,12 +52,7 @@
   (setq org-emphasis-regexp-components '("-[:multibyte:][:space:]('\"{" "-[:multibyte:][:space:].,:!?;'\")}\\[" "[:space:]" "." 1))
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
   (org-element-update-syntax)
-
-  (require 'org-id)
-  (defun my/org-id-update-id-locations-current-dir()
-    "Update id locations from current dir."
-    (interactive)
-    (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
+  (require 'init-my-gtd)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((ein . t)
@@ -173,9 +158,33 @@
   :straight
   (:host github :repo "minad/org-modern")
   :after org
+  :custom
+  ;; Edit settings
+  (org-auto-align-tags nil)
+  ;; (org-tags-column 1)
+  (org-tags-column 0)
+  (org-catch-invisible-edits 'show-and-error)
+  (org-special-ctrl-a/e t)
+  (org-insert-heading-respect-content t)
+
+  ;; Org styling, hide markup etc.
+  (org-hide-emphasis-markers t)
+  (org-pretty-entities t)
+  ;; (org-ellipsis "…")
+  (org-ellipsis " \u25bc" )
+
+  ;; Agenda styling
+  (org-agenda-tags-column 0)
+  (org-agenda-block-separator ?─)
+  (org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+  (org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
   :hook
   (org-mode . org-modern-mode)
-  (org-agenda-finalize . org-modern-mode))
+  (org-agenda-finalize . org-modern-agenda))
 
 (use-package org-pomodoro
   :straight t

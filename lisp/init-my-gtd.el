@@ -10,8 +10,14 @@
 (require 'org-agenda)
 
 (setq org-directory (expand-file-name "codes/notes/roam-research-notes-hugo/mind-monkey" "~"))
-(setq org-agenda-files (list "inbox.org" "agenda.org"
-                             "notes.org" "projects.org"))
+
+(defun my/expand-agenda-files (x)
+  "Expand agenda file path X to absoluted."
+  (expand-file-name x org-directory))
+
+(setq org-agenda-files (cl-map 'list #'my/expand-agenda-files
+                               (list "inbox.org" "agenda.org"
+                                     "notes.org" "projects.org")))
 
 (setq org-capture-templates
       `(("i" "Inbox" entry  (file "inbox.org")
@@ -26,16 +32,26 @@
         ("n" "Note" entry  (file "notes.org")
          ,(concat "* Note (%a)\n"
                   "/Entered on/ %U\n" "\n" "%?"))))
-(setq org-agenda-hide-tags-regexp ".")
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-        (todo   . " ")
-        (tags   . " %i %-12:c")
-        (search . " %i %-12:c")))
 
+(setq org-agenda-hide-tags-regexp ".")
+;; (setq org-agenda-prefix-format
+;;       '((agenda . " %i %-12:c%?-12t% s")
+;;         (todo   . " ")
+;;         (tags   . " %i %-12:c")
+;;         (search . " %i %-12:c")))
+;;
 
 ;; Use full window for org-capture
 (add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(defun my/toggle-agenda-weekly-daily-view()
+  "Toggle view of agenda."
+  (interactive)
+  (if (equal org-agenda-span 'week)
+      (setq org-agenda-span 'day)
+    (setq org-agenda-span 'week)))
+
+(global-set-key (kbd "C-c a t") 'my/toggle-agenda-weekly-daily-view)
 
 ;; Refile
 (setq org-refile-use-outline-path 'file)
@@ -46,7 +62,7 @@
 (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
 
 (defun log-todo-next-creation-date (&rest ignore)
-  "Log NEXT creation time in the property drawer under the key 'ACTIVATED'."
+  "Log NEXT creation time in the property drawer under the key 'ACTIVATED', IGNORE rest."
   (when (and (string= (org-get-todo-state) "NEXT")
              (not (org-entry-get nil "ACTIVATED")))
     (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))

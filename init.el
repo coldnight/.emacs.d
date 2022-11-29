@@ -261,8 +261,6 @@
 
 ;; Org Mode
 (use-package init-org :after init-builtin-mode)
-
-(use-package init-my-gtd :after init-org)
 
 ;;; Misc
 ;; speedup
