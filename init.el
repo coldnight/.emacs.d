@@ -314,7 +314,7 @@
       (global-wakatime-mode)))
 
 (use-package init-optional)
-(use-package init-mu4e)
+(use-package init-mu4e :after org)
 (use-package init-writing)
 (use-package init-local)
 

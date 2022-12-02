@@ -7,18 +7,16 @@
   (add-to-list 'load-path (expand-file-name "straight/repos/use-package" user-emacs-directory))
   (require 'use-package))
 
+
 (defun ck/org-confirm-babel-evaluate (lang body)
   "LANG and BODY."
   (not (or (string= lang "dot"))))
 
 ;; Emacs IPython Notebook
-(use-package ein
-  :straight t
-  :defer
-  :after org)
+(use-package ein :straight t)
 
 (use-package org
-  :straight (:type git :host github :repo "coldnight/org-mode" :branch "branch_9.5.2")
+  :straight (:type git :host github :repo "coldnight/org-mode" :branch "branch_9.5.5")
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -104,6 +102,7 @@
 
 (use-package org-roam
   :straight t
+  :after org
   :config
   (org-roam-setup)
   ;; If using org-roam-protocol
