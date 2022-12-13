@@ -89,8 +89,7 @@
 (use-package lsp-ivy :after lsp-mode :straight t :commands lsp-ivy-workspace-symbol)
 
 (use-package lsp-dart
-  :straight t
-  :after (lsp-mode))
+  :straight t)
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

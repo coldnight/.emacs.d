@@ -129,7 +129,8 @@
   :after multi-vterm
   :hook
   (vterm-mode . (lambda ()
-                  (linum-mode -1)
+                  (when (< emacs-major-version 29)
+                    (linum-mode -1))
                   (when (>= emacs-major-version 26)
                     (display-line-numbers-mode -1))))
   :custom
