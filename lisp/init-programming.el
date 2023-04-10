@@ -125,6 +125,7 @@
   "Return suffix of current buffer."
 
   (nth 0 (cdr (split-string (buffer-name) "\\."))))
+
 (use-package web-mode
   :straight t
   :hook

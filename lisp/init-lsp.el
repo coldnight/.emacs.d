@@ -15,8 +15,9 @@
 (use-package lsp-mode
   :straight (lsp-mode :host github :repo "emacs-lsp/lsp-mode")
   :hook
-  ((python-mode . lsp)
-   (c++-mode . lsp)
+  ((c++-mode . lsp)
+   ;; lsp-pyright
+   ;; (python-mode . lsp)
    (rust-mode . lsp)
    (rust-mode . (lambda()
 				          (add-hook 'before-save-hook #'lsp-format-buffer t t)))
@@ -39,6 +40,21 @@
   (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
   :after (company flycheck))
 
+(use-package with-venv
+  :straight t)
+
+(use-package lsp-pyright
+  :straight t
+  :after (lsp-mode with-venv)
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (setq lsp-pyright-venv-path (with-venv--find-venv-dir))
+                         (lsp)))
+  :custom
+  (lsp-pyright-use-library-code-for-types t) ;; set this to nil if getting too many false positive type errors
+  (lsp-pyright-stub-path (concat (getenv "HOME") "/.local/src/python-type-stubs")))
+
+
 (use-package lsp-java
   :straight t
   :after lsp-mode
@@ -47,8 +63,8 @@
   ;; otherwise Java 11 is required.
   (lsp-java-jdt-download-url  "https://download.eclipse.org/jdtls/milestones/0.57.0/jdt-language-server-0.57.0-202006172108.tar.gz")
   (lsp-java-configuration-runtimes '[(:name "JavaSE-1.8"
-											:path "/Users/wh/.sdkman/candidates/java/8.0.292.hs-adpt"
-											:default t)])
+											                      :path "/Users/wh/.sdkman/candidates/java/8.0.292.hs-adpt"
+											                      :default t)])
   :hook
   (java-mode . lsp))
 

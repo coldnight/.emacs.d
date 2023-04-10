@@ -25,6 +25,9 @@
 ;; Disable native compilation warnings
 (setq native-comp-async-report-warnings-errors nil)
 
+;; Fix libgccjit according to: https://github.com/d12frosted/homebrew-emacs-plus/issues/323
+(setenv "LIBRARY_PATH" "/usr/local/opt/gcc@12/lib:/usr/local/opt/libgccjit/lib/gcc/12:/usr/local/opt/gcc@12/lib/gcc/12/gcc/x86_64-apple-darwin22/12")
+
 ;; ACK org-roam-v2
 (setq org-roam-v2-ack t)
 ;; early-init.el ends here
