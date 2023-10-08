@@ -57,7 +57,7 @@
 (use-package flycheck
   :straight t
   :hook
-  ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode org-mode php-mode web-mode) . flycheck-mode)
+  ((python-mode go-mode rust-mode scala-mode emacs-lisp-mode org-mode php-mode web-mode sh-mode) . flycheck-mode)
   :custom
   ;; .rst 文件禁用 flycheck
   (flycheck-disabled-checkers '(rst grammarly)))
@@ -280,6 +280,10 @@
 (use-package dart-mode
   :straight t
   :mode "\\.dart\\'")
+
+(use-package lua-mode
+  :straight (lua-mode :host github :repo "immerrr/lua-mode")
+  :mode "\\.lua\\'")
 
 (provide 'init-programming)
 ;;; init-programming.el ends here

@@ -30,4 +30,14 @@
 
 ;; ACK org-roam-v2
 (setq org-roam-v2-ack t)
+
+;; Fix "Too Many Files Open" on macOS.
+(defun my/file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+
 ;; early-init.el ends here

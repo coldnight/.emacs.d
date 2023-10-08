@@ -56,27 +56,6 @@
    '((ein . t)
      (dot . t))))
 
-;; ;; Now we are using org-roam
-;; (use-package org-wiki
-;;   :straight (org-wiki :host github :repo "caiorss/org-wiki")
-;;   :init
-;;   (setq org-wiki-location "~/codes/incubating/notes")
-;;   (setq org-wiki-template
-;;         (string-trim
-;; "
-;; #+TITLE: %n
-;; #+DESCRIPTION:
-;; #+KEYWORDS:
-;; #+STARTUP:  content
-;; #+DATE: %d
-;; #+SETUPFILE: assets/themes/theme.setup
-;;
-;; - [[wiki:index][Index]]
-;;
-;; - Related:
-;;
-;; * %n
-;; ")))
 
 (use-package org-journal
   :straight t
