@@ -236,7 +236,9 @@
   (org-mode . (lambda()
                 (org-babel-do-load-languages
                  'org-babel-load-languages
-                 '((restclient . t))))))
+                 '((restclient . t)
+                   (dot . t)
+                   (ein . t))))))
 
 (provide 'init-org)
 ;;; init-org.el ends here
