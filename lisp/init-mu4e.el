@@ -47,7 +47,7 @@
 
       (setq my/mu4e-unread-messages-count "Mail: -")
 
-      (defcustom my/inbox-count-command "echo -n ( mu find date:1w..now maildir:/INBOX flag:unread 2>/dev/null | wc -l )"
+      (defcustom my/inbox-count-command "echo -n ( mu find date:1w..now maildir:/gmail/INBOX flag:unread 2>/dev/null | wc -l )"
         "Command to retrieve count of emails in Inbox."
         :type 'string
         :group 'inbox)
