@@ -109,7 +109,14 @@
      (font-spec :name "-*-WenQuanYi Zen Hei Mono-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
                 :weight 'normal
                 :slant 'normal
-                :size 16.5))))
+                :size 16.5)))
+  (use-package ultra-scroll-mac
+    :if (eq window-system 'mac)
+    :straight (ultra-scroll-mac :host github :repo "jdtsmith/ultra-scroll-mac")
+    :init
+    (setq scroll-conservatively 101) ; important for jumbo images
+    :config
+    (ultra-scroll-mac-mode 1)))
 
 (use-package all-the-icons :straight t)
 
