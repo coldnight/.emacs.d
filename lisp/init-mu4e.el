@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;;
 ;;; Code:
-(defvar-local my/mu4e-sys-path "/usr/local/opt/mu/share/emacs/site-lisp/mu/mu4e")
+(defvar-local my/mu4e-sys-path "/opt/homebrew/opt/mu/share/emacs/site-lisp/mu/mu4e")
 
 (if (file-exists-p my/mu4e-sys-path)
     (progn
@@ -21,18 +21,18 @@
   context's `user-mail-address' is set to ADDRESS and its
   `mu4e-compose-signature' to SIGNATURE."
         (lexical-let ((addr-lex address))
-          (make-mu4e-context :name name
-                             :vars `((user-mail-address . ,address)
-                                     (mu4e-compose-signature . ,signature)
-                                     (mu4e-sent-folder . "/gmail/[Gmail]/Sent Mail")
-                                     (mu4e-drafts-folder . "/gmail/Drafts")
-                                     (mu4e-trash-folder . "/gmail/Trash")
-                                     (mu4e-refile-folder . "/gmail/[Gmail]/All Mail"))
-                             :match-func
-                             (lambda (msg)
-                               (when msg
-                                 (or (mu4e-message-contact-field-matches msg :to addr-lex)
-                                     (mu4e-message-contact-field-matches msg :cc addr-lex)))))))
+                     (make-mu4e-context :name name
+                                        :vars `((user-mail-address . ,address)
+                                                (mu4e-compose-signature . ,signature)
+                                                (mu4e-sent-folder . "/gmail/[Gmail]/Sent Mail")
+                                                (mu4e-drafts-folder . "/gmail/Drafts")
+                                                (mu4e-trash-folder . "/gmail/Trash")
+                                                (mu4e-refile-folder . "/gmail/[Gmail]/All Mail"))
+                                        :match-func
+                                        (lambda (msg)
+                                          (when msg
+                                            (or (mu4e-message-contact-field-matches msg :to addr-lex)
+                                                (mu4e-message-contact-field-matches msg :cc addr-lex)))))))
 
       ;; Most of the time, I merely want mu4e to re-index my local maildir (because
       ;; I'm running mbsync as a cron job). However, sometimes I want to fetch mails
@@ -75,7 +75,7 @@
         ;; Override in context switching for other type of mailboxes
         (mu4e-sent-messages-behavior 'delete)
         (message-kill-buffer-on-exit t)
-        (mu4e-get-mail-command "/usr/local/bin/mbsync gmail")
+        (mu4e-get-mail-command "/opt/homebrew/bin/mbsync gmail")
         (mu4e-contexts
          `( ,(my-make-mu4e-context "main" "grayking.w@gmail.com" nil)))
         (message-send-mail-function 'smtpmail-send-it)
@@ -86,8 +86,8 @@
 
         (starttls-use-gnutls t)
         ;; Personal info
-        (user-full-name "Gray King")
-        ( user-mail-address "grayking.w@gmail.com")
+        (user-full-name "Gary Wang")
+        (user-mail-address "gary@linuxzen.com")
         ;; gmail setup
         (smtpmail-smtp-server "smtp.gmail.com")
         (smtpmail-smtp-service 587)
@@ -100,7 +100,7 @@
         (org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t")
         (org-msg-startup "hidestars indent inlineimages")
         (org-msg-greeting-fmt "\nHi *%s*,\n\n")
-        (org-msg-recipient-names '(("grayking.w@gmail.com" . "Gray King")))
+        (org-msg-recipient-names '(("gary@linuxzen.com" . "Gary Wang")))
         (org-msg-greeting-name-limit 3)
         (org-msg-default-alternatives '((new		. (text html)))
 				                              (reply-to-html	. (text html))
@@ -112,7 +112,7 @@
 
  #+begin_signature
  --
- *Gray*
+ *Gary*
  /One Emacs to rule them all/
  #+end_signature")
         :init

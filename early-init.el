@@ -26,7 +26,7 @@
 (setq native-comp-async-report-warnings-errors nil)
 
 ;; Fix libgccjit according to: https://github.com/d12frosted/homebrew-emacs-plus/issues/323
-(setenv "LIBRARY_PATH" "/usr/local/opt/gcc@12/lib:/usr/local/opt/libgccjit/lib/gcc/12:/usr/local/opt/gcc@12/lib/gcc/12/gcc/x86_64-apple-darwin22/12")
+(setenv "LIBRARY_PATH" "/opt/homebrew/opt/gcc/lib:/opt/homebrew/opt/libgccjit/lib/gcc/14:/opt/homebrew/opt/gcc/lib/gcc/14/gcc/aarch64-apple-darwin23/14")
 
 ;; ACK org-roam-v2
 (setq org-roam-v2-ack t)
@@ -39,5 +39,16 @@
    (lambda (key _value)
      (file-notify-rm-watch key))
    file-notify-descriptors))
+
+
+
+
+(defun my/magit-ssh-agent-fix()
+  "Copy SSH_AUTH_SOCK env to fix connecting SSH via YubiKey."
+  ;; https://emacs.stackexchange.com/a/17890
+  (interactive)
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 ;; early-init.el ends here

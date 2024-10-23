@@ -79,14 +79,5 @@
            (add-to-list 'default-frame-alist '(alpha . (100 . 90))))))
   (setq my/transparent-enabled (not my/transparent-enabled)))
 
-
-(defun my/magit-ssh-agent-fix()
-  "Copy SSH_AUTH_SOCK env to fix connecting SSH via YubiKey."
-  ;; https://emacs.stackexchange.com/a/17890
-  (interactive)
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
-
 (provide 'init-my)
 ;;; init-my.el ends here

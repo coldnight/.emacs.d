@@ -65,7 +65,7 @@
   ("C-c j b" . org-journal-open-previous-entry)
   ("C-c j j" . org-journal-new-entry)
   :custom
-  (org-journal-file-type 'weekly)
+  (org-journal-file-type 'monthly)
   (org-journal-dir (expand-file-name "codes/notes/roam-research-notes-hugo/journal" "~"))
   ;; (org-journal-enable-encryption t)
   ;; (org-journal-encrypt-journal t)
@@ -153,7 +153,8 @@
 
   ;; Agenda styling
   (org-agenda-tags-column 0)
-  (org-agenda-block-separator ?─)
+  ;; (org-agenda-block-separator ?─)
+  (org-agenda-block-separator "──────────────────────────────────────────────────────────────────────────────────────────────────")
   (org-agenda-time-grid
    '((daily today require-timed)
      (800 1000 1200 1400 1600 1800 2000)

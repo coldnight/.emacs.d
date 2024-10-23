@@ -11,9 +11,9 @@
 
 ;; Shell
 (if (file-exists-p "/opt/homebrew")
-    (setq usr-bin-path "/opt/homebrew/bin")
+    (setq usr-bin-path "/opt/homebrew/bin/")
   (setq usr-bin-path "/usr/local/bin/"))
-
+(setq shell-file-name (concat usr-bin-path "fish"))
 ;; share clipboard between os
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))

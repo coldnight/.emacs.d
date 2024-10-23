@@ -59,7 +59,7 @@
 (setq org-refile-targets
       `((,(expand-file-name "projects.org" org-directory) :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
 
-(setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
 
 (defun log-todo-next-creation-date (&rest ignore)
   "Log NEXT creation time in the property drawer under the key 'ACTIVATED', IGNORE rest."

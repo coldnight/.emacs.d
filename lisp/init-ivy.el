@@ -17,7 +17,7 @@
   (counsel-mode +1)
   :bind
   ("C-x b" . counsel-switch-buffer)
-  ("C-c a p" . counsel-ag)
+  ("C-c a p" . counsel-rg)
   ("M-y" . counsel-yank-pop)
   ("M-x" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
@@ -54,7 +54,7 @@
   :after ivy
   :custom
   (ivy-posframe-display-functions-alist
-   '((swiper          . ivy-posframe-display-at-point)
+   '((swiper          . ivy-posframe-display-at-frame-bottom-center)
      (complete-symbol . ivy-posframe-display-at-point)
      (t . ivy-posframe-display)))
   (ivy-posframe-parameters '((left-fringe . 8)

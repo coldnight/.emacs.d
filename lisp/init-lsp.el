@@ -38,7 +38,7 @@
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-rust-server 'rust-analyzer)
-  (lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd")
+  (lsp-clients-clangd-executable "/opt/homebrew/opt/llvm/bin/clangd")
   :after (company flycheck))
 
 (use-package with-venv

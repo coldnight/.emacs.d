@@ -204,6 +204,7 @@
 
 ;; Effective
 (use-package magit
+  :after exec-path-from-shell
   :straight (magit :host github :repo "magit/magit")
   :bind
   ("C-c m s" . magit-status)
