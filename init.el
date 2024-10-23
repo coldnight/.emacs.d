@@ -113,8 +113,9 @@
   (use-package ultra-scroll-mac
     :if (eq window-system 'mac)
     :straight (ultra-scroll-mac :host github :repo "jdtsmith/ultra-scroll-mac")
-    :init
-    (setq scroll-conservatively 101) ; important for jumbo images
+    :custom
+    (scroll-margin 0)
+    (scroll-conservatively 101) ; important for jumbo images
     :config
     (ultra-scroll-mac-mode 1)))
 
